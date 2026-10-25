@@ -1,0 +1,52 @@
+{
+  "collected": "2026-10-25T18:10:06.563Z",
+  "source": "trends.google.com explore widgets (TIMESERIES multiline, GEO_MAP comparedgeo), hl=en-US, category=All, worldwide",
+  "anchor_ratios": {
+    "web 2004-2025": 1.9231,
+    "youtube 2008-2025": 2.4018
+  },
+  "missing_cells": {
+    "alone:streetwear": 0,
+    "alone:y2k fashion": 158,
+    "alone:gorpcore": 159,
+    "alone:quiet luxury": 70,
+    "alone:dark academia": 95,
+    "alone:coquette aesthetic": 206,
+    "shareA": 482,
+    "shareB": 206,
+    "ytA": 563,
+    "ytB": 190,
+    "bterm:gucci": 0,
+    "bterm:balenciaga": 0,
+    "bterm:saint laurent": 0,
+    "bterm:versace": 0,
+    "bterm:prada": 0,
+    "bterm:bottega veneta": 0,
+    "bterm:nike": 0,
+    "bterm:jacquemus": 0,
+    "bterm:dior": 0,
+    "bterm:miu miu": 0,
+    "bterm:moncler": 0,
+    "bterm:loewe": 0,
+    "bterm:alaia": 0
+  },
+  "unresolved_countries": [],
+  "notes": [
+    "Coquette uses \"coquette aesthetic\": plain \"coquette\" is also a French/Spanish word and had a ~25% share of these six terms already in 2004, before the aesthetic existed.",
+    "Brands are search terms, each queried alone (2016-2025). Google Trends brand *topics* were tried first but had gaps and near-zero values in 2017-2020 (e.g. Dior), so they were dropped. Brands whose names are common words (Off-White, Diesel, The Row, Valentino) were left out."
+  ],
+  "countries_per_era": {
+    "2004–2012": 38,
+    "2013–2017": 40,
+    "2018–2020": 45,
+    "2021–2022": 53,
+    "2023–2024": 56,
+    "2025": 57
+  },
+  "streetwear_share": {
+    "2004": 100.0,
+    "2019": 97.2,
+    "2024": 58.6,
+    "2025": 72.7
+  }
+}
