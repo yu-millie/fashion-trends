@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand visual drafts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@200;300;400;500&family=JetBrains+Mono&display=swap">
+<style>
+  :root { --ink:#0d1013; --ink2:#4a525b; --ink3:#7b848d; --rule:rgba(13,16,19,.12); --paper:#f4f1ea;
+          --serif:"Bodoni Moda",Didot,Georgia,serif; --sans:"Jost",Futura,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 300 14px/1.55 var(--sans); padding: 40px clamp(16px,4vw,56px) 60px; }
+  h1 { font-weight: 300; text-transform: uppercase; font-size: 40px; margin: 0; letter-spacing: .01em; }
+  h1 em { font-family: var(--serif); font-style: italic; text-transform: none; color: #6f8497; }
+  .intro { color: var(--ink2); max-width: 70ch; margin: 8px 0 28px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px; }
+  .card { background: #fff; border-radius: 16px; padding: 20px 22px 18px; box-shadow: 0 24px 50px -32px rgba(30,45,60,.45); position: relative; }
+  .card.wide { grid-column: 1 / -1; }
+  .num { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink3); }
+  .card h2 { margin: 4px 0 2px; font-weight: 400; text-transform: uppercase; font-size: 20px; letter-spacing: .02em; }
+  .card .what { color: #6f8497; font-size: 12.5px; margin: 0 0 12px; }
+  .pick { position: absolute; top: 18px; right: 20px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; background: var(--ink); color: #fff; padding: 4px 9px; border-radius: 999px; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+  svg text { font-family: var(--sans); fill: var(--ink3); font-size: 11px; }
+  .mono { font-family: var(--mono) !important; }
+  .ctrl { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--ink2); margin-top: 8px; }
+  .ctrl input { flex: 1; accent-color: #0d1013; }
+  .tip { position: fixed; pointer-events: none; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px; font-size: 12px; box-shadow: 0 12px 30px -14px rgba(0,0,0,.35); }
+  /* cards idea */
+  .bcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .bcard { border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px 8px; background: #fbfaf7; }
+  .bcard .bn { font-family: var(--serif); font-size: 19px; line-height: 1.05; }
+  .bcard .st { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; color: var(--ink3); margin-top: 6px; }
+  .bcard .st b { color: var(--ink); font-weight: 600; }
+  /* year in review */
+  .spread { display: grid; grid-template-columns: 220px 1fr 260px; gap: 20px; align-items: end; background: linear-gradient(180deg,#e9edf1,#d9e0e6); border-radius: 12px; padding: 18px 22px 0; min-height: 360px; overflow: hidden; position: relative; }
+  .spread .big { font-family: var(--sans); font-weight: 100; font-size: 120px; line-height: .8; letter-spacing: -.03em; align-self: start; }
+  .spread .no1 { align-self: center; }
+  .spread .no1 small { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--ink3); text-transform: uppercase; }
+  .spread .lines .no1 div { font-family: var(--serif); font-style: italic; text-transform: none; font-weight: 400; font-size: 58px; line-height: 1; margin-top: 4px; }
+  .spread .lines { align-self: center; display: grid; gap: 14px; padding-bottom: 20px; }
+  .spread .lines div { font-weight: 400; text-transform: uppercase; font-size: 15px; }
+  .spread .lines em { display: block; font-family: var(--serif); font-size: 24px; text-transform: none; color: #2c3640; font-weight: 400; }
+  .spread img { height: 330px; width: auto; display: block; justify-self: center; filter: drop-shadow(0 20px 26px rgba(20,30,40,.3)); }
+  .spread img.seated { height: 200px; }
+  .ytabs { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .ytabs button { font: 11px var(--mono); border: 1px solid var(--rule); background: #fff; border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+  .ytabs button.on { background: var(--ink); color: #fff; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .spread { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<h1>Brand visuals <em>— six drafts</em></h1>
+<p class="intro">Rough drafts built from our real data (Google Trends brand searches + the Lyst Index). Each one is interactive: hover, and use the sliders and tabs. Pick one or two and we'll polish them into the shops section.</p>
+
+<div class="grid">
+  <div class="card"><span class="pick">RECOMMENDED</span><div class="num">Idea 1</div><h2>Before / after the spike</h2><p class="what">Lyst rank the year before vs. the year after each brand's biggest search jump. Rising line = the shops followed.</p><div id="v1"></div></div>
+  <div class="card"><div class="num">Idea 2</div><h2>The Lyst chart, animated</h2><p class="what">Top 20 for one quarter; drag the slider and the bars re-sort. Our 13 brands take the year's look colour.</p><div id="v2"></div><div class="ctrl"><span id="v2q">2022 Q4</span><input id="v2s" type="range"></div></div>
+  <div class="card"><div class="num">Idea 3</div><h2>Search vs. shop scatter</h2><p class="what">One dot per brand per year: search growth that year (across) vs. Lyst rank change the next year (up = climbed). Hover a dot to trace that brand.</p><div id="v3"></div></div>
+  <div class="card"><div class="num">Idea 4</div><h2>Brand cards</h2><p class="what">One card per brand: search line, Lyst rank strip (dot per year, bigger = higher rank), best year and best rank.</p><div id="v4" class="bcards"></div></div>
+  <div class="card wide"><div class="num">Idea 5</div><h2>Brands per look</h2><p class="what">Each aesthetic's time on top (bars) with the brands whose searches spiked during it (chips at their spike year). Timing only, not cause and effect.</p><div id="v5"></div></div>
+  <div class="card wide"><div class="num">Idea 6</div><h2>Year in review spread</h2><p class="what">One magazine page per year: the look, Lyst's #1 brand, the top search risers. Flip through the years.</p><div id="v6"></div><div class="ytabs" id="v6t"></div></div>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="../lib/d3.v7.9.0.min.js"></script>
+<script src="../data/bundle.js"></script>
+<script>const DATA_ONLY = true;</script>
+<script>
+/* minimal copies of the site's shared definitions */
+const TRENDS = [["street","Streetwear","#eb6834"],["quiet","Quiet Luxury","#2a78d6"],["gorp","Gorpcore","#008300"],["y2k","Y2K","#e87ba4"],["coquette","Coquette","#6250d6"],["academia","Dark Academia","#e34948"]];
+const COL = Object.fromEntries(TRENDS.map(t => [t[0], t[2]])), NAME = Object.fromEntries(TRENDS.map(t => [t[0], t[1]]));
+const D = window.SITE_DATA, BR = D.brands, LY = D.lyst, SUM = D.summary_by_year, LIFE = D.lifecycle;
+const YS = d3.range(2017, 2026);
+const LOOK = Object.fromEntries(SUM.years.map(y => [y.year, y.look]));
+const tip = document.getElementById("tip");
+const show = (ev, h) => { tip.innerHTML = h; tip.hidden = false; tip.style.left = Math.min(innerWidth - 230, ev.clientX + 14) + "px"; tip.style.top = (ev.clientY + 14) + "px"; };
+const hide = () => tip.hidden = true;
+
+// per brand: yearly search growth, spike year, mean Lyst rank per year
+const meanRank = (name, y) => { const qs = LY.quarters.filter(q => q.year === y && q.depth); return qs.length ? d3.mean(qs, q => q.ranks[name] || q.depth + 1) : null; };
+const bestRankIn = (name, y) => { const r = LY.quarters.filter(q => q.year === y && q.ranks[name]).map(q => q.ranks[name]); return r.length ? d3.min(r) : null; };
+const brands = BR.brands.map(b => {
+  const growth = YS.map(y => { const i = BR.years.indexOf(y), p = b.annual[i - 1]; return p >= 10 ? (b.annual[i] / p - 1) * 100 : null; });
+  const sj = d3.maxIndex(growth.map(g => g ?? -Infinity)), spike = YS[sj];
+  const before = meanRank(b.name, spike - 1) ?? meanRank(b.name, spike), after = meanRank(b.name, spike + 1);
+  return { name: b.name, annual: b.annual, growth, spike, spikeG: growth[sj], before, after };
+});
+
+/* ── 1 · slope chart ─────────────────────────────────────────────── */
+(() => {
+  const W = 560, H = 380, m = { t: 30, r: 140, b: 20, l: 140 };
+  const svg = d3.select("#v1").append("svg").attr("viewBox", [0, 0, W, H]);
+  const y = d3.scaleLinear().domain([1, 21]).range([m.t, H - m.b]);
+  const xa = m.l, xb = W - m.r;
+  [[xa, "YEAR BEFORE SPIKE"], [xb, "YEAR AFTER SPIKE"]].forEach(([x, t]) => {
+    svg.append("line").attr("x1", x).attr("x2", x).attr("y1", m.t - 6).attr("y2", H - m.b).attr("stroke", "rgba(13,16,19,.15)");
+    svg.append("text").attr("x", x).attr("y", 14).attr("text-anchor", "middle").attr("class", "mono").style("font-size", "9.5px").text(t);
+  });
+  [1, 5, 10, 15, 20].forEach(r => svg.append("text").attr("x", (xa + xb) / 2).attr("y", y(r) + 3).attr("text-anchor", "middle").style("font-size", "9px").style("fill", "#b5bcc3").text("#" + r));
+  svg.append("text").attr("x", (xa + xb) / 2).attr("y", y(21) + 3).attr("text-anchor", "middle").style("font-size", "9px").style("fill", "#b5bcc3").text("not ranked");
+  const data = brands.filter(b => b.before != null && b.after != null);
+  // nudge labels apart on each side
+  const spread = (key) => { const s = data.map(b => ({ b, y: y(b[key]) })).sort((p, q) => p.y - q.y); for (let i = 1; i < s.length; i++) s[i].y = Math.max(s[i].y, s[i - 1].y + 12); return new Map(s.map(o => [o.b, o.y])); };
+  const la = spread("before"), lb = spread("after");
+  const g = svg.selectAll("g.b").data(data).join("g").style("cursor", "default");
+  const up = b => b.before - b.after >= 1, dn = b => b.after - b.before >= 1;
+  const c = b => up(b) ? "#c4302b" : dn(b) ? "#1c5cab" : "#9aa2aa";
+  g.append("line").attr("x1", xa).attr("x2", xb).attr("y1", b => y(b.before)).attr("y2", b => y(b.after)).attr("stroke", c).attr("stroke-width", 2.2);
+  g.append("circle").attr("cx", xa).attr("cy", b => y(b.before)).attr("r", 4.5).attr("fill", c);
+  g.append("circle").attr("cx", xb).attr("cy", b => y(b.after)).attr("r", 4.5).attr("fill", c);
+  g.append("text").attr("x", xa - 10).attr("y", b => la.get(b) + 4).attr("text-anchor", "end").style("fill", "#0d1013").text(b => b.name + " · " + b.spike);
+  g.append("text").attr("x", xb + 10).attr("y", b => lb.get(b) + 4).style("fill", c).style("font-weight", 500)
+    .text(b => { const d = b.before - b.after; return Math.abs(d) < 1 ? "held" : (d > 0 ? "▲ " : "▼ ") + Math.round(Math.abs(d)); });
+  g.on("pointerenter", function () { g.style("opacity", .15); d3.select(this).style("opacity", 1); })
+   .on("pointermove", (ev, b) => show(ev, "<b>" + b.name + "</b><br>Searches +" + Math.round(b.spikeG) + "% in " + b.spike + "<br>Lyst avg rank " + b.before.toFixed(1) + " → " + b.after.toFixed(1)))
+   .on("pointerleave", () => { g.style("opacity", 1); hide(); });
+})();
+
+/* ── 2 · animated leaderboard ─────────────────────────────────────── */
+(() => {
+  const Q = LY.quarters.filter(q => q.depth);
+  const W = 560, rowH = 17, H = 20 * rowH + 10;
+  const svg = d3.select("#v2").append("svg").attr("viewBox", [0, 0, W, H]);
+  const x = d3.scaleLinear().domain([0, 20]).range([0, W - 190]);
+  const ours = new Set(BR.brands.map(b => b.name));
+  const s = document.getElementById("v2s"); s.min = 0; s.max = Q.length - 1; s.value = Q.findIndex(q => q.q === "2022Q4");
+  function draw() {
+    const q = Q[+s.value];
+    document.getElementById("v2q").textContent = q.q.replace("Q", " Q");
+    const rows = q.list.map((n, i) => ({ n: n === "?" ? "(not reported)" : n, r: i + 1 }));
+    const col = COL[LOOK[Math.min(2025, Math.max(2017, q.year))]];
+    const g = svg.selectAll("g.r").data(rows, d => d.n).join(
+      e => { const gg = e.append("g").attr("class", "r").attr("transform", d => "translate(0," + (H) + ")").style("opacity", 0);
+        gg.append("text").attr("class", "rk mono").attr("x", 18).attr("y", 12).attr("text-anchor", "end").style("font-size", "10px");
+        gg.append("rect").attr("x", 120).attr("y", 2).attr("height", rowH - 4).attr("rx", 3);
+        gg.append("text").attr("class", "nm").attr("x", 112).attr("y", 12).attr("text-anchor", "end").style("font-size", "11.5px");
+        return gg; },
+      u => u, x_ => x_.transition().duration(500).style("opacity", 0).remove());
+    g.transition().duration(700).ease(d3.easeCubicInOut).attr("transform", d => "translate(0," + ((d.r - 1) * rowH + 4) + ")").style("opacity", 1);
+    g.select(".rk").text(d => d.r);
+    g.select(".nm").text(d => d.n).style("fill", d => ours.has(d.n) ? "#0d1013" : "#9aa2aa").style("font-weight", d => ours.has(d.n) ? 500 : 300);
+    g.select("rect").transition().duration(700).attr("width", d => x(21 - d.r)).attr("fill", d => ours.has(d.n) ? col : "#dfe3e7");
+    svg.selectAll("text.note").data([q]).join("text").attr("class", "note mono").attr("x", W).attr("y", H - 4).attr("text-anchor", "end").style("font-size", "9px")
+      .text(q.year >= 2017 && q.year <= 2025 ? "colour = " + NAME[LOOK[q.year]] + " (the year's look)" : "");
+  }
+  s.addEventListener("input", draw); draw();
+})();
+
+/* ── 3 · scatter ──────────────────────────────────────────────────── */
+(() => {
+  const W = 560, H = 380, m = { t: 14, r: 14, b: 40, l: 44 };
+  const pts = [];
+  brands.forEach(b => YS.forEach((yy, j) => {
+    const g = b.growth[j], r0 = meanRank(b.name, yy), r1 = meanRank(b.name, yy + 1);
+    if (g != null && r0 != null && r1 != null) pts.push({ b, yy, g, d: r0 - r1 });
+  }));
+  const svg = d3.select("#v3").append("svg").attr("viewBox", [0, 0, W, H]);
+  const x = d3.scaleLinear().domain([-45, 120]).range([m.l, W - m.r]).clamp(true);
+  const y = d3.scaleLinear().domain([-14, 14]).range([H - m.b, m.t]).clamp(true);
+  svg.append("line").attr("x1", x(0)).attr("x2", x(0)).attr("y1", m.t).attr("y2", H - m.b).attr("stroke", "rgba(13,16,19,.2)");
+  svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(0)).attr("y2", y(0)).attr("stroke", "rgba(13,16,19,.2)");
+  svg.append("g").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).ticks(6).tickFormat(d => d + "%")).call(a => a.select(".domain").remove());
+  svg.append("g").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).ticks(6).tickFormat(d => (d > 0 ? "▲" : d < 0 ? "▼" : "") + Math.abs(d))).call(a => a.select(".domain").remove());
+  svg.append("text").attr("x", W - m.r).attr("y", H - 6).attr("text-anchor", "end").text("search growth that year →");
+  svg.append("text").attr("x", m.l + 6).attr("y", m.t + 8).text("Lyst rank change next year (▲ climbed)");
+  // least-squares line + correlation
+  const mx = d3.mean(pts, p => p.g), my = d3.mean(pts, p => p.d);
+  const sxy = d3.sum(pts, p => (p.g - mx) * (p.d - my)), sxx = d3.sum(pts, p => (p.g - mx) ** 2), syy = d3.sum(pts, p => (p.d - my) ** 2);
+  const k = sxy / sxx, r = sxy / Math.sqrt(sxx * syy);
+  svg.append("line").attr("x1", x(-45)).attr("x2", x(120)).attr("y1", y(my + k * (-45 - mx))).attr("y2", y(my + k * (120 - mx))).attr("stroke", "#c4302b").attr("stroke-dasharray", "4 3");
+  svg.append("text").attr("x", W - m.r).attr("y", m.t + 8).attr("text-anchor", "end").style("fill", "#c4302b").text("r = " + r.toFixed(2) + " (" + pts.length + " brand-years)");
+  const trail = svg.append("path").attr("fill", "none").attr("stroke", "#0d1013").attr("stroke-width", 1.2);
+  const dots = svg.selectAll("circle.p").data(pts).join("circle").attr("class", "p").attr("cx", p => x(p.g)).attr("cy", p => y(p.d)).attr("r", 5)
+    .attr("fill", p => COL[LOOK[p.yy]]).attr("fill-opacity", .75).attr("stroke", "#fff");
+  dots.on("pointermove", (ev, p) => {
+      dots.attr("fill-opacity", q => q.b === p.b ? 1 : .12);
+      trail.attr("d", d3.line().x(q => x(q.g)).y(q => y(q.d))(pts.filter(q => q.b === p.b)));
+      show(ev, "<b>" + p.b.name + " · " + p.yy + "</b><br>Searches " + (p.g >= 0 ? "+" : "") + Math.round(p.g) + "%<br>Lyst next year: " + (p.d >= 0 ? "▲ " : "▼ ") + Math.abs(p.d).toFixed(1));
+    }).on("pointerleave", () => { dots.attr("fill-opacity", .75); trail.attr("d", null); hide(); });
+})();
+
+/* ── 4 · brand cards ──────────────────────────────────────────────── */
+(() => {
+  const host = d3.select("#v4");
+  brands.slice().sort((a, b) => a.spike - b.spike).forEach(b => {
+    const c = host.append("div").attr("class", "bcard");
+    c.append("div").attr("class", "bn").text(b.name);
+    const svg = c.append("svg").attr("viewBox", [0, 0, 150, 58]);
+    const x = d3.scaleLinear().domain([2016, 2025]).range([2, 148]), y = d3.scaleLinear().domain([0, 100]).range([34, 2]);
+    svg.append("path").attr("d", d3.area().x((d, i) => x(BR.years[i])).y0(34).y1(y).curve(d3.curveMonotoneX)(b.annual)).attr("fill", "#0d1013").attr("fill-opacity", .07);
+    svg.append("path").attr("d", d3.line().x((d, i) => x(BR.years[i])).y(y).curve(d3.curveMonotoneX)(b.annual)).attr("fill", "none").attr("stroke", "#0d1013").attr("stroke-width", 1.4);
+    svg.append("rect").attr("x", x(b.spike) - 6).attr("width", 12).attr("y", 0).attr("height", 36).attr("fill", "#c4302b").attr("opacity", .12);
+    d3.range(2017, 2026).forEach(yy => { const r = bestRankIn(b.name, yy);
+      svg.append("circle").attr("cx", x(yy)).attr("cy", 48).attr("r", r ? 1.5 + (21 - r) / 4.5 : 1.2).attr("fill", r ? COL[LOOK[yy]] : "#d5dade"); });
+    const best = d3.min(LY.quarters, q => q.ranks[b.name]);
+    c.append("div").attr("class", "st").html("<span>spike <b>" + b.spike + "</b></span><span>best Lyst <b>" + (best ? "#" + best : "—") + "</b></span>");
+  });
+})();
+
+/* ── 5 · brands per look ─────────────────────────────────────────── */
+(() => {
+  const A = LIFE.aesthetics.slice().sort((a, b) => a.breakout.localeCompare(b.breakout));
+  const W = 1180, rowH = 30, H = A.length * rowH + 120, m = { l: 120, r: 20 };
+  const svg = d3.select("#v5").append("svg").attr("viewBox", [0, 0, W, H]);
+  const t = s => { const [y, mo] = s.split("-").map(Number); return y + (mo - 1) / 12; };
+  const x = d3.scaleLinear().domain([2016, 2026]).range([m.l, W - m.r]);
+  d3.range(2016, 2027).forEach(yy => { svg.append("line").attr("x1", x(yy)).attr("x2", x(yy)).attr("y1", 10).attr("y2", H - 10).attr("stroke", "rgba(13,16,19,.07)");
+    svg.append("text").attr("x", x(yy)).attr("y", 10).attr("text-anchor", "middle").attr("class", "mono").style("font-size", "9.5px").text(yy); });
+  A.forEach((a, i) => {
+    const yy = 24 + i * rowH;
+    svg.append("text").attr("x", m.l - 10).attr("y", yy + 13).attr("text-anchor", "end").style("fill", "#0d1013").text(a.name);
+    svg.append("rect").attr("x", x(t(a.breakout))).attr("width", Math.max(4, x(t(a.fade) + 1 / 12) - x(t(a.breakout)))).attr("y", yy + 3).attr("height", 16).attr("rx", 8).attr("fill", COL[a.key]).attr("opacity", .85);
+  });
+  // brand chips at their spike year, stacked
+  const by = d3.group(brands, b => b.spike);
+  const y0 = 24 + A.length * rowH + 14;
+  svg.append("text").attr("x", m.l - 10).attr("y", y0 + 13).attr("text-anchor", "end").style("fill", "#0d1013").style("font-weight", 500).text("Brand spikes");
+  by.forEach((list, yr) => list.forEach((b, j) => {
+    const cx = x(yr + .5), cy = y0 + j * 22;
+    const w = b.name.length * 6.6 + 16;
+    svg.append("rect").attr("x", cx - w / 2).attr("y", cy).attr("width", w).attr("height", 18).attr("rx", 9).attr("fill", "#fff").attr("stroke", "#0d1013");
+    svg.append("text").attr("x", cx).attr("y", cy + 13).attr("text-anchor", "middle").style("fill", "#0d1013").style("font-size", "10.5px").text(b.name);
+  }));
+})();
+
+/* ── 6 · year in review ───────────────────────────────────────────── */
+(() => {
+  const host = d3.select("#v6"), tabs = d3.select("#v6t");
+  const KIND = { coquette: "seated" };
+  function draw(yr) {
+    const row = SUM.years.find(y => y.year === yr);
+    const qs = LY.quarters.filter(q => q.year === yr && q.top3.length);
+    const no1 = d3.greatest(d3.rollups(qs, v => v.length, q => q.top3[0]), d => d[1]);
+    host.html('<div class="spread">' +
+      '<div class="big">' + yr + '</div>' +
+      '<img class="' + (KIND[row.look] || "") + '" src="../assets/people/' + row.look + '.webp" alt="' + NAME[row.look] + '">' +
+      '<div class="lines">' +
+        '<div class="no1"><small>Lyst\'s hottest brand</small><div>' + (no1 ? no1[0] : "—") + '</div></div>' +
+        '<div>The look<em>' + NAME[row.look] + '</em></div>' +
+        '<div>Searches rising fastest<em>' + row.brands.slice(0, 3).map(b => b.name).join(" · ") + '</em></div>' +
+      '</div></div>');
+    tabs.selectAll("button").classed("on", d => d === yr);
+  }
+  tabs.selectAll("button").data(SUM.years.map(y => y.year)).join("button").text(d => d).on("click", (ev, d) => draw(d));
+  draw(2022);
+})();
+</script>
+</body>
+</html>

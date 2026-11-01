@@ -3,7 +3,10 @@
   "source": "trends.google.com explore widgets (TIMESERIES multiline, GEO_MAP comparedgeo), hl=en-US, category=All, worldwide",
   "anchor_ratios": {
     "web 2004-2025": 1.9231,
-    "youtube 2008-2025": 2.4018
+    "youtube 2008-2025": 2.4018,
+    "country US": 1.0,
+    "country CL": 1.0,
+    "country IN": 1.0
   },
   "missing_cells": {
     "alone:streetwear": 0,
@@ -28,7 +31,13 @@
     "bterm:miu miu": 0,
     "bterm:moncler": 0,
     "bterm:loewe": 0,
-    "bterm:alaia": 0
+    "bterm:alaia": 0,
+    "ctyA:US": 130,
+    "ctyB:US": 78,
+    "ctyA:CL": 485,
+    "ctyB:CL": 134,
+    "ctyA:IN": 347,
+    "ctyB:IN": 88
   },
   "unresolved_countries": [],
   "notes": [
@@ -43,6 +52,9 @@
     "2023–2024": 56,
     "2025": 57
   },
+  "lyst_missing_quarters": [
+    "2017Q4"
+  ],
   "streetwear_share": {
     "2004": 100.0,
     "2019": 97.2,

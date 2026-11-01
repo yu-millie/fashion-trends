@@ -176,6 +176,81 @@ dump("summary_by_year.json", {
     "years": years,
 })
 
+# 7a ── country drill-down: the six terms per country, annual share 2015-2025 (Prototype II)
+CTY = [("US", "United States"), ("CL", "Chile"), ("IN", "India")]
+cty = []
+for a2, nm in CTY:
+    d = anchored("ctyA:" + a2, "ctyB:" + a2, "2015-01", "country " + a2)
+    yd = d.groupby(d.index.year).mean()
+    sh = (yd.div(yd.sum(axis=1), axis=0) * 100).round(1).fillna(0)
+    cty.append({"code": a2, "iso3": iso3(a2), "name": nm, "years": sh.index.tolist(),
+                "share": {k: sh[k].tolist() for k in sh.columns}})
+dump("country_trends.json", {
+    "source": "Google Trends, the six terms within each country (two comparisons joined through streetwear), annual mean, share of the six. Collected for three countries.",
+    "countries": cty,
+})
+
+# 7b ── who peaks first: month of highest interest (3-month centred mean) on Google vs YouTube
+peaks = []
+for k, n, t in AES:
+    g = alone[k].rolling(3, center=True).mean()
+    y = yt[k].rolling(3, center=True).mean()
+    gp, yp = g.idxmax(), y.idxmax()
+    peaks.append({"key": k, "name": n, "google": str(gp), "youtube": str(yp), "lag_months": int((yp - gp).n)})
+dump("peaks.json", {
+    "source": "Month of each aesthetic's highest search interest (3-month centred average), Google web search (term alone, 2004-2025) vs YouTube search (anchored comparison, 2008-2025). Positive lag = YouTube peaked later.",
+    "aesthetics": peaks,
+})
+
+# 7c ── seasonal clock: average interest by calendar month, 2021-2025, best month = 100
+seas = {}
+for k, n, t in AES:
+    s = alone[k][pd.Period("2021-01", "M"):pd.Period("2025-12", "M")]
+    mm = s.groupby(s.index.month).mean()
+    seas[k] = (mm / mm.max() * 100).round(1).tolist()
+dump("seasonal.json", {
+    "source": "Google Trends worldwide, each term alone. Mean interest by calendar month over 2021-2025, scaled so each aesthetic's best month = 100.",
+    "aesthetics": meta, "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "values": seas,
+})
+
+# 7d ── brands in flux: each brand's monthly search interest (own peak = 100), 2016-2025
+bsm = brand.rolling(3, center=True, min_periods=1).mean().round(1)
+dump("brands.json", {
+    "source": "Google Trends worldwide, each brand queried alone as a search term (100 = that brand's own 2016-2025 peak). Monthly, 3-month centred average. 13 brands from Lyst Index Hottest Brands lists.",
+    "months": [str(p) for p in bsm.index],
+    "brands": [{"name": b, "values": bsm[b].tolist(), "annual": by[b].round(1).tolist()} for b in bsm.columns],
+    "years": by.index.tolist(),
+})
+
+# 7e ── Lyst Index: the shop side. Quarterly "hottest brands" rankings, transcribed from
+#       Lyst's own Index pages (press articles for 2017-2018 quarters Lyst no longer hosts).
+#       raw/lyst_index.csv: one row per quarter, brands in rank order, "?" = rank not reported.
+import csv
+lyst_rows = list(csv.DictReader(open(HERE / "raw" / "lyst_index.csv", encoding="utf-8")))
+OUR = list(NAMES.values())
+quarters = []
+for r in lyst_rows:
+    ranked = [b.strip() for b in r["brands_in_rank_order"].split(";")]
+    quarters.append({
+        "q": r["quarter"], "year": int(r["quarter"][:4]), "depth": len(ranked), "source": r["source_url"],
+        "ranks": {b: i + 1 for i, b in enumerate(ranked) if b in OUR},
+        "top3": [b for b in ranked[:3] if b != "?"],
+        "list": ranked,                                  # the full published list, "?" = unreported rank
+    })
+# every quarter from the first index to the latest, with a placeholder for any gap
+allq = [f"{y}Q{n}" for y in range(2017, 2027) for n in range(1, 5)]
+first, last = quarters[0]["q"], quarters[-1]["q"]
+allq = allq[allq.index(first): allq.index(last) + 1]
+byq = {q["q"]: q for q in quarters}
+qc["lyst_missing_quarters"] = [q for q in allq if q not in byq]
+dump("lyst.json", {
+    "source": "Lyst Index quarterly Hottest Brands rankings (lyst.com / lyst.co.uk; 2017-2018 from press coverage). Rank 1 = hottest. "
+              "Only ranks the source showed are recorded: top 10 until Q4 2018, top 20 after. Lyst changed its method in Q1 2026.",
+    "brands": OUR,
+    "quarters": [byq.get(q, {"q": q, "year": int(q[:4]), "depth": 0, "source": None, "ranks": {}, "top3": [], "list": []}) for q in allq],
+})
+
 # 7 ── thesis numbers
 qc["streetwear_share"] = {int(y_): float(share.loc[y_, "street"]) for y_ in [2004, 2019, 2024, 2025]}
 json.dump(qc, open(HERE / "qc_report.json", "w"), indent=2, ensure_ascii=False)
