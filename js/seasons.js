@@ -1,7 +1,7 @@
 /* ══ seasons: the seasonal clock (new in Prototype II) ════════════════════
    Radial line chart: angle = calendar month, radius = average interest that
    month (2021–2025), each aesthetic scaled so its best month = 100.
-   Hover a month wedge → tooltip with all six; hover a table row → that loop. */
+   Hover a month wedge → tooltip with every aesthetic; hover a table row → that loop. */
 loadData("seasonal").then(seas => {
   const svg = d3.select("#clock");
   const cx = 230, cy = 230, R0 = 46, R1 = 178;
@@ -9,7 +9,8 @@ loadData("seasonal").then(seas => {
   const a = i => (i / 12) * Math.PI * 2;                         // 0 = Jan at 12 o'clock
   const r = d3.scaleLinear().domain([0, 100]).range([R0, R1]);
   const g = svg.append("g").attr("transform", "translate(" + cx + "," + cy + ")");
-  chips("#skey");
+  const FOC = focusGroup(document.querySelector("#clock").closest(".card"));   // filter for this clock only
+  chips("#skey", FOC);
 
   // rings + spokes
   g.append("g").selectAll("circle").data([25, 50, 75, 100]).join("circle")
@@ -68,6 +69,7 @@ loadData("seasonal").then(seas => {
     .html(d => '<span class="gn"><i></i>' + nameOf(d.key) + '</span><span class="gv">' + MONTHS[d.peak] +
       '</span><span class="gv">' + MONTHS[d.low] + '</span><span class="gg">' + d.swing + "</span>");
   const most = stats[0], least = stats[stats.length - 1];
+  document.getElementById("seasonTitle").textContent = "Each aesthetic has its own peak month, and " + nameOf(most.key) + " swings the most through the year";
   d3.select("#seasonLede").text("Each loop is one aesthetic's average year, 2021–2025, scaled so its best month touches the outer ring. " +
     nameOf(most.key) + " is the most seasonal: its quietest month (" + MONTHS[most.low] + ") is " + most.swing + "% below its best (" +
     MONTHS[most.peak] + "). " + nameOf(least.key) + " is the steadiest, swinging " + least.swing + "%. Hover a month to read every aesthetic at once.");
@@ -77,6 +79,6 @@ loadData("seasonal").then(seas => {
     peaks.style("opacity", k => !f || k === f ? 1 : .15);
     rows.style("opacity", d => !f || d.key === f ? 1 : .35);
   };
-  rows.on("pointerenter", (ev, d) => show(d.key)).on("pointerleave", () => show(FOCUS.key));
-  onFocus(show);
+  rows.on("pointerenter", (ev, d) => show(d.key)).on("pointerleave", () => show(FOC.key));
+  FOC.on(show);
 });

@@ -5,7 +5,8 @@
 ## Collection
 - Source: Google Trends, worldwide, all categories, collected 25 Oct 2026 through the Explore page in a browser.
 - What was saved: the same time-series and by-country numbers the page's CSV download gives. A cell Google marks as having no data is stored as `null`.
-- Terms: streetwear, y2k fashion, gorpcore, quiet luxury, dark academia, coquette aesthetic.
+- Terms: streetwear, y2k fashion, gorpcore, quiet luxury, dark academia, coquette aesthetic (collected 25 Oct 2026), then cottagecore and maximalist fashion (collected 14 Nov 2026 the same way, plus comparison C below).
+  - Plain "maximalism" was also tested and rejected for the same kind of reason: it is an art and interior-design word with a baseline long before the fashion aesthetic (about 7 of its own peak over 2004–2012, against under 1 for "maximalist fashion").
   - Plain "coquette" was also collected and rejected. It is a French/Spanish word, so it held about a quarter of the six terms' share in 2004, before the aesthetic existed.
 - Brands: 13 brands from Lyst's Hottest Brands lists, as search terms, monthly 2016–2025.
   - Brands whose names are everyday words (Off-White, Diesel, The Row, Valentino) were left out.
@@ -13,16 +14,17 @@
 | raw query id | what |
 |---|---|
 | `alone:<term>` | each aesthetic on its own, monthly 2004–2025 (100 = its own peak) |
-| `shareA`, `shareB` | the six terms on Google web search in two comparisons that share "streetwear" |
+| `shareA`, `shareB`, `shareC` | the eight terms on Google web search in three comparisons that share "streetwear" (C = streetwear, cottagecore, maximalist fashion) |
 | `ytA`, `ytB` | the same two comparisons on YouTube search, 2008–2025 |
-| `geoA:<era>`, `geoB:<era>` | by-country comparisons for each era |
+| `geoA:<era>`, `geoB:<era>`, `geoC:<era>` | by-country comparisons for each era |
 | `bterm:<brand>` | each brand on its own, monthly 2016–2025 |
 | `ctyA:<country>`, `ctyB:<country>` | the six terms for the US, Chile and India, monthly 2015–2025 (used for the country drill-down draft) |
 
 ## Cleaning and joining
-- Google compares at most 5 terms and rescales each comparison to 100. To get six terms, two comparisons are joined through the shared "streetwear" term.
-- Batch B is multiplied by sum(streetwear in A) / sum(streetwear in B). Summed totals are used, not month-by-month ratios, so rounding on small integers doesn't turn into noise.
-- Country shares use the same anchor per country and are then renormalised to 100 %. Codes are converted to ISO alpha-3 for the map.
+- Google compares at most 5 terms and rescales each comparison to 100. To get eight terms, three comparisons are joined through the shared "streetwear" term.
+- Batches B and C are multiplied by sum(streetwear in A) / sum(streetwear in B or C). Summed totals are used, not month-by-month ratios, so rounding on small integers doesn't turn into noise.
+- Country shares use the same anchor per country and are then renormalised to 100 %.
+- **Maximalism is tiny next to streetwear**: on the shared scale it rounds to 0 in every month and country, so it shows a real shape only on charts that scale each aesthetic to its own peak (timeline, ring, seasons) and about 0 % on every share chart. That is a finding about the term, not a bug. Codes are converted to ISO alpha-3 for the map.
 
 ## Outputs (`../data/`)
 | file | used by |
@@ -41,14 +43,15 @@
 | `bundle.js` | every JSON above in one script, so the page works from `file://` |
 
 New derived rules (Prototype II):
+- **Despeckle**: in each solo series, a month that has data while every month within two either side has none is dropped (low-volume sampling noise). It removes values of at most 4 from the original six, and a lone 41 in Oct 2010 from maximalist fashion; the dropped months are listed in `qc_report.json`.
 - **Peak month**: month of the highest 3-month centred average. Google uses each term alone (2004–2025); YouTube uses the anchored comparison (2008–2025).
 - **Seasonal clock**: mean interest per calendar month over 2021–2025, divided by that aesthetic's best month (best = 100).
 - **Brand ribbons**: each brand alone (own peak = 100), 3-month centred average.
 
 ## Derived-metric rules
-- **Breakout**: first month at ≥ 25 of 100. **Fade**: last month at ≥ 25. **Months on top**: months at ≥ 50.
-- **Platform share**: each aesthetic's share of the six on that platform, summed over 2023–2025.
-- **Year's look**: the aesthetic whose share grew most that year. If none grew by at least 0.5 points, streetwear.
+- **Breakout**: first month of a run of at least 3 months at ≥ 25 of 100 (a single noisy month in a sparse series does not count). **Fade**: last month of such a run. **Months on top**: months at ≥ 50.
+- **Platform share** (unused by the page since the platform chart was cut): each aesthetic's share of the six on that platform, summed over 2023–2025.
+- **Year's look**: the aesthetic whose share of the eight grew most that year. If none grew by at least 0.5 points, streetwear.
 - **Rising brands**: year-over-year growth in annual mean search interest. Growth from a tiny base (prior-year mean < 10) is ignored.
 
 ## Lyst Index (the shop side)

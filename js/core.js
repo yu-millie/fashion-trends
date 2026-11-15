@@ -1,23 +1,38 @@
-/* ══ core: the six aesthetics, colours, data loading, shared helpers ══════
+/* ══ core: the eight aesthetics, colours, data loading, shared helpers ══════
    Every other script reads from here. Loaded first. */
 
 // Colours are the validated categorical order (adjacent pairs pass CVD checks
 // on the silver page surface). ORDER is the legend order everywhere.
-const TRENDS = [
-  { key: "street",   name: "Streetwear",    color: "#eb6834",
+const TRENDS_ALL = [
+  { key: "street",   name: "Streetwear",    color: "#CC623E",
     def: "Skate and hip-hop dress codes turned luxury: oversized hoodies, box logos, sneakers released in drops." },
-  { key: "quiet",    name: "Quiet Luxury",  color: "#2a78d6",
+  { key: "quiet",    name: "Quiet Luxury",  color: "#497C9C",
     def: "Logo-free cashmere, camel coats and a tote that costs a month's rent. Wealth that declines to announce itself." },
-  { key: "gorp",     name: "Gorpcore",      color: "#008300",
+  { key: "gorp",     name: "Gorpcore",      color: "#44765B",
     def: "Technical outdoor kit worn in the city: puffers, fleece, trail shoes. Named for the trail mix." },
-  { key: "y2k",      name: "Y2K",           color: "#e87ba4",
+  { key: "y2k",      name: "Y2K",           color: "#CB648E",
     def: "Low-rise everything, baby tees and frosted lip. The millennium's own idea of the future, worn back as nostalgia." },
-  { key: "coquette", name: "Coquette",      color: "#6250d6",
+  { key: "coquette", name: "Coquette",      color: "#9475B5",
     def: "Ribbons, lace trim, ballet flats and bows on everything. Girlhood staged as an aesthetic." },
-  { key: "academia", name: "Dark Academia", color: "#e34948",
-    def: "Tweed, pleats, oxfords and a satchel of unread Greek. Campus gothic for people who miss the library." }
+  { key: "academia", name: "Dark Academia", color: "#574052",
+    def: "Tweed, pleats, oxfords and a satchel of unread Greek. Campus gothic for people who miss the library." },
+  // added after the first six (data collected 14 Nov 2026). `extra` entries are charted only if the data has a series for them.
+  { key: "cottage",  name: "Cottagecore",   color: "#369894", extra: true,
+    def: "Gingham, pointelle knits and headscarves, dressed as if the orchard were next door. Pastoral calm for people who live in cities." },
+  { key: "maxi",     name: "Maximalism",    color: "#BD922F", extra: true,
+    def: "Clashing prints, saturated colour and statement accessories piled on at once. More is the whole idea." }
 ];
-const T = Object.fromEntries(TRENDS.map(t => [t.key, t]));
+// an aesthetic is charted only if the data has a series for it
+const HAS_SERIES = k => { const L = window.SITE_DATA && window.SITE_DATA.lifecycle; return L ? L.aesthetics.some(a => a.key === k) : true; };
+const TRENDS = TRENDS_ALL.filter(t => !t.extra || HAS_SERIES(t.key));
+const T = Object.fromEntries(TRENDS_ALL.map(t => [t.key, t]));
+// label colour for text drawn on a coloured fill: white or charcoal, whichever has the higher WCAG contrast
+function textOn(hex) {
+  const lum = h => { const n = parseInt(h.slice(1), 16), f = v => { v /= 255; return v <= .04045 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(n >> 16) + .7152 * f((n >> 8) & 255) + .0722 * f(n & 255); };
+  const l = lum(hex), white = 1.05 / (l + .05), dark = (l + .05) / (lum("#0d1013") + .05);
+  return white >= dark ? "#fff" : "#0d1013";
+}
+
 const ORDER = TRENDS.map(t => t.key);
 const colorOf = k => (T[k] && T[k].color) || "#7b848d";
 const nameOf = k => (T[k] && T[k].name) || k;
@@ -56,19 +71,21 @@ function showTip(ev, html) {
 const hideTip = () => { tip.hidden = true; };
 const tipRow = (k, label, v, top) => '<div class="tr' + (top ? " top" : "") + '" style="--c:' + colorOf(k) + '"><i></i><span>' + label + "</span><b>" + v + "</b></div>";
 
-/* ── shared focus: tapping an aesthetic chip highlights it in every chart.
-   Charts register a redraw with onFocus(fn). */
-const FOCUS = { key: null, fns: [] };
-const onFocus = fn => FOCUS.fns.push(fn);
-function setFocus(k) {
-  FOCUS.key = FOCUS.key === k ? null : k;
-  FOCUS.fns.forEach(fn => fn(FOCUS.key));
+/* ── aesthetic filter: each chart owns its own (no filter carries from one chart to another).
+   A group resets itself when its chart scrolls out of view, so a forgotten filter never follows the reader. */
+function focusGroup(scope) {
+  const G = { key: null, fns: [] };
+  G.on = fn => G.fns.push(fn);
+  G.set = k => { G.key = G.key === k ? null : k; G.fns.forEach(fn => fn(G.key)); };
+  G.clear = () => { if (G.key) { G.key = null; G.fns.forEach(fn => fn(null)); } };
+  if (scope) new IntersectionObserver(es => { if (!es[0].isIntersecting) G.clear(); }).observe(scope);
+  return G;
 }
-// builds a row of aesthetic chips wired to the shared focus
-function chips(sel) {
+// builds a row of aesthetic chips wired to one chart's filter
+function chips(sel, G) {
   const key = d3.select(sel).selectAll("button").data(TRENDS).join("button")
     .style("--c", d => d.color).attr("aria-pressed", "false")
     .html(d => "<i></i>" + d.name)
-    .on("click", (ev, d) => setFocus(d.key));
-  onFocus(f => key.attr("aria-pressed", d => String(f === d.key)));
+    .on("click", (ev, d) => G.set(d.key));
+  G.on(f => key.attr("aria-pressed", d => String(f === d.key)));
 }

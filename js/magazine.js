@@ -32,7 +32,7 @@
       page += 1 + Math.round(rand() * 3);
       const f = document.createElement("div");
       f.className = "folio";
-      f.innerHTML = "<span>Wardrobe — Fall 2026 · <b>" + sec.dataset.folio + "</b></span><span>P. " + String(page).padStart(2, "0") + "</span>";
+      f.innerHTML = "<span>Aesthetic — Fall 2026 · <b>" + sec.dataset.folio + "</b></span><span>P. " + String(page).padStart(2, "0") + "</span>";
       (sec.querySelector(".lb-pin") || sec).appendChild(f);
     }
   });

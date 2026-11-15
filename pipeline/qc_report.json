@@ -2,7 +2,8 @@
   "collected": "2026-10-25T18:10:06.563Z",
   "source": "trends.google.com explore widgets (TIMESERIES multiline, GEO_MAP comparedgeo), hl=en-US, category=All, worldwide",
   "anchor_ratios": {
-    "web 2004-2025": 1.9231,
+    "web 2004-2025:shareB": 1.9231,
+    "web 2004-2025:shareC": 1.0099,
     "youtube 2008-2025": 2.4018,
     "country US": 1.0,
     "country CL": 1.0,
@@ -15,8 +16,11 @@
     "alone:quiet luxury": 70,
     "alone:dark academia": 95,
     "alone:coquette aesthetic": 206,
+    "alone:cottagecore": 179,
+    "alone:maximalist fashion": 213,
     "shareA": 482,
     "shareB": 206,
+    "shareC": 392,
     "ytA": 563,
     "ytB": 190,
     "bterm:gucci": 0,
@@ -42,8 +46,41 @@
   "unresolved_countries": [],
   "notes": [
     "Coquette uses \"coquette aesthetic\": plain \"coquette\" is also a French/Spanish word and had a ~25% share of these six terms already in 2004, before the aesthetic existed.",
+    "Maximalism uses \"maximalist fashion\", for the same reason: plain \"maximalism\" is also an art and interior-design word and already averaged about 7 (of its own peak = 100) over 2004-2012. \"maximalist fashion\" averaged under 1 until 2018.",
+    "Maximalism is a very small search term next to streetwear: on the shared scale it rounds to 0 in every month, so it has a visible shape only on charts that scale each aesthetic to its own peak (timeline, ring, seasons), and ~0 % on share charts.",
     "Brands are search terms, each queried alone (2016-2025). Google Trends brand *topics* were tried first but had gaps and near-zero values in 2017-2020 (e.g. Dior), so they were dropped. Brands whose names are common words (Off-White, Diesel, The Row, Valentino) were left out."
   ],
+  "despeckled_months": {
+    "streetwear": [],
+    "y2k fashion": [
+      "2016-05=1"
+    ],
+    "gorpcore": [
+      "2016-06=1"
+    ],
+    "quiet luxury": [
+      "2007-07=4",
+      "2007-11=3",
+      "2008-04=3",
+      "2009-01=3"
+    ],
+    "dark academia": [
+      "2009-12=0",
+      "2010-11=1",
+      "2011-08=0"
+    ],
+    "coquette aesthetic": [
+      "2008-08=2",
+      "2014-05=0"
+    ],
+    "cottagecore": [],
+    "maximalist fashion": [
+      "2010-10=41",
+      "2019-03=12",
+      "2020-09=21",
+      "2021-03=12"
+    ]
+  },
   "countries_per_era": {
     "2004–2012": 38,
     "2013–2017": 40,
@@ -58,7 +95,7 @@
   "streetwear_share": {
     "2004": 100.0,
     "2019": 97.2,
-    "2024": 58.6,
-    "2025": 72.7
+    "2024": 49.6,
+    "2025": 66.0
   }
 }

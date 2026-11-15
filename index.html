@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Enter the Wardrobe</title>
+<title>Enter the Aesthetic</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400;1,6..96,500&family=Jost:wght@100;200;300;400;500&family=JetBrains+Mono:wght@400&display=swap">
 <style>
   /* ══ tokens ═══════════════════════════════════════════════════════════
      Editorial chrome: silver-blue paper, black ink, chrome figures.
      Series colours are the validated categorical order (see README):
-     street · quiet · gorp · y2k · coquette · academia                    */
+     street · quiet · gorp · y2k · coquette · academia · cottage · maxi    */
   :root {
     color-scheme: light;
     --paper:   #e6eaee;
@@ -24,18 +24,20 @@
     --glass:   rgba(255,255,255,.56);
     --glass-2: rgba(255,255,255,.82);
 
-    --street:   #eb6834;
-    --quiet:    #2a78d6;
-    --gorp:     #008300;
-    --y2k:      #e87ba4;
-    --coquette: #6250d6;
-    --academia: #e34948;
+    --street:   #CC623E;
+    --quiet:    #497C9C;
+    --gorp:     #44765B;
+    --y2k:      #CB648E;
+    --coquette: #9475B5;
+    --academia: #574052;
+    --cottage:  #369894;
+    --maxi:     #BD922F;
 
     --display: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
     --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
     --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
     --sans: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
-    --r: 18px;
+    --r: 3px;
   }
 
   * { box-sizing: border-box; }
@@ -88,27 +90,32 @@
   .reveal { opacity: .25; transform: translateY(18px); transition: opacity .9s ease, transform .9s cubic-bezier(.22,.8,.3,1); }
   .reveal.in { opacity: 1; transform: none; }
 
-  /* ── glass cards (rounded, like editorial image cards) ──────────────── */
+  /* ── plates: a printed catalogue plate, paper stock with a hairline border and a heavy top rule, numbered like figures ── */
   .card {
     position: relative;
-    background: linear-gradient(160deg, rgba(255,255,255,.78), rgba(255,255,255,.42));
-    border: 1px solid rgba(255,255,255,.9);
-    border-radius: var(--r);
-    box-shadow: 0 40px 70px -40px rgba(40,58,76,.45), inset 0 1px 0 #fff;
-    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-    padding: clamp(16px, 2vw, 24px);
+    background: #f8f6f1;
+    border: 1px solid rgba(13,16,19,.16);
+    border-top: 2px solid var(--ink);
+    border-radius: 2px;
+    box-shadow: none;
+    padding: clamp(18px, 2.2vw, 28px);
   }
   .cardhead { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px 16px; margin-bottom: 12px; }
   .cardhead h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(17px, 1.6vw, 22px); letter-spacing: .02em; margin: 0; line-height: 1.1; }
+  .cardhead h3.take { font-family: var(--sans); text-transform: none; font-weight: 400; letter-spacing: -.012em; font-size: clamp(21px, 2.2vw, 30px); line-height: 1.14; max-width: 30em; }
+  .cardhead h3.take small { margin-top: 8px; }
+  body { counter-reset: fig; }
+  .cardhead h3.take { counter-increment: fig; }
+  .cardhead h3.take::before { content: "Fig. " counter(fig); display: block; margin-bottom: 8px; font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
   .cardhead h3 small { display: block; font-family: var(--sans); text-transform: none; font-size: 12.5px; font-weight: 400; letter-spacing: .02em; color: var(--steel-2); margin-top: 3px; }
   .go { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--ink-3); display: grid; place-items: center; font-size: 14px; color: var(--ink-2); transition: background .25s, color .25s, transform .25s; }
   .go:hover { background: var(--ink); color: #fff; transform: rotate(45deg); }
 
-  /* ── marquee strip ───────────────────────────────────────────────────── */
-  .marquee { position: relative; z-index: 3; background: #fff; overflow: hidden; white-space: nowrap; border-block: 1px solid rgba(13,16,19,.08); }
-  .marquee .track { display: inline-flex; animation: slide 38s linear infinite; }
-  .marquee span { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(15px, 1.7vw, 22px); letter-spacing: .02em; padding: 12px 0; }
-  .marquee span::after { content: " / "; padding: 0 .35em; color: var(--ink-3); }
+  /* ── closing takeaway (replaces the scrolling strip) ──────────────────── */
+  .closing { padding: clamp(34px, 6vw, 72px) 0 clamp(10px, 2vw, 22px); }
+  .closing .k { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 14px; }
+  .closing .take { text-transform: none; margin: 0; max-width: 24em; font-family: var(--display); font-weight: 300; font-size: clamp(26px, 3.6vw, 52px); line-height: 1.12; letter-spacing: -.01em; color: var(--ink); }
+  .closing .take b { font-weight: 500; }
   @keyframes slide { to { transform: translateX(-50%); } }
 
   /* ── top nav ─────────────────────────────────────────────────────────── */
@@ -119,7 +126,7 @@
   .nav.solid .links a { color: var(--steel-2); }
   .nav .links a.on, .nav .links a:hover { opacity: 1; color: var(--ink); }
   .nav:not(.solid) .links a.on, .nav:not(.solid) .links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
-  .nav .mark { font-family: var(--serif); font-style: italic; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: #fff; text-decoration: none; transition: color .3s; }
+  .nav .mark { font-family: var(--display); font-weight: 500; font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; color: #fff; text-decoration: none; transition: color .3s; }
   .nav.solid .mark { color: var(--ink); }
   .nav .meta { justify-self: end; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: #fff; opacity: .85; transition: color .3s; }
   .nav.solid .meta { color: var(--ink-3); }
@@ -142,9 +149,9 @@
   .issue { display: flex; justify-content: space-between; padding: 0 clamp(16px, 5vw, 72px); font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.9); }
   .wordmark {
     position: relative; z-index: 1; margin: 1vh 0 0; text-align: center;
-    font-family: var(--display); font-weight: 100; text-transform: uppercase;
-    font-size: clamp(64px, 17.2vw, 260px); line-height: .86; letter-spacing: 0; color: #fff;
-    text-shadow: 0 0 18px rgba(255,255,255,.7), 0 0 46px rgba(255,255,255,.4);
+    font-family: var(--display); font-weight: 300; text-transform: uppercase;
+    font-size: clamp(64px, 17.2vw, 260px); line-height: .86; letter-spacing: .01em; color: #fff;
+    text-shadow: 0 2px 26px rgba(22,34,46,.38), 0 0 14px rgba(255,255,255,.45);
   }
   .wordmark .o { position: relative; display: inline-block; }
   .wordmark .o::after { content: ""; position: absolute; left: 30%; right: 30%; top: 52%; height: 1px; background: #fff; box-shadow: 0 0 10px #fff; }
@@ -156,7 +163,7 @@
   .cl { max-width: 250px; display: grid; gap: 18px; pointer-events: auto; }
   .cl.r { text-align: right; justify-items: end; }
   .cl .line { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 19px); line-height: 1.12; letter-spacing: .02em; color: var(--ink); }
-  .cl .line em { display: block; font-family: var(--serif); font-style: italic; text-transform: none; font-size: 1.5em; color: #fff; text-shadow: 0 1px 12px rgba(30,40,50,.35); }
+  .cl .line em { display: block; font-family: var(--display); font-style: normal; font-weight: 400; text-transform: none; font-size: 1.45em; line-height: 1.1; color: var(--ink); }
   .cl .line small { text-shadow: 0 0 6px rgba(255,255,255,.95), 0 0 14px rgba(255,255,255,.8); display: block; font-family: var(--sans); text-transform: none; font-size: 12.5px; color: var(--ink-2); margin-top: 3px; letter-spacing: 0; }
   .who h4 { margin: 0 0 8px; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; color: transparent; -webkit-text-stroke: .8px var(--ink); }
   .pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border: 1.5px solid var(--ink); border-radius: 999px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: background .3s, color .3s; background: rgba(255,255,255,.35); }
@@ -175,7 +182,6 @@
   .pieces { list-style: none; margin: 0 0 16px; padding: 0 0 0 14px; border-left: 1px solid var(--rule); display: grid; gap: 7px; }
   .pieces li { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); line-height: 1.35; }
   .pieces li span { display: block; font-style: italic; text-transform: none; letter-spacing: .02em; font-size: 12px; color: var(--ink-2); }
-  .spark { display: block; width: 100%; max-width: 280px; height: 64px; overflow: visible; }
   .lb-fade { transition: opacity .35s ease, transform .35s ease; }
   .lb-fade.out { opacity: 0; transform: translateY(8px); }
   .lb-nav { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
@@ -200,7 +206,7 @@
   .beat { min-height: 62svh; align-items: center; text-align: center; }
   .scrapwrap { position: relative; display: inline-block; rotate: var(--rot, -1.6deg); filter: drop-shadow(0 18px 24px rgba(30,40,50,.18)); }
   .scrap { background: #fffdf8; padding: clamp(30px, 4vw, 54px) clamp(30px, 5vw, 70px); max-width: min(760px, 88vw); }
-  .scrap p { margin: 0; text-wrap: balance; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(28px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -.015em; color: var(--ink); }
+  .scrap p { margin: 0; text-wrap: balance; font-family: var(--display); font-style: normal; font-weight: 400; font-size: clamp(26px, 4vw, 54px); line-height: 1.14; letter-spacing: -.005em; color: var(--ink); }
   .scrap small { display: block; margin-top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3); }
   .tape { position: absolute; z-index: 2; width: 110px; height: 28px; background: rgba(226,214,186,.72); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
   .tape.a { top: -12px; left: 8%; transform: rotate(-6deg); }
@@ -211,16 +217,19 @@
   .viz text { font-family: var(--sans); fill: var(--ink-3); font-size: 10.5px; }
   .viz .yr { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em; }
   .viz .grid line { stroke: rgba(13,16,19,.09); }
-  .viz .ln path { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; transition: opacity .3s, stroke-width .3s; }
+  .viz .ln path { fill: none; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; transition: opacity .3s, stroke-width .3s; }
   .viz .era rect { fill: rgba(255,255,255,.4); stroke: rgba(13,16,19,.14); transition: fill .25s; }
   .viz .era { cursor: pointer; }
   .viz .era:hover rect { fill: #fff; }
   .viz .era.on rect { fill: var(--ink); stroke: var(--ink); }
   .viz .era.on text { fill: #fff; }
   .viz .country { stroke: rgba(255,255,255,.9); stroke-width: .5; transition: opacity .3s, fill .4s; cursor: default; }
-  .viz .country.drill { cursor: pointer; stroke: var(--ink); stroke-width: 1.1; stroke-dasharray: 2.5 2; }
-  .viz .country.drill.picked { stroke-dasharray: none; stroke-width: 1.8; }
+  .viz .country.drill { cursor: pointer; }
+  .viz .country.drill.picked { stroke: var(--ink); stroke-width: 2; }
 
+  .howto { display: flex; align-items: baseline; gap: 10px; margin: 2px 0 14px; font-family: var(--sans); font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--ink-2); }
+  .howto::before { content: "How to"; flex: none; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: #fff; transform: translateY(-1px); }
+  .card .vkey { margin: 0 0 12px; }
   .vkey { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 18px; }
   .vkey button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 11px; border: 1px solid rgba(13,16,19,.16); background: rgba(255,255,255,.5); border-radius: 999px; font-size: 12.5px; font-weight: 400; color: var(--ink-2); transition: border-color .25s, color .25s, background .25s; }
   .vkey button i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
@@ -229,6 +238,10 @@
   .vseg { display: inline-flex; border: 1px solid rgba(13,16,19,.18); border-radius: 999px; padding: 2px; background: rgba(255,255,255,.5); }
   .vseg button { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; color: var(--ink-2); }
   .vseg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .vselect { position: relative; display: inline-block; }
+  .vselect select { -webkit-appearance: none; appearance: none; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); padding: 8px 34px 8px 16px; border: 1px solid rgba(13,16,19,.35); border-radius: 999px; cursor: pointer;
+    background: rgba(255,255,255,.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230d1013' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center; }
+  .vselect select:hover { border-color: var(--ink); background-color: #fff; }
   .vhint { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 8px 0 0; }
   .vnote { color: var(--ink-3); font-size: 12px; text-align: center; padding: 30px 10px; }
   .vtip { position: fixed; z-index: 80; pointer-events: none; min-width: 160px; max-width: 260px; padding: 11px 13px; background: var(--glass-2); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid #fff; border-radius: 12px; box-shadow: 0 20px 40px -20px rgba(30,45,60,.5); font-size: 12px; line-height: 1.5; color: var(--ink-2); }
@@ -241,22 +254,27 @@
 
   /* ══ thesis ═══════════════════════════════════════════════════════════ */
   .thesisgrid h2 { font-size: clamp(28px, 4.1vw, 58px); }
-  .thesisgrid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: clamp(20px, 4vw, 60px); align-items: center; }
-  .sharerow { display: grid; grid-template-columns: 50px 1fr; align-items: center; gap: 14px; margin: 6px 0 14px; }
-  .sharerow .yr { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
-  .sharebar { display: flex; gap: 2px; height: 46px; width: 100%; }
-  .sharebar span { position: relative; border-radius: 4px; min-width: 2px; transition: filter .25s; }
-  .sharebar span:hover { filter: brightness(1.08) saturate(1.1); }
-  .sharebar span b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 500; font-size: 12px; color: #fff; }
+  .thesisgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(22px, 3.5vw, 40px); }
+  .thesisgrid .lede { max-width: 64ch; }
+  .sharerow { display: grid; grid-template-columns: 58px 1fr; align-items: center; gap: 14px; margin: 10px 0 18px; }
+  .sharerow .yr { font-family: var(--mono); font-size: 15px; color: var(--ink); }
+  .sharebar { display: flex; gap: 3px; height: clamp(64px, 9vw, 104px); width: 100%; }
+  .sharebar span { position: relative; border-radius: 2px; min-width: 2px; transition: filter .25s; }
+  .sharebar span:hover { filter: brightness(1.06); }
+  .sharebar span b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 500; font-size: clamp(13px, 1.7vw, 20px); color: #fff; }
   .bigstat { font-family: var(--display); font-weight: 100; font-size: clamp(80px, 13vw, 190px); line-height: .85; letter-spacing: -.03em; }
   .bigstat sup { font-size: .28em; font-weight: 300; vertical-align: top; position: relative; top: .4em; margin-left: .05em; }
-  .barkey { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
+  .barkey { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 14px; color: var(--ink-2); }
   .barkey span { display: inline-flex; align-items: center; gap: 6px; }
-  .barkey i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .barkey i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
 
   /* ══ evidence ═════════════════════════════════════════════════════════ */
   .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); }
-  .drill { margin-top: clamp(14px, 2vw, 26px); display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(16px, 3vw, 40px); align-items: center; }
+  .evidence > .card:first-child { grid-column: 1 / -1; }
+  .drill { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-content: start; }
+  .drillside { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 22px; align-items: center; }
+  .drillside .tag, .drillside p.vhint { grid-column: 1 / -1; }
+  .drillside .big { grid-row: 2 / span 1; }
   .drillside .big { font-family: var(--display); font-weight: 200; font-size: clamp(42px, 5vw, 72px); line-height: 1; letter-spacing: -.02em; margin: 6px 0 4px; }
   .drillside p { margin: 0; color: var(--ink-2); font-size: 13.5px; }
   .drillside p.vhint { font-size: 9.5px; color: var(--ink-3); }
@@ -334,7 +352,17 @@
 
   .shopcard { margin-top: clamp(16px, 2.4vw, 30px); }
   .lb-ctl { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; }
+  #h20Q { font-size: 20px; font-weight: 500; color: var(--ink); letter-spacing: .02em; }
+  .h20 .bigyear { font-family: var(--display); font-weight: 200; font-size: 150px; letter-spacing: -.03em; fill: var(--ink); opacity: .9; pointer-events: none; }
+  .h20 .bigsub { font-family: var(--mono); font-weight: 600; font-size: 17px; letter-spacing: .12em; text-transform: uppercase; pointer-events: none; }
   .play { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; }
+    .h20key { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 0 10px; font-size: 12.5px; color: var(--ink-2); }
+  .h20key span { display: inline-flex; align-items: center; gap: 7px; }
+  .h20key i { width: 22px; height: 10px; border-radius: 3px; background: var(--c); }
+  .h20key i.grey { background: #e6e2d9; }
+  .h20key i.no { background: #a39e94; }
+  .h20key i.none { background: #f8f6f1; box-shadow: inset 0 0 0 1.3px #b3ad9f; }
+  .h20key i.part { background: var(--c); opacity: .34; box-shadow: inset 0 0 0 1.5px var(--c); }
   .h20range { width: 100%; margin-top: 10px; accent-color: #0d1013; }
   .h20 .bar { transition: fill .4s; }
   .h20 .nm { font-family: var(--display); font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
@@ -342,59 +370,61 @@
   .h20 .row.picked .nm { font-weight: 600; }
   .h20 .row.picked .bar { stroke: var(--ink); stroke-width: 2; }
 
-  /* the shop: product grid */
-  .shopbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 4px 0 16px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
-  .shopbar .vseg { margin-left: auto; }
-  .swkey { display: inline-flex; align-items: center; gap: 3px; }
-  .swkey i { width: 14px; height: 5px; border-radius: 2px; background: #e4e1da; }
-  .swkey i.on { background: var(--ink-2); margin-right: 5px; }
-  .bag { font-family: var(--mono); font-size: 11px; border: 1px solid var(--ink); border-radius: 999px; padding: 6px 12px; }
-  .bag b { font-weight: 600; }
-  .shopgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 16px; }
-  .item { position: relative; cursor: default; }
-  .item .shot { position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: #efece6; }
-  .item .shot .a, .item .shot .b { position: absolute; inset: 0; transition: opacity .35s; }
-  .item .shot .b { opacity: 0; background: #f7f5f0; }
-  .item:hover .shot .a { opacity: 0; } .item:hover .shot .b { opacity: 1; }
-  .item .wm { position: absolute; left: 10px; right: 10px; top: 38%; transform: translateY(-50%); text-align: center; font-family: var(--serif); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.02; color: var(--ink); }
-  .item .wm small { display: block; margin-top: 8px; font-family: var(--mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
-  .item svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; }
-  .item .tagl { position: absolute; top: 10px; left: 10px; z-index: 2; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; background: #fff; color: var(--ink); }
-  .item .tagl.hot { background: var(--ink); color: #fff; }
-  .item .tagl.up { background: #c4302b; color: #fff; }
-  .item .tagl.down { background: #1c5cab; color: #fff; }
-  .item .tagl.out { background: transparent; border: 1px solid var(--ink-3); color: var(--ink-3); }
-  .item .heart { position: absolute; top: 8px; right: 8px; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.9); font-size: 15px; line-height: 1; }
-  .item.picked .heart { background: var(--ink); color: #fff; }
-  .item.picked .shot { box-shadow: 0 0 0 2px var(--ink); }
-  .item .meta { padding: 9px 2px 0; }
-  .item .bn { font-family: var(--display); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; font-size: 13px; }
-  .item .price { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; font-family: var(--mono); }
-  .item .price b { font-size: 15px; font-weight: 600; }
-  .item .price s { font-size: 11.5px; color: var(--ink-3); }
-  .item .price.up b { color: #c4302b; }
-  .item .info { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
-  .item .sizes { display: flex; gap: 3px; margin-top: 7px; }
-  .item .sizes i { flex: 1; height: 5px; border-radius: 2px; background: #e4e1da; }
-  .item .sizes i.on { background: var(--c); }
-  .item .sizes i.cur { outline: 1.5px solid var(--ink); outline-offset: 1px; }
-  .item.dim { opacity: .35; }
-
-  /* brands per look */
-  .bpl .bar { transition: opacity .3s; }
-  .bpl .chip rect { fill: #fff; stroke: var(--ink); transition: fill .25s, opacity .3s; }
-  .bpl .chip text { font-family: var(--display); font-size: 11px; fill: var(--ink); pointer-events: none; }
-  .bpl .chip { cursor: pointer; transition: opacity .3s; }
-  .bpl .chip.picked rect { fill: var(--ink); } .bpl .chip.picked text { fill: #fff; }
-  .bpl .dim { opacity: .18; }
-  .bpl .ycur { stroke: var(--ink); stroke-dasharray: 3 3; }
-
-  details.fulldata { margin-top: clamp(16px, 2.4vw, 30px); }
-  details.fulldata > summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 16px 20px; border: 1px dashed var(--ink-3); border-radius: 12px; font-family: var(--display); text-transform: uppercase; letter-spacing: .04em; font-size: 14px; }
-  details.fulldata > summary::before { content: "+"; font-family: var(--mono); }
-  details.fulldata[open] > summary::before { content: "–"; }
-  details.fulldata > summary span { font-family: var(--mono); text-transform: none; font-size: 11px; color: var(--ink-3); letter-spacing: 0; }
-
+  /* runway photos sit where the look cutout used to */
+  .spread.rw .sp-photo { position: relative; z-index: 1; height: min(70vh, 600px); padding-bottom: 46px; gap: clamp(12px, 1.6vw, 20px); align-items: flex-end; }
+  .spread.rw.duo { grid-template-columns: minmax(0, .55fr) minmax(0, 1.5fr) minmax(250px, 340px); }
+  .rw-fig { margin: 0; display: flex; flex-direction: column; }
+  .rw-open { position: relative; display: block; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 2px; }
+  .rw-open.static { cursor: default; }
+  .rw-open:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .rw-plus { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.88); color: var(--ink); font: 400 18px/1 var(--sans); box-shadow: 0 4px 10px rgba(0,0,0,.18); transition: transform .2s, background .2s; }
+  .rw-open:hover .rw-plus { transform: scale(1.12); background: #fff; }
+  .rw-fig img { display: block; height: calc(min(70vh, 600px) - 46px - 150px); aspect-ratio: 2 / 3; width: auto; object-fit: cover; object-position: top; border-radius: 2px; box-shadow: 0 10px 22px rgba(20,30,40,.22); }
+  .spread.duo .rw-fig img { height: calc((min(70vh, 600px) - 46px - 150px) * .9); }
+  .spread.duo .rw-fig:first-child img { transform: rotate(-1.6deg); }
+  .spread.duo .rw-fig:last-child img { transform: rotate(1.4deg); }
+  .rw-cap { display: grid; gap: 3px; margin-top: 12px; width: 0; min-width: 100%; }
+  .rw-cap b { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1.05; }
+  .rw-show { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); line-height: 1.4; }
+  .rw-read { display: flex; align-items: baseline; gap: 7px; font-size: 12px; line-height: 1.35; color: var(--ink-2); }
+  .rw-read i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c); transform: translateY(-1px); }
+  .rw-read i.none { background: transparent; border: 1.5px solid var(--ink-3); }
+  .rw-credit { font-size: 10.5px; color: var(--ink-3); }
+  .rw-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+  .rw-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; background: #fff; box-shadow: 0 1px 5px rgba(20,30,40,.12); font-size: 11px; line-height: 1.3; color: var(--ink-2); white-space: nowrap; }
+  .rw-chip.up { color: var(--ink); font-weight: 600; }
+  .rw-chip i.led { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; } .rw-chip i.led.concept { background: var(--ink); }
+  .rw-chip.m-yes, .rw-chip.m-part, .rw-chip.m-no { color: var(--ink); font-weight: 600; }
+  .rw-chip.m-yes::before { content: "✓"; } .rw-chip.m-part::before { content: "◐"; } .rw-chip.m-no::before { content: "×"; color: var(--ink-3); }
+  .rw-ptext .rw-chips { margin-top: 8px; }
+  .rw-lock { overflow: hidden; }
+  .rw-modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(12px, 3vw, 40px); background: rgba(13,16,19,.58); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .rw-modal[hidden] { display: none; }
+  .rw-panel { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 3vw, 40px); align-items: center; width: min(920px, 100%); max-height: 100%; overflow: auto; padding: clamp(16px, 2.4vw, 30px); border-radius: 20px; background: #f8f7f3; box-shadow: 0 40px 90px rgba(0,0,0,.4); }
+  .rw-pimg img { display: block; height: min(78vh, 640px); max-width: 100%; width: auto; border-radius: 12px; object-fit: contain; }
+  .rw-ptext { display: grid; gap: 10px; align-content: center; padding-right: clamp(0px, 1vw, 12px); }
+  .rw-ptext h4 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1; }
+  .rw-ptext .rw-show { font-size: 10.5px; }
+  .rw-k { margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .rw-ptext p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  .rw-ptext .rw-read { margin-top: 6px; font-size: 13px; }
+  .rw-close { position: absolute; top: 12px; right: 14px; z-index: 1; width: 34px; height: 34px; border-radius: 50%; font-size: 22px; line-height: 1; background: rgba(13,16,19,.07); color: var(--ink); }
+  .rw-close:hover { background: var(--ink); color: #fff; }
+  .erasfinding { margin: clamp(26px, 4vw, 44px) 0 0; max-width: 78ch; }
+  .erasfinding b { font-weight: 600; color: var(--ink); }
+  .erascard { margin: clamp(14px, 2vw, 24px) 0 clamp(20px, 3vw, 34px); }
+  .e-halo { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--steel-2); }
+  .eras-scroll { width: 100%; }
+  #erasSvg { display: block; width: 100%; height: auto; }
+  .eras-reading { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0 calc(100% * 150 / 1296); width: calc(100% * 1130 / 1296); }
+  .er-col { padding: 10px 18px 0 10px; border-top: 3px solid var(--c, var(--ink)); }
+  .er-col b { display: block; font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--c, var(--ink)); }
+  .er-col p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+  .scrap.long p { font-size: clamp(22px, 3.3vw, 46px); line-height: 1.16; }
+  .eras-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 6px; font-size: 12.5px; color: var(--ink-2); }
+  .eras-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .e-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); background: transparent; } .e-dot.concept { background: var(--ink); }
+  .e-sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
   .scrub { margin: clamp(22px, 4vh, 36px) 0 0; }
   .scrub .ticks { display: flex; justify-content: space-between; margin-top: 10px; }
   .scrub .ticks button { font-family: var(--mono); font-size: 11px; color: var(--ink-3); padding: 4px 6px; border-radius: 999px; }
@@ -404,23 +434,6 @@
   .scrub input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 1.5px solid var(--ink); cursor: grab; }
 
   .hot { margin-top: clamp(16px, 2.4vw, 30px); }
-  .heat .hrow .rowbg { fill: transparent; transition: fill .2s; }
-  .heat .hrow.hl .rowbg { fill: rgba(255,255,255,.85); }
-  .heat .rname { font-family: var(--display); font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; fill: var(--ink-2); }
-  .heat .hrow.rise .rname, .heat .hrow.hl .rname { fill: var(--ink); font-weight: 500; }
-  .heat .cell { cursor: pointer; transition: opacity .35s; }
-  .heat .cell.dim { opacity: .72; }
-  .heat .hrow.hl .cell.dim { opacity: .9; }
-  .heat .cell.top rect { stroke: var(--ink); stroke-width: 2; }
-  .heat .gv { font-family: var(--mono); font-size: 11px; pointer-events: none; }
-  .heat .cell.na .gv { fill: var(--ink-3) !important; }
-  .heat .rk { font-family: var(--mono); font-size: 8.5px; font-weight: 600; pointer-events: none; }
-  .heat .yband { fill: rgba(255,255,255,.9); stroke: var(--ink); stroke-width: 1; }
-  .heatkey { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 12px; font-size: 12px; color: var(--ink-2); }
-  .heatkey i { width: 140px; height: 10px; border-radius: 5px; }
-  .heatkey .sw { width: 30px; height: 16px; border-radius: 4px; display: inline-grid; place-items: center; font-family: var(--mono); font-size: 8.5px; font-weight: 600; margin-left: 10px; }
-  .heatkey .sw.outl { border: 2px solid var(--ink); background: #f0efec; }
-  .heatkey .sw.na { background: repeating-linear-gradient(45deg, #f4f2ed 0 3px, rgba(13,16,19,.12) 3px 5px); }
   .hot .ylab { font-family: var(--mono); font-size: 11px; fill: var(--ink-3); cursor: pointer; }
   .hot .ylab.on { fill: var(--ink); font-weight: 600; }
 
@@ -429,6 +442,11 @@
 
   /* ── narrow ────────────────────────────────────────────────────────── */
   @media (max-width: 900px) {
+    #slotLines { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    #slotLines svg { min-width: 760px; }
+    .eras-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .eras-reading { grid-template-columns: 1fr; margin-left: 0; width: 100%; gap: 14px; }
+    #erasSvg { min-width: 820px; }
     .nav { grid-template-columns: auto 1fr; }
     .nav .links { display: none; }
     .nav .mark { justify-self: start; }
@@ -440,8 +458,14 @@
     .spread { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-bottom: 40px; }
     .sp-year, .sp-photo, .sp-lines { grid-column: 1; grid-row: auto; }
     .sp-photo { height: 46vh; }
+    .spread.rw .sp-photo { height: auto; padding-bottom: 8px; justify-content: center; }
+    .spread.rw .rw-fig img { height: min(52vh, 420px); }
+    .spread.rw.duo .rw-fig { flex: 1; min-width: 0; }
+    .spread.rw.duo .rw-fig img { height: auto; width: 100%; }
+    .spread.rw.duo { grid-template-columns: minmax(0, 1fr); }
+    .rw-panel { grid-template-columns: minmax(0, 1fr); }
+    .rw-pimg img { height: min(46vh, 420px); margin: 0 auto; }
     .sp-lines { padding-bottom: 10px; }
-    .shopgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .sp-folio span:last-child, .swkey { display: none; }
   }
   @media (max-width: 900px) {
@@ -464,7 +488,7 @@
     .lb-dots, .lb-hint, .folio { display: none; }
     .lb-text h3 { font-size: 28px; }
     .lb-text p { margin: 8px 0 0; font-size: 12.5px; }
-    .lb-text .pieces, .lb-text .spark, .lb-text .k + .spark { display: none; }
+    .lb-text .pieces { display: none; }
     .lb-text .k:last-of-type { display: none; }
     .lb-nav { margin-top: 10px; }
   }
@@ -487,28 +511,27 @@
     <a href="#evidence">evidence</a>
     <a href="#cycle">cycle</a>
     <a href="#seasons">seasons</a>
-    <a href="#platforms">platforms</a>
     <a href="#summary">brands</a>
   </div>
-  <a class="mark" href="#cover">Enter the Wardrobe</a>
+  <a class="mark" href="#cover">Enter the Aesthetic</a>
   <div class="meta">CS 1710 · FALL '26</div>
 </nav>
 
 <!-- ── 1 · cover ─────────────────────────────────────────────────────── -->
 <section id="cover">
   <div class="issue"><span>Issue 02 · The trend cycle issue</span><span>Fall 2026 · CS 1710</span></div>
-  <h1 class="wordmark">Wardr<span class="o">o</span>be</h1>
+  <h1 class="wordmark">Aesth<span class="o">e</span>tic</h1>
   <div class="backline" id="backline" aria-hidden="true"></div>
   <img class="star" id="coverStar" src="assets/people/y2k.webp" alt="Cover look, Y2K: white halter top, cut-off denim shorts and orange on-ear headphones">
   <div class="coverlines">
     <div class="cl">
       <div class="line">Streetwear's fall<em id="clFall">97 → 73</em><small>searches in every hundred, 2019 to 2025</small></div>
-      <div class="line">Six aesthetics<em>22 years</em><small>of Google and YouTube search</small></div>
+      <div class="line">Eight aesthetics<em>22 years</em><small>of Google search</small></div>
       <a class="pill" href="#lookbook">Open the issue <span aria-hidden="true">↓</span></a>
     </div>
     <div class="cl r">
-      <div class="line">Cover look: Y2K<em id="clStar">52 months on top</em><small>the longest run of the six</small></div>
-      <div class="line">The hot list<em>13 brands</em><small>who rose fastest, year by year</small></div>
+      <div class="line">Cover look: Y2K<em id="clStar">52 months on top</em><small>the longest run of the eight</small></div>
+      <div class="line">The hot 20<em id="clHot">35 quarters</em><small>of Lyst's top brands, year by year</small></div>
       <div class="barcode" aria-hidden="true"><svg id="barcode" viewBox="0 0 120 30" preserveAspectRatio="none"></svg><span>002026 · 171000</span></div>
     </div>
   </div>
@@ -520,6 +543,7 @@
     <div class="lb-text">
       <div class="lb-fade" id="lbText"></div>
       <div class="lb-nav"><button id="lbPrev" aria-label="Previous look">←</button><span id="lbCount">01 / 06</span><button id="lbNext" aria-label="Next look">→</button></div>
+      <div class="howto" style="margin-top:14px">Scroll down to turn to the next look. Or use the arrows, the names underneath, or click a faded look.</div>
     </div>
     <div class="lb-stage" id="lbStage">
       <div class="lb-ghost" id="lbGhost" aria-hidden="true"></div>
@@ -542,9 +566,10 @@
       </div>
       <div class="card">
         <div class="cardhead">
-          <h3>Streetwear, searches in every hundred<small>Share of the six aesthetics · Google, worldwide</small></h3>
+          <h3 class="take"><span id="thesisTitle">Streetwear used to be almost every search. Now a third go to other aesthetics.</span><small>Streetwear's share of searches for the eight aesthetics · Google, worldwide</small></h3>
           <a class="go" href="#evidence" aria-label="Next: evidence">↗</a>
         </div>
+        <div class="howto">Hover or tap a block in either bar to read that aesthetic's share. The big number counts down as you scroll to it.</div>
         <div style="display:flex;align-items:flex-end;gap:18px;margin:4px 0 14px">
           <div class="bigstat" id="bigStat">—</div>
           <div class="sub" id="bigStatSub" style="padding-bottom:10px"></div>
@@ -563,35 +588,38 @@
 <section id="evidence" class="pg-news" data-tear data-folio="The evidence">
   <div class="wrap reveal">
     <div class="tag">Feature 02 · The evidence</div>
-    <h2>Six aesthetics, <em>unevenly spread</em></h2>
-    <p class="lede">Each aesthetic rises at its own time and catches on in its own places. Tap an aesthetic to follow it through every chart below. Pick an era on the timeline to redraw the map, then click an outlined country to zoom in.</p>
-    <div class="vkey" id="vkey" role="group" aria-label="Aesthetics"></div>
+    <h2>Eight aesthetics, <em>unevenly spread</em></h2>
+    <p class="lede">Each aesthetic rises at its own time and catches on in its own places. Read it in three steps: the timeline shows when, the map shows where, and the chart below zooms in on one country.</p>
     <div class="evidence">
       <div class="card">
-        <div class="cardhead"><h3>When<small>Worldwide search · each line scaled to its own peak</small></h3></div>
-        <figure id="slotLines" style="margin:0" aria-label="Line chart of worldwide Google search interest for six aesthetics, 2004 to 2025"></figure>
+        <div class="cardhead"><h3 class="take"><span id="whenTitle">Seven of the eight aesthetics took off in 2020 or later, each on its own schedule</span><small>When · worldwide search, each line scaled to its own peak</small></h3></div>
+        <div class="howto">Hover the chart to read every aesthetic in any month. Tap a name to isolate its line (tap again to clear). Tap an era under the chart to redraw the map.</div>
+        <div class="vkey" id="vkey" role="group" aria-label="Isolate one aesthetic in this chart"></div>
+        <figure id="slotLines" style="margin:0" aria-label="Line chart of worldwide Google search interest for eight aesthetics, 2004 to 2025"></figure>
       </div>
       <div class="card">
         <div class="cardhead">
-          <h3>Where · <span id="mapEra">2023–2024</span><small id="mapSub">Leading aesthetic by country</small></h3>
+          <h3 class="take"><span id="mapTitle">Different countries lean toward different aesthetics</span><small id="mapSub">Where · leading aesthetic by country</small></h3>
           <div class="vseg" role="group" aria-label="Map measure">
             <button id="mStand" aria-pressed="true">Stands out</button>
             <button id="mMost" aria-pressed="false">Most searched</button>
           </div>
         </div>
+        <div class="howto">Hover a country for its numbers. Click any coloured country to see its story in the Zoom in card. Switch the colouring with the buttons above.</div>
         <figure id="slotMap" style="margin:0" aria-label="World map coloring each country by its leading aesthetic"></figure>
         <p class="vhint" id="mapHint"></p>
       </div>
-    </div>
-    <div class="card drill" id="drillCard">
-      <div>
-        <div class="cardhead">
-          <h3>Zoom in · <span id="drillName">India</span><small>Share of the six, by year · streetwear is the rest</small></h3>
-          <div class="vseg" id="drillSeg" role="group" aria-label="Country"></div>
+      <div class="card drill" id="drillCard">
+        <div>
+          <div class="cardhead">
+            <h3 class="take"><span id="drillTitle">India: Dark Academia peaked at 29% in 2021–2022</span><small>Zoom in · share of the eight, era by era · streetwear is the rest</small></h3>
+            <label class="vselect"><span class="sr">Country</span><select id="drillSelect" aria-label="Or pick a country from the list"></select></label>
+          </div>
+          <div class="howto">Click any country on the map, or pick one here. Hover the chart to compare eras. The shaded band is the era chosen on the timeline.</div>
+          <figure id="slotDrill" style="margin:0" aria-label="Line chart of each aesthetic's share of searches in the selected country, by era"></figure>
         </div>
-        <figure id="slotDrill" style="margin:0" aria-label="Line chart of each aesthetic's share of searches in the selected country, 2015 to 2025"></figure>
+        <div class="drillside" id="drillSide"></div>
       </div>
-      <div class="drillside" id="drillSide"></div>
     </div>
   </div>
 </section>
@@ -606,7 +634,10 @@
     <div class="card circlewrap" style="margin-top:clamp(22px,4vh,40px)">
       <svg class="ring" id="ring" viewBox="0 0 440 440" role="img" aria-label="Circular timeline, one arc per aesthetic from breakout to fade"></svg>
       <div>
+        <div class="cardhead"><h3 class="take"><span id="ringTitle">A typical aesthetic stays on top for about 20 months</span><small>How long each aesthetic stayed above half its peak</small></h3></div>
         <p class="lede" style="margin-top:0">Each arc runs from the month search for an aesthetic broke out (a quarter of its peak) to the last month it stayed there. The bright dot is the peak, and the table counts the months spent above half of it. Some aesthetics stay on top for years; others are gone within a season.</p>
+        <p class="vhint" style="margin:12px 0 0">Small faded dot = breakout · big dot = peak · longer arc = more months on top</p>
+        <div class="howto">Hover an arc on the ring or a row in the table: the matching one lights up.</div>
         <div class="gaps" id="gaps">
           <div class="gaphead"><div><span>Aesthetic</span><span>Broke out</span><span>Peaked</span><span>Months on top</span></div></div>
         </div>
@@ -615,7 +646,7 @@
   </div>
 </section>
 
-<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>And every year, the calendar turns them over.</p></div></div></section>
+<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>And inside every year, each one has a month of its own.</p></div></div></section>
 
 <!-- ── 5 · seasons (new) ─────────────────────────────────────────────── -->
 <section id="seasons" class="pg-news" data-tear data-folio="The seasons">
@@ -626,7 +657,9 @@
     <div class="card circlewrap">
       <svg class="ring clock" id="clock" viewBox="0 0 460 460" role="img" aria-label="Seasonal clock: average search interest by calendar month for each aesthetic"></svg>
       <div>
+        <div class="cardhead"><h3 class="take"><span id="seasonTitle">Each aesthetic has its own peak month</span><small>The average year, 2021–2025, each aesthetic scaled to its best month</small></h3></div>
         <p class="lede" style="margin-top:0" id="seasonLede">Each loop is one aesthetic's average year, 2021–2025, scaled so its best month touches the outer ring. Hover a month to read every aesthetic at once.</p>
+        <div class="howto">Hover a month on the clock to read every aesthetic at once. Hover a table row to see that loop. The name buttons above isolate one loop and reset when you scroll away.</div>
         <div class="gaps" id="seasonTable">
           <div class="gaphead"><div><span>Aesthetic</span><span>Peak</span><span>Low</span><span>Swing</span></div></div>
         </div>
@@ -635,35 +668,15 @@
   </div>
 </section>
 
-<section class="beat pg-news"><div class="scrapwrap reveal" style="--rot:1.6deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>But search is only half of where people look.</p></div></div></section>
+<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1.3deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap long"><p>The shops initially didn’t match the general aesthetic patterns.</p></div></div></section>
 
-<!-- ── 6 · platforms ─────────────────────────────────────────────────── -->
-<section id="platforms" class="pg-silver" data-tear data-folio="The platforms">
-  <div class="wrap reveal">
-    <div class="tag">Feature 05 · The platforms</div>
-    <h2 id="platTitle">Search or video?</h2>
-    <div class="plat">
-      <div class="card">
-        <div class="cardhead"><h3>Where it's searched<small>Share of the six on each platform, 2023–2025 · log scale</small></h3></div>
-        <div class="dumb" id="dumb"></div>
-        <div class="dkey"><span><i></i>Google</span><span><i class="solid"></i>YouTube</span><span>4.0× YT = four times the share on YouTube</span></div>
-      </div>
-      <div class="card">
-        <div class="cardhead"><h3>Who peaks first<small>Month of highest interest (3-month average)</small></h3></div>
-        <figure id="slotPeaks" style="margin:0" aria-label="Dot plot of the month each aesthetic peaked on Google and on YouTube"></figure>
-        <div class="dkey"><span><i></i>Google peak</span><span><i class="solid"></i>YouTube peak</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1.3deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>And the shops followed.</p></div></div></section>
-
-<!-- ── 7 · the shops: year in review, hot 20, the shop, brands per look ──────────────────────────────────── -->
+<!-- ── 7 · the shops: year in review, three eras, hot 20 ──────────────────────────────────── -->
 <section id="summary" class="pg-news" data-tear data-folio="The shops">
   <div class="wrap reveal">
-    <div class="tag">Feature 06 · The shops</div>
+    <div class="tag">Feature 05 · The shops</div>
     <h2>What the year <em>was wearing</em></h2>
+    <p class="lede">If an aesthetic really takes over, shops should feel it. Each year below pairs the look that gained most with the hottest brand on Lyst, a fashion shopping site whose quarterly Index ranks brands by shopper activity, and the brands whose searches grew fastest, to see whether buying followed searching.</p>
+    <div class="howto">Use the year slider or tap a year underneath to turn the page. Click a runway photo to read about the show. Every chart in this section follows the year you pick.</div>
     <div class="spread" id="spread">
       <div class="sp-year" id="spYear">2017</div>
       <div class="sp-photo" id="spPhoto"></div>
@@ -681,66 +694,53 @@
       <div class="ticks" id="yearTicks"></div>
     </div>
 
+  </div>
+</section>
+
+<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:1.1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap long"><p id="erasLink">Shows about the clothes sometimes matched. Shows about the staging never did.</p></div></div></section>
+
+<section id="summaryB" class="pg-news" data-tear data-folio="The shops" data-nav="#summary">
+  <div class="wrap reveal">
+    <p class="lede erasfinding" id="erasFinding"></p>
+    <div class="card erascard" id="erasCard">
+      <div class="cardhead"><h3 class="take"><span id="erasTitle">Streetwear lost share in 2020–22, when most of the shows we studied were concept-led</span><small>Three eras · streetwear's share, the year's look, the #1 Lyst brand and every show we studied, 2017 to 2025</small></h3></div>
+      <div class="howto">Read down one column of time: the same years change in every row. Hover a dot, a quarter or a block for details.</div>
+      <div class="eras-scroll"><svg id="erasSvg" viewBox="0 0 1296 336" role="img" aria-label="Timeline of streetwear's share of searches, the year's look, the number-one brand on Lyst each quarter and every runway show studied, 2017 to 2025"></svg></div>
+      <div class="eras-reading" id="erasReading" aria-label="What each era shows">
+        <div class="er-col"><b>Streetwear era</b><p id="er0"></p></div>
+        <div class="er-col"><b>Concept era</b><p id="er1"></p></div>
+        <div class="er-col"><b>Clothes-led era</b><p id="er2"></p></div>
+      </div>
+      <div class="eras-legend">
+        <span><i class="e-dot concept"></i>concept-led show (the staging is the idea)</span><span><i class="e-dot"></i>clothes-led show</span>
+        <span><i class="e-halo"></i>ringed: the runway matched the year's look (dashed: partly)</span>
+        <span><i class="e-sw" style="background:#0d1013"></i>#1 brand: Gucci, Balenciaga, Off-White (G, B, O)</span>
+        <span><i class="e-sw" style="background:#6f8497"></i>Prada, Miu Miu, Loewe, Saint Laurent (P, M, L, S)</span><span><i class="e-sw" style="background:#a39e94"></i>Nike (N)</span>
+      </div>
+      <p class="vhint" style="margin:12px 0 0"><b>Concept-led</b> means the staging was the show's headline idea (a film, a stunt, a set). <b>Clothes-led</b> means the clothes were. Both labels, and the eras, are our reading of reviews, not a measurement.</p>
+    </div>
+
     <div class="card shopcard">
       <div class="cardhead">
-        <h3>The hot 20<small>Lyst's top 20 brands, quarter by quarter. Our 13 brands take the colour of that year's look. Press play or drag.</small></h3>
+        <h3 class="take"><span id="h20Title">Most top-20 brands did not match the year's look, except in 2019 and 2023</span><small>The hot 20 · Lyst's top 20 brands, quarter by quarter. A brand is highlighted when its runway matched the look that led that year.</small></h3>
         <div class="lb-ctl"><button class="play" id="h20Play" aria-label="Play through the quarters">▶</button><span id="h20Q">2017 Q2</span></div>
       </div>
+      <div class="howto">Press play to watch the ranking move quarter by quarter, or drag the slider under the chart. Highlighted bars are brands whose runway matched the year's look (from the shows we studied). Click one of our 13 brands to follow it; it clears when you scroll away.</div>
+      <div class="h20key" id="h20Key"></div>
       <figure id="slotH20" style="margin:0" aria-label="Animated ranking of Lyst's top 20 brands by quarter"></figure>
       <input type="range" id="h20Range" class="h20range" aria-label="Quarter">
       <p class="bsrc">Lyst Index · top 10 recorded until Q4 2018, top 20 after · no index found for Q4 2017 · new method from Q1 2026</p>
+      <p class="bsrc" style="margin-top:6px">Runway match: Gucci, Balenciaga, Off-White, Prada, Miu Miu and Saint Laurent are judged show by show where we studied a show, and from a reading of the designer's era in the other years. The other 34 brands with a runway, such as Versace, Fendi and Louis Vuitton, are judged from one or two representative shows per designer era. Brands with no runway (13 sportswear, footwear and similar labels, including Skims and Stone Island) are drawn with a dashed outline. These are our readings of reviews, not measurements.</p>
     </div>
 
-    <div class="card shopcard">
-      <div class="cardhead">
-        <h3>The shop<small id="shopSub">All 13 brands, priced in Lyst rank for the selected year. Tags come from the data. Heart a brand to follow it through every chart in this section.</small></h3>
-      </div>
-      <div class="shopbar">
-        <span id="shopCount">13 items</span>
-        <div class="vseg" role="group" aria-label="Sort">
-          <button data-sort="rank" aria-pressed="true">Lyst rank</button>
-          <button data-sort="growth" aria-pressed="false">Search growth</button>
-          <button data-sort="az" aria-pressed="false">A–Z</button>
-        </div>
-        <span class="swkey"><i></i><i class="on"></i> years on Lyst's list, '17–'26</span>
-        <button class="bag" id="bag">♡ Following <b id="bagN">0</b></button>
-      </div>
-      <div class="shopgrid" id="shopGrid"></div>
-    </div>
-
-    <div class="card shopcard">
-      <div class="cardhead">
-        <h3>Brands per look<small>Each aesthetic's time on top (bars), and the year each brand's searches grew fastest (tags). Hover a look or a brand to line them up. Timing only, not cause and effect.</small></h3>
-      </div>
-      <figure id="slotBPL" style="margin:0" aria-label="Timeline of each aesthetic's time on top with brand search spikes placed by year"></figure>
-    </div>
-
-    <details class="fulldata">
-      <summary>See the full data tables <span>search growth by year · Lyst rank by quarter</span></summary>
-    <div class="card hot">
-      <div class="cardhead">
-        <h3>The hot list<small>How much each brand's searches grew or fell each year. Read across for one brand, down for one year. Rows run in order of each brand's best year.</small></h3>
-      </div>
-      <figure id="slotHot" style="margin:0" aria-label="Heatmap of each brand's year-over-year search growth, 2017 to 2025"></figure>
-      <p class="bsrc">13 brands from Lyst Index Hottest Brands lists · Google Trends, worldwide · click a year to jump there</p>
-    </div>
-    <div class="card hot" id="lystCard">
-      <div class="cardhead">
-        <h3>Search vs. shop<small id="lystSub">Each brand's quarterly rank in the Lyst Index.</small></h3>
-      </div>
-      <figure id="slotLyst" style="margin:0" aria-label="Table of each brand's Lyst Index rank by quarter, 2017 to 2026, with the year its searches grew fastest marked"></figure>
-      <div class="heatkey"><span>Lyst rank #1</span><i style="background:linear-gradient(90deg,#0d1013,#d3d9df)"></i><span>#20</span><span class="sw" style="background:#f1efea"></span><span>not in the published list</span><span class="sw na"></span><span>no index that quarter</span><span class="sw" style="height:4px;background:#c4302b;width:26px"></span><span>year searches grew fastest</span></div>
-      <p class="bsrc">Lyst Index quarterly Hottest Brands · top 10 recorded until Q4 2018, top 20 after · Lyst changed its method in Q1 2026 · every source URL in pipeline/raw/lyst_index.csv</p>
-    </div>
-    </details>
   </div>
 </section>
 
 <footer class="pg-silver" data-tear style="position:relative">
-  <div class="marquee" aria-hidden="true"><div class="track" id="marquee2"></div></div>
+  <div class="wrap closing"><p class="k">The takeaway</p><p class="take" id="closingTake"><b>There is a pattern to the aesthetic changes.</b></p></div>
   <div class="wrap">
     <span>Joanna Zhang · Amelia Yu · Yuankang Li</span>
-    <span>Data: Google Trends, collected 25 Oct 2026 · see pipeline/</span>
+    <span>Data: Google Trends (collected 25 Oct and 14 Nov 2026) and the Lyst Index · see pipeline/</span>
   </div>
 </footer>
 
@@ -757,9 +757,9 @@
 <script src="js/evidence.js"></script>
 <script src="js/cycle.js"></script>
 <script src="js/seasons.js"></script>
-<script src="js/platforms.js"></script>
+<script src="js/runway.js"></script>
 <script src="js/shop.js"></script>
-<script src="js/brands.js"></script>
+<script src="js/eras.js"></script>
 <script src="js/scroll.js"></script>
 </body>
 </html>

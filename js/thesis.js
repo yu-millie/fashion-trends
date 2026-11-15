@@ -1,4 +1,4 @@
-/* ══ thesis: streetwear's share of the six, 2019 vs 2025 ═════════════════ */
+/* ══ thesis: streetwear's share of the eight, 2019 vs 2025 ═════════════════ */
 DATA.then(({ share }) => {
   const at = y => Object.fromEntries(share.aesthetics.map(a => [a.key, share.share[a.key][share.years.indexOf(y)]]));
   const a = at(2019), b = at(2025);
@@ -8,13 +8,13 @@ DATA.then(({ share }) => {
     d3.select("#" + id).selectAll("span").data(ORDER).join("span")
       .style("width", k => row[k] + "%")
       .style("background", k => colorOf(k))
-      .style("opacity", k => k === "street" ? 1 : .85)
-      .html(k => row[k] >= 8 ? "<b>" + Math.round(row[k]) + "</b>" : "")
+      .html(k => row[k] >= 8 ? '<b style="color:' + textOn(colorOf(k)) + '">' + Math.round(row[k]) + "</b>" : "")
       .on("pointermove", (ev, k) => showTip(ev, '<div class="tt">' + year + "</div>" + tipRow(k, nameOf(k), row[k] + "%", true)))
       .on("pointerleave", hideTip);
   };
   draw("bar2019", a, 2019);
   draw("bar2025", b, 2025);
+
 
   d3.select("#barKey").selectAll("span").data(ORDER).join("span")
     .style("--c", k => colorOf(k)).html(k => "<i></i>" + nameOf(k));
@@ -32,7 +32,8 @@ DATA.then(({ share }) => {
   }, { threshold: .6 });
   io.observe(big);
 
+  document.getElementById("thesisTitle").textContent = "Streetwear used to be almost every search. By 2025, " + (100 - to) + " in every 100 went to other aesthetics.";
   document.getElementById("thesisLede").textContent =
-    "In 2019, " + inWords(from) + " of every hundred searches for these six aesthetics were for streetwear. By 2025 it was " + inWords(to) +
-    ". The rest went to five aesthetics that each rose on their own schedule. That spread is the story this page follows.";
+    "In 2019, " + inWords(from) + " of every hundred searches for these " + inWords(ORDER.length) + " aesthetics were for streetwear. By 2025 it was " + inWords(to) +
+    ". The rest went to " + inWords(ORDER.length - 1) + " aesthetics that each rose on their own schedule. That spread is the story this page follows.";
 });

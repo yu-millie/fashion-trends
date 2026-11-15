@@ -13,6 +13,10 @@ const PEOPLE = {
     pieces: [["Shell", "Hooded nylon"], ["Pack cover", "Silicone-coated nylon"], ["Cargo trousers", "Olive cotton, toggled hem"], ["Sneakers", "Black canvas"]] },
   quiet: { kind: "stand", alt: "Quiet Luxury look: cream mohair turtleneck and knit maxi skirt, oversized brown leather clutch",
     pieces: [["Turtleneck", "Cream mohair"], ["Skirt", "Knit maxi"], ["Clutch", "Gathered leather, oversized"], ["Flats", "Pointed black leather"]] },
+  cottage: { kind: "knee", alt: "Cottagecore look: cream pointelle cardigan with lace cuffs, white crochet headscarf, blue gingham skirt gathered to hold apples",
+    pieces: [["Cardigan", "Cream pointelle knit, gold buttons, lace cuffs"], ["Headscarf", "Pale crochet"], ["Skirt", "Blue gingham, gathered"]] },
+  maxi: { kind: "stand", alt: "Maximalism look: red baby tee with a black rabbit print, blue plaid draped maxi skirt, cobalt lace-up boots, layered silver jewellery",
+    pieces: [["Tee", "Red ringer, oversized rabbit print"], ["Skirt", "Blue plaid, draped asymmetric maxi"], ["Boots", "Cobalt patent, lace-up heel"], ["Jewellery", "Layered silver collar and cuffs"], ["Bag", "Black leather, studs and hardware"]] },
   coquette: { kind: "seated", alt: "Coquette look: pink tulle mini dress, knee-high black kitten-heel boots",
     pieces: [["Dress", "Pink jersey bodice, tulle skirt"], ["Boots", "Knee-high, kitten heel"], ["Hair", "Low ponytail"]] }
 };

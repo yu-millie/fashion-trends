@@ -49,6 +49,8 @@ DATA.then(({ life }) => {
   }, { threshold: .4 }).observe(svg.node());
 
   const median = Math.round(d3.median(items, a => a.months_above_half));
+  const shortest = d3.least(items, a => a.months_above_half), longest = d3.greatest(items, a => a.months_above_half);
+  document.getElementById("ringTitle").textContent = "A typical aesthetic stays on top for about " + median + " months, from " + shortest.months_above_half + " (" + nameOf(shortest.key) + ") to " + longest.months_above_half + " (" + nameOf(longest.key) + ")";
   svg.append("text").attr("x", cx).attr("y", cy + 2).attr("text-anchor", "middle").attr("fill", INK.ink)
     .style("font-family", "var(--display)").style("font-weight", 100).style("font-size", "40px").text("≈" + median);
   svg.append("text").attr("x", cx).attr("y", cy + 18).attr("text-anchor", "middle").attr("fill", INK.ink3)
@@ -63,5 +65,4 @@ DATA.then(({ life }) => {
   const link = (key, on) => { g.classed("on", d => on && d.key === key); rows.classed("on", d => on && d.key === key); };
   g.on("pointerenter", (ev, d) => link(d.key, true)).on("pointerleave.link", () => link(null, false));
   rows.on("pointerenter", (ev, d) => link(d.key, true)).on("pointerleave", () => link(null, false));
-  onFocus(f => { g.style("opacity", d => !f || d.key === f ? 1 : .2); rows.style("opacity", d => !f || d.key === f ? 1 : .35); });
 });
