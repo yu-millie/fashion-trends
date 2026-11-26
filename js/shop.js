@@ -64,17 +64,14 @@ SHOP.ready.then(S => {
     const fill = () => {
       const t = T[row.look], n1 = no1(y);
       document.getElementById("spYear").textContent = y;
-      const ctx = { look: row.look };
-      const rw = typeof runwayHTML === "function" ? runwayHTML(y, ctx) : null;           // runway photos first, the look cutout as a fallback
+      const rw = typeof runwayHTML === "function" ? runwayHTML(y, { look: row.look }) : null;           // runway photos first, the look cutout as a fallback
       spread.classList.toggle("rw", !!rw); spread.classList.toggle("duo", !!rw && rw.n > 1);
       document.getElementById("spPhoto").innerHTML = rw ? rw.html : personImg(row.look);
       document.getElementById("spNo1").textContent = n1.names.join(" / ");
-      document.getElementById("spNo1Sub").textContent = "#1 in " + n1.n + " of " + n1.of + " quarters" + (n1.names.length > 1 ? " each" : "") + (y === 2017 ? " (no Q4 index)" : "");
+      document.getElementById("spNo1Sub").textContent = "#1 in " + n1.n + " of " + n1.of + " quarters" + (n1.names.length > 1 ? " each" : "");
       document.getElementById("spLook").textContent = t.name;
       document.getElementById("spLookSub").textContent = row.look === "street" && row.look_gain < .5
-        ? "Nothing gained ground; streetwear held."
-        : "Gained most this year (+" + row.look_gain + " points)";
-      document.getElementById("spTags").innerHTML = rw ? runwayTagsHTML(y, ctx) : "";
+        ? "Nothing else gained ground." : "Gained most in search (+" + row.look_gain + " pts).";
       document.getElementById("spPage").textContent = "Lyst Index + Google Trends · " + y;
     };
     if (first) { fill(); first = false; return; }
@@ -85,8 +82,7 @@ SHOP.ready.then(S => {
 
 /* ── the hot 20: Lyst's ranking, quarter by quarter ───────────────────── */
 SHOP.ready.then(S => {
-  const UNTIL = 2019;                                  // this chart covers the years before 2020; the eras timeline covers 2020 on
-  const QS = S.Q.filter(q => q.depth && q.year <= UNTIL);
+  const QS = S.Q.filter(q => q.depth);
   const slider = document.getElementById("h20Range"), label = document.getElementById("h20Q"), play = document.getElementById("h20Play");
   slider.min = 0; slider.max = QS.length - 1;
   const W = 1100, rowH = 25, H = 20 * rowH + 6, L = 250;
@@ -95,27 +91,35 @@ SHOP.ready.then(S => {
   const bigYear = svg.append("text").attr("class", "bigyear").attr("x", W - 6).attr("y", H - 58).attr("text-anchor", "end");
   const bigSub = svg.append("text").attr("class", "bigsub").attr("x", W - 10).attr("y", H - 20).attr("text-anchor", "end");
   const x = d3.scaleLinear().domain([0, 20]).range([0, W - L - 70]);
+  // Lyst published only a top 10 until Q4 2018: say so in the empty rows, and mark the switch on the slider
+  const firstFull = QS.findIndex(q => q.depth >= 20);
+  const tenNote = svg.append("g").attr("class", "tennote").attr("transform", "translate(0," + (10 * rowH + 8) + ")").style("opacity", 0);
+  tenNote.append("line").attr("x1", 0).attr("x2", W - 330).attr("stroke", "rgba(13,16,19,.35)").attr("stroke-dasharray", "4 4");
+  tenNote.append("text").attr("x", L).attr("y", 30).attr("class", "tn1").text("Lyst only published a top 10 until the end of 2018.");
+  tenNote.append("text").attr("x", L).attr("y", 54).attr("class", "tn2").text("From 2019 on, its list has 20 brands.");
+  if (firstFull > 0) {
+    const mark = document.createElement("div"); mark.className = "h20switch";
+    mark.style.left = (firstFull / (QS.length - 1) * 100) + "%";
+    mark.innerHTML = "<span>Top 10</span><b></b><span>Top 20</span>";
+    slider.insertAdjacentElement("afterend", mark);
+  }
   const ours = new Set(S.brands.map(b => b.name));
   let qi = 0, timer = null;
-  {   // title: how often the top brands matched the year's look before 2020, fully or partly, counting only brands we assessed
+  {   // title: the year in which the largest share of assessed top-20 brands matched the year's look, fully or partly
     const tally = {};
-    S.Q.filter(q => q.year <= UNTIL && q.list && q.list.length && S.YEARS[q.year]).forEach(q => {
+    S.Q.filter(q => q.list && q.list.length && S.YEARS[q.year]).forEach(q => {
       const t = tally[q.year] = tally[q.year] || { m: 0, n: 0 };
       q.list.filter(n => n !== "?").forEach(n => { const v = brandYearVerdict(n, q.year, S.YEARS[q.year].look); if (v.s === "yes" || v.s === "part" || v.s === "no") { t.n++; if (v.s !== "no") t.m++; } });
     });
-    const ys = Object.keys(tally).map(Number).sort(), good = ys.filter(y => tally[y].m / tally[y].n >= .4), miss = ys.filter(y => tally[y].m === 0);
-    const and = a => a.length === 1 ? a[0] : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
-    const ht = document.getElementById("h20Title"), sub = document.getElementById("h20Sub");
-    if (ht && good.length) {
-      const m = d3.sum(good, y => tally[y].m), n = d3.sum(good, y => tally[y].n), looks = [...new Set(good.map(y => S.YEARS[y].look))];
-      ht.textContent = "Before 2020, top brands often matched the look: " + Math.round(m / n * 10) + " in 10 did in " + and(good);
-    }
-    if (sub && miss.length) sub.textContent = "The hot 20 · Lyst's top brands, 2017–" + UNTIL + " · " + and(miss) + " (" +
-      and([...new Set(miss.map(y => nameOf(S.YEARS[y].look)))]) + "): no matches";
+    // years where at least 45 % of the assessed brands matched the year's look, fully or partly (and enough brands were assessed to say)
+    const good = Object.entries(tally).filter(([, t]) => t.n >= 20 && t.m / t.n >= .45).map(([y]) => y).sort();
+    const ht = document.getElementById("h20Title");
+    if (ht && good.length) ht.textContent = "Most top-20 brands did not match the year's look, except in " + (good.length === 1 ? good[0] : good.slice(0, -1).join(", ") + " and " + good[good.length - 1]);
   }
 
   function draw() {
     const q = QS[qi], prev = QS[qi - 1];
+    tenNote.transition().duration(400).style("opacity", q.depth < 20 ? 1 : 0);
     label.textContent = q.q.replace("Q", " Q");
     bigYear.text(q.year);
     slider.value = qi;
@@ -128,8 +132,8 @@ SHOP.ready.then(S => {
     const c = beyond ? INK.ink2 : S.lookColor(q.year);
     bigSub.text("Q" + q.q.slice(-1) + (look ? " · " + nameOf(look) + " year" : "")).style("fill", look ? c : INK.ink3);
     d3.select("#h20Key").html(look
-      ? '<span style="--c:' + c + '"><i></i>Runway matched the look (' + nameOf(look) + ')</span><span><i class="part" style="--c:' + c + '"></i>Partly</span>' +
-        '<span><i class="no"></i>Didn\'t match</span><span><i class="none"></i>No runway</span><span>▲▼ vs last quarter</span>'
+      ? '<span style="--c:' + c + '"><i></i>Runway matched ' + q.year + "'s look (" + nameOf(look) + ')</span><span><i class="part" style="--c:' + c + '"></i>Partly matched</span>' +
+        '<span><i class="no"></i>Studied, did not match</span><span><i class="none"></i>No runway</span><span>▲ up / ▼ down vs last quarter</span>'
       : '<span><i class="grey"></i>No look assigned after ' + S.ys[S.ys.length - 1] + ', so no runway match is shown</span><span><i class="none"></i>No runway</span><span>▲ up / ▼ down vs last quarter</span>');
     const g = svg.selectAll("g.row").data(rows, d => d.n).join(enter => {
       const e = enter.append("g").attr("class", "row").attr("transform", "translate(0," + H + ")").style("opacity", 0);
@@ -143,13 +147,13 @@ SHOP.ready.then(S => {
     g.on("click", (ev, d) => ours.has(d.n) && S.toggle(d.n)).style("cursor", d => ours.has(d.n) ? "pointer" : "default")
       .on("pointermove", (ev, d) => showTip(ev, '<div class="tt">' + d.n + "</div>#" + d.r + " in " + q.q.replace("Q", " Q") +
         (d.p ? "<br>" + (d.p === d.r ? "same as" : d.p > d.r ? "up from" : "down from") + " #" + d.p + " last quarter" : prev ? "<br>new to the list" : "") +
-        (d.s === "none" ? '<div style="margin-top:6px;font-size:11.5px">Doesn\'t have a runway: ' + d.shows[0] + "</div>"
-          : look && (ours.has(d.n) || d.s !== "na") ? '<div style="margin-top:6px;font-size:11.5px">' +
+        (d.s === "none" ? '<div style="margin-top:6px;font-size:12.5px">Doesn\'t have a runway: ' + d.shows[0] + "</div>"
+          : look && (ours.has(d.n) || d.s !== "na") ? '<div style="margin-top:6px;font-size:12.5px">' +
           (d.s === "yes" ? "Runway matched " + q.year + "'s look (" + nameOf(look) + "): " + d.shows.join(", ")
             : d.s === "part" ? "Runway partly matched " + q.year + "'s look (" + nameOf(look) + "): " + d.shows.join(", ")
             : d.s === "no" ? "Runway did not match " + q.year + "'s look (" + nameOf(look) + ")" : "No runway studied this year") +
           (d.era && d.s !== "na" ? "<br><i>A reading of the brand's designer era, not one show" + (d.s === "no" ? ": " + d.shows.join("; ") : "") + "</i>" : "") + "</div>" : "") +
-        (ours.has(d.n) ? '<div style="margin-top:3px;font-size:11px">Click to follow this brand</div>' : "")))
+        (ours.has(d.n) ? '<div style="margin-top:3px;font-size:12px">Click to follow this brand</div>' : "")))
       .on("pointerleave", hideTip);
     g.classed("picked", d => S.picked.has(d.n));
     g.transition().duration(1200).ease(d3.easeCubicInOut).attr("transform", d => "translate(0," + (d.r - 1) * rowH + ")").style("opacity", 1);
@@ -163,7 +167,7 @@ SHOP.ready.then(S => {
     g.select(".al").text(d => d.s === "yes" ? "✓" : d.s === "part" ? "◐" : "").style("fill", d => d.s === "yes" && c.startsWith("#") ? textOn(c) : INK.ink)
       .style("font-size", "13px").style("font-weight", 700).style("pointer-events", "none");
     g.select(".ch").transition().duration(1200).attr("x", d => L + x(21 - d.r) + 8)
-      .text(d => !prev || d.n === "?" ? "" : !d.p ? "NEW" : d.p === d.r ? "" : (d.p > d.r ? "▲" : "▼") + Math.abs(d.p - d.r))
+      .text(d => !prev || d.n === "?" ? "" : !d.p ? (prev.depth < q.depth && d.r > prev.depth ? "" : "NEW") : d.p === d.r ? "" : (d.p > d.r ? "▲" : "▼") + Math.abs(d.p - d.r))   // rows 11-20 in Q1 2019 are only new because the list grew
       .style("fill", d => !d.p || d.p > d.r ? INK.ink : INK.ink3);
   }
   const goQ = (i, src) => {

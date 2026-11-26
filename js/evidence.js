@@ -118,7 +118,7 @@
     let LEAD = {};
     function countryTip(ev, f) {
       const v = geo.shares[state.era][f.id];
-      const zoom = DRILL.has(f.id) ? '<div style="margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase">Click to zoom in ↓</div>' : "";
+      const zoom = DRILL.has(f.id) ? '<div style="margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase">Click to zoom in ↓</div>' : "";
       if (!v) { showTip(ev, '<div class="tt">' + f.properties.name + "</div>Too little search volume" + zoom); return; }
       const rows = AES.filter(a => v[a.key] > 0).sort((a, b) => v[b.key] - v[a.key])
         .map(a => tipRow(a.key, a.name, v[a.key] + "%", a.key === LEAD[f.id])).join("");
@@ -130,7 +130,7 @@
 
     /* ── Zoom in: any country's share of the eight, era by era ──────────── */
     const ERAS = geo.eras;
-    const DW = 640, DH = 260, dm = { t: 14, r: 96, b: 30, l: 34 };
+    const DW = 640, DH = 290, dm = { t: 14, r: 122, b: 34, l: 40 };
     const svgD = d3.select("#slotDrill").append("svg").attr("class", "viz").attr("viewBox", [0, 0, DW, DH]);
     const dx = d3.scalePoint().domain(ERAS).range([dm.l + 22, DW - dm.r - 22]);
     const dy = d3.scaleLinear().range([DH - dm.b, dm.t]);
@@ -146,7 +146,7 @@
     dLines.append("path").attr("stroke", k => colorOf(k));
     const dDots = svgD.append("g").selectAll("g").data(DKEYS).join("g").attr("fill", k => colorOf(k));
     const dLabels = svgD.append("g").selectAll("text").data(DKEYS).join("text")
-      .attr("x", DW - dm.r + 8).style("font-size", "10.5px").style("fill", INK.ink2).text(k => nameOf(k));
+      .attr("x", DW - dm.r + 8).style("font-size", "15px").style("fill", INK.ink).text(k => nameOf(k));
     const dCross = svgD.append("line").attr("y1", dm.t).attr("y2", DH - dm.b).attr("stroke", INK.ink2).attr("stroke-dasharray", "2 3").attr("visibility", "hidden");
     // one country's series: share of `k` in each era (null where Google had too little volume)
     const ser = (id, k) => ERAS.map(e => { const v = geo.shares[e][id]; return v ? v[k] : null; });
@@ -188,9 +188,9 @@
       // end labels at each line's last available era, nudged apart so they never overlap
       const lastV = k => { const a = S[k].filter(v => v != null); return a.length ? a[a.length - 1] : null; };
       const ends = DKEYS.filter(k => lastV(k) != null).map(k => ({ k, y: dy(lastV(k)) })).sort((a, b) => a.y - b.y);
-      for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 12);
+      for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 18);
       const yAt = Object.fromEntries(ends.map(e => [e.k, e.y]));
-      dLabels.style("display", k => yAt[k] == null ? "none" : null).transition().duration(750).attr("y", k => (yAt[k] ?? 0) + 3.5);
+      dLabels.style("display", k => yAt[k] == null ? "none" : null).transition().duration(750).attr("y", k => (yAt[k] ?? 0) + 5);
 
       // side panel: this country's biggest non-streetwear moment
       let best = { k: null, v: -1, e: null };
@@ -201,9 +201,11 @@
       d3.select("#drillSide").html(
         '<div class="tag">Peak moment</div>' +
         '<div class="big">' + Math.round(best.v) + "%</div>" +
-        "<p><b style=\"font-weight:500\">" + nameOf(best.k) + "</b>, " + best.e + ". " +
-        (st.length > 1 ? "Streetwear: " + Math.round(first.v) + "% → " + Math.round(last.v) + "%." : "Only " + first.e + " has enough data.") + "</p>" +
-        '<p class="vhint" style="margin-top:14px">Blank = too little search volume</p>');
+        "<p>In " + best.e + ", <b style=\"font-weight:500\">" + nameOf(best.k) + "</b> reached " + Math.round(best.v) +
+        "% of searches for the " + inWords(ORDER.length) + " aesthetics in " + name + ". " +
+        (st.length > 1 ? "Streetwear's share went from " + Math.round(first.v) + "% in " + first.e + " to " + Math.round(last.v) + "% in " + last.e + "."
+                       : "Only " + first.e + " has enough search volume here to chart.") + "</p>" +
+        '<p class="vhint" style="margin-top:14px">Eras with too little search volume are left blank · click any country on the map</p>');
     }
 
     /* ── one update for all three views ───────────────────────────────── */
@@ -224,10 +226,10 @@
       d3.select("#mapTitle").text(top.length === 1
         ? nameOf(top[0][0]) + (state.mode === "most" ? " is the most-searched aesthetic in all " : " stands out in all ") + total + " countries in " + state.era
         : state.mode === "most"
-          ? nameOf(top[0][0]) + " leads in " + top[0][1] + " of " + total + " countries in " + state.era
+          ? nameOf(top[0][0]) + " is the most-searched aesthetic in " + top[0][1] + " of " + total + " countries in " + state.era + ", but " + inWords(top.length - 1) + " others lead somewhere"
           : cap(inWords(top.length)) + " different aesthetics stand out across " + total + " countries in " + state.era);
-      d3.select("#mapSub").text("Where · " + state.era + " · " + (state.mode === "most" ? "most-searched aesthetic" : "aesthetic most above its global average"));
-      d3.select("#mapHint").text(top.slice(0, 3).map(([k, n]) => nameOf(k) + " " + n).join(" · ") + " countries");
+      d3.select("#mapSub").text("Where · " + state.era + " · " + (state.mode === "most" ? "colored by the most-searched aesthetic" : "colored by the aesthetic searched most above its global average"));
+      d3.select("#mapHint").text(top.slice(0, 3).map(([k, n]) => nameOf(k) + " " + n).join(" · ") + " countries · click any country to zoom in");
       drawDrill();
       applyFocus(FOC.key);
     }
@@ -251,5 +253,5 @@
 // the "When" title counts the aesthetics that broke out in 2020 or later
 DATA.then(() => {
   const n = Object.values(LIFE).filter(a => +a.breakout.slice(0, 4) >= 2020).length;
-  const t = document.getElementById("whenTitle"); if (t) t.textContent = cap(inWords(n)) + " of the " + inWords(ORDER.length) + " aesthetics took off in 2020 or later";
+  const t = document.getElementById("whenTitle"); if (t) t.textContent = cap(inWords(n)) + " of the " + inWords(ORDER.length) + " aesthetics took off in 2020 or later, each on its own schedule";
 });

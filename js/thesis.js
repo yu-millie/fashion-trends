@@ -23,7 +23,7 @@ DATA.then(({ share }) => {
   const big = document.getElementById("bigStat");
   const from = Math.round(a.street), to = Math.round(b.street);
   big.innerHTML = from + "<sup>%</sup>";
-  document.getElementById("bigStatSub").textContent = "in 2025, down from " + from + "% in 2019";
+  document.getElementById("bigStatSub").textContent = "2019 → " + to + "% in 2025";
   const io = new IntersectionObserver(es => {
     if (!es[0].isIntersecting) return;
     io.disconnect();
@@ -32,7 +32,8 @@ DATA.then(({ share }) => {
   }, { threshold: .6 });
   io.observe(big);
 
-  document.getElementById("thesisTitle").textContent = "Streetwear fell from " + from + " to " + to + " in every 100 searches";
+  document.getElementById("thesisTitle").textContent = "Streetwear used to be almost every search. By 2025, " + (100 - to) + " in every 100 went to other aesthetics.";
   document.getElementById("thesisLede").textContent =
-    "Searches spread to " + inWords(ORDER.length - 1) + " newer aesthetics, each on its own schedule.";
+    "In 2019, " + inWords(from) + " of every hundred searches for these " + inWords(ORDER.length) + " aesthetics were for streetwear. By 2025 it was " + inWords(to) +
+    ". The rest went to " + inWords(ORDER.length - 1) + " aesthetics that each rose on their own schedule. That spread is the story this page follows.";
 });

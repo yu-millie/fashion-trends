@@ -4,17 +4,84 @@
 
 **Team members:** *(list every student who actively worked on this submission here, as the milestone requires)*
 
-## Latest round (after Prototype III feedback)
-- **Fig. 7 and 8 swapped.** The hot 20 now comes first and covers 2017–2019 only. Its title is computed from the data: 4 in 10 assessed top brands matched the look in 2017 and 2019 (the streetwear years); the subtitle notes that 2018's look, Dark Academia, matched no top brand.
-- **New transition between them:** "Until 2019, streetwear ruled searches, and the streetwear houses on top wore it. Then searches moved on, and the runways didn't follow." (It falls back to a neutral line if the data stops supporting it.)
-- **The eras timeline (now Fig. 8) covers 2020–2025 only.** The #1-on-Lyst row, the streetwear-share row, the brand legend and the finding paragraph are removed. It now has two rows (the year's look, runway shows) with bigger dots. Title: "After 2020, only two of the fifteen shows we studied matched the year's look."
-- **Year in review:** the "searches rising fastest" list and the "rising / not rising in search last year" tag are removed. The concept-led / clothes-led and match tags moved into that space, larger (a full match is filled in the look's colour). A one-line definition of concept-led vs clothes-led now sits above the page.
-- **Fix:** Gucci 2020 and Miu Miu 2024 each had two `alt` keys, so their "partly matches" reading was overwritten and the page said "Doesn't match". The looser reading is now `part` in `js/runway.js`.
-- Shorter lede, "How to" lines and source notes in the shops section.
-- **Concept-led / clothes-led key** now sits in the top-right corner of the year-in-review page, so it is always visible (above the page on mobile).
-- **Less text on every figure:** shorter titles, subtitles, "How to" lines, ledes, map and zoom-in notes, cycle and seasons descriptions, hot 20 key and source line, and the eras captions. The charts and data are unchanged.
-
 ---
+
+## Fig. 8 simplified to match the team's mockup (26 Nov 2026)
+
+- **2020–2025 only, two eras** (Concept 2020–22, Clothes-led 2023–25), **two rows** (the year's look, the runway shows). The streetwear-share row, the #1-on-Lyst row and the 2017–19 streetwear era are gone; streetwear's fall is Fig. 1 and the #1 brands are in the year-in-review and the hot 20.
+- **Title** "Since 2020, only 2 of 15 shows matched the year's look" (the mockup said "After 2020", but the 15 shows include 2020's), subtitle "Shows by Lyst's #1 brands, 2020–2025", how-to "Hover a dot for the show.", the legend above the chart, one caption per era ("8 of 11 shows were spectacle (a livestream, a film, The Simpsons). None fully matched." / "Clothes-led again; 2 of 4 matched (Prada, Miu Miu).") and one footnote ("Labels and eras are our reading of reviews."). All counts are computed.
+- **The one-show walkthrough box and the finding paragraph above the card are gone.** To keep the teacher's "one runway before all of them", the chart now does what Figs. 5 and 6 do: the first time it comes into view, only Prada Fall/Winter 2023 is lit, with a two-line note beside it ("Example · Prada, Feb 2023 / Clothes-led; the ring: it matched Quiet Luxury"). After about 4.5 s every show appears. Hovering the chart ends it early.
+- Shows within about a month of each other now stack instead of overlapping (Off-White and Gucci in early 2020).
+- **Closing takeaway** now counts the same years as Fig. 8: "Since 2020, 2 of 7 clothes-led shows matched the year's look; none of the 8 concept-led shows did."
+
+## Fig. 5 centre label no longer overlaps (26 Nov 2026)
+
+- The "≈20 median months" label in the middle of the ring ran into the innermost arc (Coquette). The arcs are now spaced 14 apart instead of 18, so the innermost sits at radius 56, not 24. The label is a little smaller and stacked on two lines ("≈20 / MEDIAN / MONTHS", or "2 / MONTHS / ON TOP" when one aesthetic is picked), so it fits inside with room to spare.
+
+## Colours re-picked (26 Nov 2026)
+
+The teacher noted some colours were similar. We measured it: with the old muted set, 7 of the 28 pairs were hard to tell apart even with full colour vision. The worst were Quiet Luxury blue and Cottagecore teal (OKLab ΔE 8.8; the floor is 15), and Quiet Luxury and Gorpcore green (10.0). Under colour-blind simulation, Quiet Luxury and Y2K nearly merged (ΔE 2.2). Four of the colours were also so muted they read as greyish.
+
+New set, with each aesthetic kept in its own colour family:
+
+| Aesthetic | Old | New |
+|---|---|---|
+| Streetwear | `#CC623E` | `#D85218` orange |
+| Quiet Luxury | `#497C9C` | `#2762BD` blue |
+| Gorpcore | `#44765B` | `#1B8E51` green |
+| Y2K | `#CB648E` | `#B8338A` magenta |
+| Coquette | `#9475B5` | `#9680F2` lavender |
+| Dark Academia | `#574052` | `#823A25` oxblood brown |
+| Cottagecore | `#369894` | `#28B9C4` aqua |
+| Maximalism | `#BD922F` | `#C1A233` gold |
+
+How they were chosen: a search over each aesthetic's colour family (hue, lightness and saturation ranges) that maximised the closest pair, then a check with a colour-palette validator. Because all eight lines cross on the timeline and the clock and any two countries can touch on the map, **every** pair was tested, not just legend neighbours. Results: closest pair ΔE 18.2 for full colour vision (was 8.8, floor 15) and 8.6 under protanopia/deuteranopia simulation (was 2.2, target 8). All eight sit inside the lightness band and above the saturation floor. Coquette, Cottagecore and Maximalism are lighter than 3:1 against the page, which the method allows only when colours are also named, and every chart does that (legend, chips, end labels, tooltips). Text on coloured blocks still switches between white and dark automatically.
+
+## Two kinds of show, a takeaway that includes luxury, and the top 10 → top 20 note (26 Nov 2026)
+
+- **"Two kinds of show" is now its own block**, before the three-eras timeline and outside the chart. It opens with a short lead line, "We noticed the big luxury shows came in two kinds.", then the four runway photos under the matching filled or hollow dot: Gucci 2018 Cyborg and Gucci 2021 Aria (concept-led), Balenciaga 2017 and Prada 2023 (clothes-led). Captions are just brand, year and show name. **Hover, tap or tab to a photo** for the full story: why it got its label in one line, plus the show description already used in the year-in-review panel (built from `RUNWAY` in `js/runway.js`). Fig. 8 now opens straight on its one-show walkthrough.
+- **The closing takeaway now ties in luxury design.** It was only about search. It now reads "Aesthetics now move in waves, each on top for about 20 months. Luxury runways kept up only when the show was about the clothes.", with a smaller line underneath: "New looks broke out in 2020, 2022 and 2023. 5 of 11 clothes-led shows matched the year's look; none of the 10 concept-led shows did." It is computed in `js/eras.js` from the same show coding as Fig. 8, and the luxury sentence only appears while clothes-led shows match more often than concept-led ones.
+- **Top 10 → top 20 note on the hot 20.** While the chart shows a 2017–18 quarter, the empty rows say "Lyst only published a top 10 until the end of 2018. From 2019 on, its list has 20 brands." The slider has a "Top 10 | Top 20" marker where the list grows, and the subtitle says "(a top 10 until 2018)". In Q1 2019, rows 11–20 are no longer tagged NEW, since they only appear because the list got longer.
+
+## One example first on Figs. 5 and 6 (26 Nov 2026)
+
+- **Brings back the teacher's "one example first" note on the ring and the clock, while keeping the key and the All-then-filter setup.** The first time each chart comes into view, it shows one aesthetic on its own: Cottagecore on the ring (it has the whole life cycle) and Coquette on the clock (the most seasonal). The panel shows that aesthetic's numbers with an "Example" tag and a short progress bar, then the chart opens up to all eight by itself (about 4.5 s and 4 s). Clicking a chip or hovering an arc ends the example early. It plays once per page load (`introDemo` in `js/core.js`).
+- With Fig. 8's one-show walkthrough, all three new chart forms now open on one example before showing everything.
+
+## Filter instead of tables on Figs. 5 and 6 (26 Nov 2026)
+
+- **Tables removed** under the ring and the clock.
+- **See all, then filter down.** Both charts now have a chip row that starts on **All**. Pick one aesthetic and the chart isolates it, and a panel under the chart shows its numbers: broke out, peaked and months on top for the ring; best month, quietest month and swing for the clock. The ring's centre switches from the median to that aesthetic's months. Hovering an arc previews it. **All**, or scrolling away, resets the chart.
+- The same **All** chip is now on the timeline's filter (Fig. 2) too, so every filter works the same way (`chips` / `filterPanel` in `js/core.js`).
+
+## Runway photos as examples of concept-led vs clothes-led (26 Nov 2026; later moved into its own block, see above)
+
+- **Photo key in Fig. 8**, next to the one-show walkthrough. Two runway photos for each label, from our own photos. Concept-led: Gucci 2018 "Cyborg" (models carried copies of their own heads) and Gucci 2021 Aria (a mirrored-tunnel set). Clothes-led: Balenciaga 2017 (tailoring on a plain runway) and Prada 2023 (pared-back pieces; also the walkthrough's show). Each half shows the matching filled or hollow dot from the chart, so the photos teach how to read the dots. It stacks under the walkthrough on a phone.
+- **Hover definitions show a photo too.** The concept-led and clothes-led tooltips now carry a thumbnail (Gucci 2018 and Prada 2023), and their example text now names those same shows (`TERMS` in `js/core.js`).
+
+## Third feedback round (26 Nov 2026): layout and transition
+
+- **Figs. 5 and 6 side by side** in one feature ("The cycle"), each in its own card: title, key, chart, table. The old seasons section and the pull quote between them are gone. That quote's line ("And inside every year, each one has a month of its own.") is now the feature's subtitle. The nav link reads "cycle & seasons", and the shops are now Feature 04.
+- **Yearly vs monthly titles:** shorter titles that open with the label and drop the extra specifics: "Yearly: a typical aesthetic stays on top for about 20 months" (Fig. 5) and "Monthly: each aesthetic has its own peak month" (Fig. 6). The median is still computed from the data.
+- **A key instead of the step-by-step example** on both. Ring: small dot = broke out, big dot = peak, arc length = time on top, clockwise 2016 to 2025. Clock: dot = best month, further out = more searched, round loop = steady, loop closes = the year repeats. (Fig. 8's one-show walkthrough stays.)
+- **The hot 20 moved up**, directly under the year-in-review and its slider, so it is now Fig. 7. The three-eras timeline comes after the transition as Fig. 8.
+- **New transition** before the timeline: "But look deeper, and a pattern appears." (shortened to match the other transitions) The finding under it now states the pattern: 3 of 6 shows matched in 2017–19 and 2 of 4 from 2023 on, but none of 11 in 2020–22. Both lines are computed in `js/eras.js`. The transition only claims a pattern when the eras' match rates differ by at least 25 points.
+
+## Second feedback round (26 Nov 2026): less text, runway page shows only the match
+
+- **Condensed text.** Walkthrough notes on Figs. 5–7 cut to one short line each. Removed the long paragraphs beside the ring and the clock, since the title and the walkthrough now carry the point. Fig. 7's finding is one sentence, its era captions are one line each, and its definitions footnote is gone (the hover tooltips cover it). Every "How to" line is now one short sentence. The Hot 20 notes and the shops intro are shorter.
+- **Year-in-review page: only "did the runway match the look?"** Removed the "Searches rising fastest" list, the concept-led / clothes-led chip and the "rising in search last year" chip. These are gone from the photo panel too. Each photo now shows the brand, the show, "Runway read as <aesthetic>" and the match chip. The right column shows Lyst's #1 brand and the year's look.
+- Fig. 7 keeps its concept-led / clothes-led dot fill, since its title is about that, but its walkthrough now talks only about the match.
+
+## Prototype III feedback round (26 Nov 2026)
+
+| Feedback | What we did |
+|---|---|
+| Some colours are a little similar | **Kept as is** (every chart still labels its colours directly). |
+| Tooltip for concept-led vs clothes-led | The terms are now underlined (with a small "?") wherever they appear: the chips under each year-in-review runway photo and in its click-open panel, the Fig. 7 era names (in the chart and in the captions under it), the Fig. 7 legend and its footnote. Hover, tap or tab to one to see a definition with an example show. "Matches the year's look" got the same treatment. Definitions live in `TERMS` in `js/core.js`; mark any element with `data-def="concept"` to reuse them. |
+| Font colour and size: no grey on grey, bigger text | Grey ink darkened site-wide (`--ink-2` #4a525b → #323941, `--ink-3` #7b848d → #525a63, `--steel-2` #6f8497 → #4a6073, same in `INK` in `js/core.js`). Small text enlarged: body 15 → 16 px, "How to" lines 13 → 15, subtitles 12.5 → 14.5, mono notes and sources 9.5 → 11.5–12, chart axis and table text up 2–3 px, the zoom-in chart's labels and the Fig. 7 timeline labels redrawn larger. The ring and clock tables now highlight a row instead of fading the others. Nike's lane in Fig. 7 is darker so its white letter reads. |
+| Introduce the three novel charts (e.g. talk about one runway before all of them) | Fig. 5 (trend ring), Fig. 6 (seasonal clock) and Fig. 7 (three eras) now open on **one worked example** with numbered badges on the chart and matching notes beside it, then a "Now show all" button (or the 1 / 2 tabs) reveals the full chart. Ring: Cottagecore's arc (broke out, peaked, faded). Clock: Coquette's loop (best month, quietest month, December joining January). Three eras: one show, Prada Fall/Winter 2023, read down its column (hollow dot = clothes-led, blue ring = matched, the year's look, the #1 Lyst brand that quarter, streetwear's share that year); the rest are dimmed until step 2. On a phone the timeline scrolls to that show. The examples and numbers are computed from the data (`introSteps` in `js/core.js`). |
+| The circle one doesn't connect | The trend ring is now an **open ring**: a gap at 12 o'clock separates START (2016) from END (2026), with an arrowhead showing the direction, so a run that lasts to 2025 no longer appears to loop back to 2016. The seasonal clock stays closed on purpose, and its walkthrough says why (the calendar repeats; the trend timeline does not). |
 
 ## 1. At a glance
 

@@ -4,8 +4,7 @@
    about: a description of the show (this is what the click-open panel shows; no about = the photo is not clickable).
    look:  what the model in the photo is wearing (kept for reference, not shown).
    led:   concept (the staging is the idea) or clothes (the clothes are the idea): our reading of the show.
-   alt:   the photo's alt text.
-   part:  a looser aesthetic reading, used for "partly matches the year's look".
+   alt:   a looser aesthetic reading, used for "partly matches the year's look".
    read:  our own reading of the show, matched to the six aesthetics (key) with a
    fit of strong | fair | loose; key null = outside our aesthetics. */
 const RUNWAY = {
@@ -38,7 +37,7 @@ const RUNWAY = {
   2020: [
     // matched to the Fall/Winter 2020 show (mint-green runway around a glass carousel, February 19, 2020);
     // Gucci held no live runway in Q3 2020, so this is the last one before that quarter
-    { brand: "Gucci", show: "Fall/Winter 2020 · The Ritual", q: "Q3 2020", file: "2020-gucci.jpg", credit: "", led: "concept", part: "cottage",
+    { brand: "Gucci", show: "Fall/Winter 2020 · The Ritual", q: "Q3 2020", file: "2020-gucci.jpg", credit: "", led: "concept", alt: "cottage",
       alt: "Model in an orange double-breasted coat, striped top, wide blue jeans and a green beanie on a mint runway",
       look: "A long peach double-breasted coat with gold buttons over a red and white striped top, wide-leg blue jeans with a Gucci label sewn on the hem, and a bright green beanie, on a mint-green runway.",
       about: "Michele called the show “The Ritual.” Guests walked in through a backstage door, and models were dressed on a rotating glass-walled platform before walking the runway around it. The clothes ran from ruffled Victorian dresses to seventies suits with flared trousers. It was shown in Milan on February 19, 2020; Gucci's next collection, Epilogue, was a 12-hour livestream in July.",
@@ -67,7 +66,7 @@ const RUNWAY = {
       read: { key: "quiet", fit: "strong" } }
   ],
   2024: [
-    { brand: "Miu Miu", show: "Fall/Winter 2024", q: "Q1 2024", file: "2024-miu-miu.jpg", credit: "", led: "clothes", part: "coquette",
+    { brand: "Miu Miu", show: "Fall/Winter 2024", q: "Q1 2024", file: "2024-miu-miu.jpg", credit: "", led: "clothes", alt: "coquette",
       alt: "Model in a pale blue sleeveless dress with a pearl necklace, a black croc glove and a black bag",
       look: "A pale blue sleeveless scoop-neck dress with a raw hem, a pearl necklace and wraparound sunglasses, with one long black crocodile-embossed glove, a slouchy black leather bag and black Mary Jane heels.",
       about: "Shown in Paris on March 5, 2024, the collection followed clothes through the stages of a life, from childhood to maturity. Classic pieces such as little black dresses, pearls and luncheon suits were recombined in unexpected ways, with a preppy, schoolgirl streak.",
@@ -214,30 +213,22 @@ function brandYearVerdict(brand, year, look) {
 
 const rwEsc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 function rwReadHTML(e) {
-  if (e.read && e.read.key) return '<span class="rw-read"><i style="--c:' + colorOf(e.read.key) + '"></i><span>Closest aesthetic: ' + nameOf(e.read.key) + " · " + e.read.fit + " fit</span></span>";
+  if (e.read && e.read.key) return '<span class="rw-read"><i style="--c:' + colorOf(e.read.key) + '"></i><span>Runway read as ' + nameOf(e.read.key) + "</span></span>";
   if (e.read) return '<span class="rw-read"><i class="none"></i><span>' + rwEsc(e.read.text) + "</span></span>";
   return "";
 }
 
-/* The two tags for a runway look: concept-led or clothes-led, and whether it matched the year's look.
-   Shown large in the year-in-review's right column and in the click-open panel. ctx = { look: the year's look } */
+/* Small chips under each runway photo and in its panel. ctx = { look: the year's look, prev: last year's five fastest-rising
+   brand searches (null for the first year), tracked: brands that have a search series } */
 let RW_CTX = null;
-const rwMatch = (e, look) => { const k = e.read && e.read.key; return k && k === look ? "yes" : (e.part && e.part === look ? "part" : "no"); };
 function rwChipsHTML(e, ctx) {
   if (!ctx) return "";
-  const out = [];
-  if (e.led) out.push('<span class="rw-chip"><i class="led ' + e.led + '"></i>' + (e.led === "concept" ? "Concept-led" : "Clothes-led") + "</span>");
-  const m = rwMatch(e, ctx.look);
-  out.push('<span class="rw-chip m-' + m + '">' + (m === "yes" ? "Matches the year's look" : m === "part" ? "Partly matches the year's look" : "Doesn't match the year's look") + "</span>");
-  return '<span class="rw-chips">' + out.join("") + "</span>";
+  const k = e.read && e.read.key;
+  const m = k && k === ctx.look ? "yes" : (e.alt && e.alt === ctx.look ? "part" : "no");
+  return '<span class="rw-chips"><span class="rw-chip term m-' + m + '" data-def="match" tabindex="0">' +
+    (m === "yes" ? "Matches the year's look" : m === "part" ? "Partly matches the year's look" : "Doesn't match the year's look") + "</span></span>";
 }
-/* The right column of the year-in-review: one block per runway photo, brand name over its two tags. */
-function runwayTagsHTML(y, ctx) {
-  const list = (RUNWAY[y] || []).filter(e => e.file);
-  if (!list.length) return "";
-  const c = colorOf(ctx.look);
-  return list.map(e => '<div class="sp-tag" style="--c:' + c + ";--on:" + textOn(c) + '">' + (list.length > 1 ? "<b>" + rwEsc(e.brand) + "</b>" : "") + rwChipsHTML(e, ctx) + "</div>").join("");
-}
+// (concept-led / clothes-led and "rising in search last year" chips were removed: the spread now shows only whether the runway matched)
 
 /* Markup for the photos of a year, or null when there is no photo yet (the spread then keeps its look cutout). */
 function runwayHTML(y, ctx) {
@@ -249,7 +240,7 @@ function runwayHTML(y, ctx) {
       ? '<button type="button" class="rw-open" data-i="' + i + '" aria-label="Read about the ' + rwEsc(e.brand) + ' show">'
       : '<div class="rw-open static">') +
     '<img src="assets/runway/' + rwEsc(e.file) + '" alt="' + rwEsc(e.alt + ", " + e.brand + (e.show ? " " + e.show : "")) + '">' + (e.about ? '<span class="rw-plus" aria-hidden="true">+</span></button>' : "</div>") +
-    '<figcaption class="rw-cap"><b>' + rwEsc(e.brand) + '</b><span class="rw-show">' + (e.show ? rwEsc(e.show) + " · " : "") + "#1 in " + rwEsc(e.q) + "</span>" + rwReadHTML(e) +
+    '<figcaption class="rw-cap"><b>' + rwEsc(e.brand) + '</b><span class="rw-show">' + (e.show ? rwEsc(e.show) + " · " : "") + "#1 in " + rwEsc(e.q) + "</span>" + rwReadHTML(e) + rwChipsHTML(e, ctx) +
     '<span class="rw-credit">Photo courtesy of ' + rwEsc(e.credit || e.brand) + "</span>" + "</figcaption></figure>").join("");
   return { html, n: list.length };
 }
@@ -282,4 +273,34 @@ function runwayHTML(y, ctx) {
   });
   modal.addEventListener("click", ev => { if (ev.target === modal || ev.target.closest(".rw-close")) close(); });
   document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !modal.hidden) close(); });
+})();
+
+/* Two kinds of show: four runway photos as examples of concept-led and clothes-led (the block before the three-eras timeline).
+   Hover, tap or focus a photo for the story behind the show (the `about` text above) and why it got its label. */
+(function ledKey() {
+  const box = document.getElementById("ledKey"); if (!box) return;
+  const EX = [
+    ["2018-gucci.jpg", "concept", "Cyborg", "The staging was the story: an operating-theatre set, and models carrying copies of their own heads."],
+    ["2021-gucci.jpg", "concept", "Aria", "Released as a film, not a live runway, to open Gucci's 100th year."],
+    ["2017-balenciaga.jpg", "clothes", "", "A plain white runway. Reviews were about the tailoring."],
+    ["2023-prada.jpg", "clothes", "", "Pared back to essentials. Reviews were about the clothes themselves."]
+  ];
+  const all = Object.values(RUNWAY).flat();
+  const yearOfShow = e => +Object.keys(RUNWAY).find(y => RUNWAY[y].includes(e));
+  const card = (e, why) => '<div style="width:290px"><div class="tt">' + rwEsc(e.brand) + " · " + rwEsc(e.show) + "</div><b>" +
+    (e.led === "concept" ? "Concept-led. " : "Clothes-led. ") + "</b>" + rwEsc(why) + '<div style="margin-top:8px">' + rwEsc(e.about) + "</div></div>";
+  EX.forEach(([file, led, nick, why]) => {
+    const e = all.find(x => x.file === file); if (!e) return;
+    const side = box.querySelector('[data-led="' + led + '"] .led-pics');
+    const fig = document.createElement("figure");
+    fig.tabIndex = 0;
+    fig.innerHTML = '<img src="assets/runway/' + file + '" alt="' + rwEsc(e.alt + ", " + e.brand + " " + e.show) + '" loading="lazy">' +
+      "<figcaption>" + rwEsc(e.brand) + " " + yearOfShow(e) + (nick ? " · " + nick : "") + "</figcaption>";
+    const html = card(e, why);
+    fig.addEventListener("pointermove", ev => showTip(ev, html));
+    fig.addEventListener("pointerleave", hideTip);
+    fig.addEventListener("focus", () => { const r = fig.getBoundingClientRect(); showTip({ clientX: r.right, clientY: r.top }, html); });
+    fig.addEventListener("blur", hideTip);
+    side.appendChild(fig);
+  });
 })();

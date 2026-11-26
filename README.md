@@ -12,7 +12,7 @@ python3 -m http.server 8000
 It also runs as is on GitHub Pages. Fonts come from Google Fonts. Offline, the page falls back to system fonts.
 
 ## Structure
-- `index.html`: page layout and all CSS. Laid out like a magazine issue: cover → lookbook → thesis → evidence → cycle → seasons → shops, with torn-page edges between features and pull quotes on taped paper scraps.
+- `index.html`: page layout and all CSS. Laid out like a magazine issue: cover → lookbook → thesis → evidence → cycle & seasons → shops, with torn-page edges between features and pull quotes on taped paper scraps.
 - `js/`: one script per part of the story, loaded in order:
   | file | what it does |
   |---|---|
@@ -51,8 +51,17 @@ It also runs as is on GitHub Pages. Fonts come from Google Fonts. Offline, the p
 | Evidence | **Zoom in** (new): any country's share of the eight, era by era | `geo_by_era.json` |
 | Cycle | Trend ring: breakout → peak → fade, months on top | `lifecycle.json` |
 | Seasons | **Seasonal clock** (new): average interest by calendar month, 2021–2025 | `seasonal.json` |
-| Shops | **Year in review** (new): one magazine page per year: the look, Lyst's #1 brand, the five fastest-rising brand searches | `summary_by_year.json`, `lyst.json` |
+| Shops | **Runway shows** (Fig. 8): the year's look and every show by Lyst's #1 brands, 2020–2025, ringed when the show matched the look | `summary_by_year.json`, `js/runway.js` |
+| Shops | **Year in review** (new): one magazine page per year: the look, Lyst's #1 brand, and whether its runway matched the look | `summary_by_year.json`, `lyst.json` |
 | Shops | **The hot 20** (new): Lyst's top 20 re-sorting quarter by quarter; a brand is highlighted when its runway matched the year's look | `lyst.json`, `js/runway.js` |
+
+## Changes after the Prototype III feedback
+- **Colours re-picked** ("some colours are a little similar"): Streetwear `#D85218`, Quiet Luxury `#2762BD`, Gorpcore `#1B8E51`, Y2K `#B8338A`, Coquette `#9680F2`, Dark Academia `#823A25`, Cottagecore `#28B9C4`, Maximalism `#C1A233` (in `js/core.js` and the `--street` etc. variables). Every pair now clears the colour checks, for full colour vision and for colour-blind readers alike.
+- **Layout:** the trend ring and seasonal clock sit side by side in one feature, each with a key; the hot 20 sits right under the year-in-review, before the transition and the three-eras timeline.
+- **Read one, then all:** the trend ring, seasonal clock and three-eras timeline open on one worked example (numbered badges + notes), then reveal every series (`introSteps` in `js/core.js`).
+- **Open trend ring:** a gap at the top separates 2016 (start) from 2026 (end), so time no longer looks like a loop.
+- **Definitions on hover:** concept-led, clothes-led and "matches the year's look" are underlined with a "?" wherever they appear (`TERMS` / `data-def` in `js/core.js`).
+- **Legibility:** darker grey ink and larger small text throughout; no faded grey rows in the tables.
 
 ## Changes after the think-aloud study (Milestone 10)
 - **Renamed:** the site is now "Enter the Aesthetic" (cover wordmark "AESTHETIC", nav, page title and page folios), replacing "Wardrobe". The decorative line through the cover's "o" now runs through the middle "e".
@@ -62,7 +71,7 @@ It also runs as is on GitHub Pages. Fonts come from Google Fonts. Offline, the p
 - **Transitions fixed:** "And the shops followed." overclaimed, so it is now "The shops initially didn't match the general aesthetic patterns." "And every year, the calendar turns them over." is now "And inside every year, each one has a month of its own." A new short transition between the year pages and the timeline says "In the concept years, luxury drifted furthest from the trend." (`js/eras.js` only uses that wording when the data shows the concept era had the lowest match rate; 2020 to 22 had none of 11 shows match, while 2019's two clothes-led shows both matched).
 - **Runway photo credit:** every photo is credited "Photo courtesy of" its brand (`credit` in `js/runway.js` defaults to the brand and can be overridden).
 - **Three eras now says why it matters:** one plain-language caption per era under the chart (aligned to its band, numbers computed from the data), a finding paragraph above it and the tie as a transition. "Concept-led" and "clothes-led" are defined in a line under the legend (`js/eras.js`).
-- **Catalogue look:** the thesis chart is back to the two stacked bars (the overhead-runway version is gone). The page keeps its ivory and charcoal look, and charts sit on printed-style plates (paper stock, hairline border, heavy top rule, small square corners, no glass or shadow) with "Fig." numbers. The eight aesthetic colours are a richer editorial set: burnt orange (Streetwear `#CC623E`), steel blue (Quiet Luxury `#497C9C`), forest green (Gorpcore `#44765B`), raspberry pink (Y2K `#CB648E`), lavender (Coquette `#9475B5`), deep plum (Dark Academia `#574052`), teal (Cottagecore `#369894`) and golden ochre (Maximalism `#BD922F`), set in `js/core.js` and the `--street` etc. variables. Text on a colour is white or charcoal, whichever has more contrast (`textOn` in `js/core.js`). Three pairs (blue and lavender, blue and raspberry, raspberry and teal) are close for red-green colour-blind readers, so every chart also labels its colours directly.
+- **Catalogue look:** the thesis chart is back to the two stacked bars (the overhead-runway version is gone). The page keeps its ivory and charcoal look, and charts sit on printed-style plates (paper stock, hairline border, heavy top rule, small square corners, no glass or shadow) with "Fig." numbers. The eight aesthetic colours are a richer editorial set: burnt orange (Streetwear `#CC623E`), steel blue (Quiet Luxury `#497C9C`), forest green (Gorpcore `#44765B`), raspberry pink (Y2K `#CB648E`), lavender (Coquette `#9475B5`), deep plum (Dark Academia `#574052`), teal (Cottagecore `#369894`) and golden ochre (Maximalism `#BD922F`), set in `js/core.js` and the `--street` etc. variables. Text on a colour is white or charcoal, whichever has more contrast (`textOn` in `js/core.js`). (These colours were replaced after the Prototype III feedback; see above.)
 - **Removed:** the Brands per look chart (each aesthetic's time on top with brand search spikes by year). `lifecycle.json` and `brands.json` are unchanged; following a brand now works only in the hot 20.
 - **Takeaway titles:** each chart's title now states what it shows, with the old label demoted to a small subtitle (e.g. the thesis chart: "Streetwear used to be almost every search. By 2025, 34 in every 100 went to other aesthetics."). Titles are built from the data in the chart's own script (`thesisTitle`, `whenTitle`, `mapTitle`, `drillTitle`, `ringTitle`, `seasonTitle`, `erasTitle`, `h20Title`), so they stay true if the data changes, and the map and zoom titles change with the era, mode and country you pick. The zoom title only considers 2018 on, because before then the newer aesthetics barely existed and a share there is just low-volume noise.
 - **Hot 20 shows the year large:** the current year is drawn as a big numeral in the chart's empty lower-right corner, with the quarter and that year's look beneath it (for example "Q3 · Cottagecore year"), and the small quarter label up by the play button is larger too.

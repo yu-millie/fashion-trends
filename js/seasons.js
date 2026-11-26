@@ -16,7 +16,7 @@ loadData("seasonal").then(seas => {
   g.append("g").selectAll("circle").data([25, 50, 75, 100]).join("circle")
     .attr("r", r).attr("fill", "none").attr("stroke", (d) => d === 100 ? "rgba(13,16,19,.22)" : "rgba(13,16,19,.08)");
   g.append("g").selectAll("text").data([50, 100]).join("text").attr("x", d => Math.sin(a(.5)) * r(d) + 3).attr("y", d => -Math.cos(a(.5)) * r(d) - 3)
-    .style("font-family", "var(--mono)").style("font-size", "8.5px").style("fill", INK.ink3).text(d => d);
+    .style("font-family", "var(--mono)").style("font-size", "11px").style("fill", INK.ink2).text(d => d);
   g.append("g").selectAll("line").data(d3.range(12)).join("line").attr("class", "spoke")
     .attr("x1", i => Math.sin(a(i)) * R0).attr("y1", i => -Math.cos(a(i)) * R0)
     .attr("x2", i => Math.sin(a(i)) * (R1 + 6)).attr("y2", i => -Math.cos(a(i)) * (R1 + 6));
@@ -40,8 +40,8 @@ loadData("seasonal").then(seas => {
     .attr("opacity", 0);
   const centre = g.append("text").attr("text-anchor", "middle").attr("y", 8).attr("fill", INK.ink)
     .style("font-family", "var(--display)").style("font-weight", 200).style("font-size", "30px").text("YEAR");
-  const centreSub = g.append("text").attr("text-anchor", "middle").attr("y", 24).attr("fill", INK.ink3)
-    .style("font-family", "var(--mono)").style("font-size", "8px").style("letter-spacing", ".16em").text("HOVER A MONTH");
+  const centreSub = g.append("text").attr("text-anchor", "middle").attr("y", 26).attr("fill", INK.ink2)
+    .style("font-family", "var(--mono)").style("font-size", "10.5px").style("letter-spacing", ".12em").text("HOVER A MONTH");
 
   // bloom the loops open when the clock scrolls into view
   new IntersectionObserver((es, io) => {
@@ -55,29 +55,27 @@ loadData("seasonal").then(seas => {
       centre.text(MONTHS[i].toUpperCase()); centreSub.text("AVG 2021–2025");
       const rows = ORDER.slice().sort((p, q) => seas.values[q][i] - seas.values[p][i])
         .map(k => tipRow(k, nameOf(k), Math.round(seas.values[k][i]), seas.values[k][i] === 100)).join("");
-      showTip(ev, '<div class="tt">' + MONTHS[i] + "</div>" + rows + '<div style="margin-top:5px;font-size:11px">100 = that aesthetic\'s best month</div>');
+      showTip(ev, '<div class="tt">' + MONTHS[i] + "</div>" + rows + '<div class="tnote">100 = that aesthetic\'s best month</div>');
     })
     .on("pointerleave", () => { hideTip(); wedges.classed("on", false); mlab.classed("on", false); centre.text("YEAR"); centreSub.text("HOVER A MONTH"); });
 
-  // table: peak month, low month, swing (best minus worst month)
-  const stats = ORDER.map(k => {
+  // filter: All by default; pick one aesthetic to see its best and quietest month in the panel under the clock
+  const stats = Object.fromEntries(ORDER.map(k => {
     const v = seas.values[k];
-    return { key: k, peak: v.indexOf(d3.max(v)), low: v.indexOf(d3.min(v)), swing: Math.round(100 - d3.min(v)) };
-  }).sort((p, q) => q.swing - p.swing);
-  const rows = d3.select("#seasonTable").selectAll("div.gaprow").data(stats).join("div")
-    .attr("class", "gaprow").style("--c", d => colorOf(d.key))
-    .html(d => '<span class="gn"><i></i>' + nameOf(d.key) + '</span><span class="gv">' + MONTHS[d.peak] +
-      '</span><span class="gv">' + MONTHS[d.low] + '</span><span class="gg">' + d.swing + "</span>");
-  const most = stats[0], least = stats[stats.length - 1];
-  document.getElementById("seasonTitle").textContent = "Each aesthetic peaks in its own month; " + nameOf(most.key) + " swings most";
-  d3.select("#seasonLede").text("Farther out = more searches. " + nameOf(most.key) + " drops " + most.swing + "% from " + MONTHS[most.peak] + " to " + MONTHS[most.low] +
-    "; " + nameOf(least.key) + " barely moves (" + least.swing + "%).");
-
+    return [k, { peak: v.indexOf(d3.max(v)), low: v.indexOf(d3.min(v)), swing: Math.round(100 - d3.min(v)) }];
+  }));
+  document.getElementById("seasonTitle").textContent = "Monthly: each aesthetic has its own peak month";
+  const panel = document.getElementById("seasonDetail");
   const show = f => {
     loops.classed("dim", k => f && k !== f).classed("hot", k => f && k === f);
     peaks.style("opacity", k => !f || k === f ? 1 : .15);
-    rows.style("opacity", d => !f || d.key === f ? 1 : .35);
+    const st = f && stats[f];
+    filterPanel(panel, f, st ? [["Best month", MONTHS[st.peak]], ["Quietest", MONTHS[st.low]], ["Swing", st.swing + "% lower"]] : [],
+      "All eight shown. Pick one above to see its best and quietest month.");
   };
-  rows.on("pointerenter", (ev, d) => show(d.key)).on("pointerleave", () => show(FOC.key));
-  FOC.on(show);
+  show(null);
+  // one example first (the most seasonal aesthetic), then all eight
+  const exKey = ORDER.slice().sort((p, q) => stats[q].swing - stats[p].swing)[0];
+  const stopDemo = introDemo(svg.node(), FOC, show, exKey, panel, 4000);
+  FOC.on(f => { stopDemo(); show(f); });
 });

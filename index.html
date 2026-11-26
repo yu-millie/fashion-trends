@@ -16,22 +16,22 @@
     --paper:   #e6eaee;
     --paper-2: #d4dbe2;
     --steel:   #8fa3b5;
-    --steel-2: #6f8497;
+    --steel-2: #4a6073;
     --ink:     #0d1013;
-    --ink-2:   #4a525b;
-    --ink-3:   #7b848d;
+    --ink-2:   #323941;
+    --ink-3:   #525a63;
     --rule:    rgba(13,16,19,.12);
     --glass:   rgba(255,255,255,.56);
     --glass-2: rgba(255,255,255,.82);
 
-    --street:   #CC623E;
-    --quiet:    #497C9C;
-    --gorp:     #44765B;
-    --y2k:      #CB648E;
-    --coquette: #9475B5;
-    --academia: #574052;
-    --cottage:  #369894;
-    --maxi:     #BD922F;
+    --street:   #D85218;
+    --quiet:    #2762BD;
+    --gorp:     #1B8E51;
+    --y2k:      #B8338A;
+    --coquette: #9680F2;
+    --academia: #823A25;
+    --cottage:  #28B9C4;
+    --maxi:     #C1A233;
 
     --display: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
     --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
@@ -52,7 +52,7 @@
     color: var(--ink);
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -76,7 +76,7 @@
   .wrap { width: min(1180px, 100%); margin-inline: auto; }
 
   /* ── editorial heading: "FILE 01:" / BIG TITLE / steel subtitle ─────── */
-  .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 10px; }
+  .tag { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 10px; }
   .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
   h2 {
     font-family: var(--display); font-weight: 300; text-transform: uppercase;
@@ -84,8 +84,8 @@
     margin: 14px 0 0; text-wrap: balance;
   }
   h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--steel-2); letter-spacing: -.01em; }
-  .sub { font-family: var(--sans); font-weight: 400; font-size: 13px; letter-spacing: .02em; color: var(--steel-2); margin-top: 8px; }
-  .lede { max-width: 52ch; margin: 18px 0 0; color: var(--ink-2); font-size: clamp(13.5px, 1.05vw, 15.5px); line-height: 1.7; }
+  .sub { font-family: var(--sans); font-weight: 400; font-size: 14.5px; letter-spacing: .02em; color: var(--steel-2); margin-top: 8px; }
+  .lede { max-width: 52ch; margin: 18px 0 0; color: var(--ink-2); font-size: clamp(15.5px, 1.15vw, 17px); line-height: 1.65; }
 
   .reveal { opacity: .25; transform: translateY(18px); transition: opacity .9s ease, transform .9s cubic-bezier(.22,.8,.3,1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -106,29 +106,30 @@
   .cardhead h3.take small { margin-top: 8px; }
   body { counter-reset: fig; }
   .cardhead h3.take { counter-increment: fig; }
-  .cardhead h3.take::before { content: "Fig. " counter(fig); display: block; margin-bottom: 8px; font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
-  .cardhead h3 small { display: block; font-family: var(--sans); text-transform: none; font-size: 12.5px; font-weight: 400; letter-spacing: .02em; color: var(--steel-2); margin-top: 3px; }
+  .cardhead h3.take::before { content: "Fig. " counter(fig); display: block; margin-bottom: 8px; font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+  .cardhead h3 small { display: block; font-family: var(--sans); text-transform: none; font-size: 14.5px; font-weight: 400; letter-spacing: .01em; color: var(--steel-2); margin-top: 3px; }
   .go { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--ink-3); display: grid; place-items: center; font-size: 14px; color: var(--ink-2); transition: background .25s, color .25s, transform .25s; }
   .go:hover { background: var(--ink); color: #fff; transform: rotate(45deg); }
 
   /* ── closing takeaway (replaces the scrolling strip) ──────────────────── */
   .closing { padding: clamp(34px, 6vw, 72px) 0 clamp(10px, 2vw, 22px); }
-  .closing .k { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 14px; }
+  .closing .k { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 14px; }
   .closing .take { text-transform: none; margin: 0; max-width: 24em; font-family: var(--display); font-weight: 300; font-size: clamp(26px, 3.6vw, 52px); line-height: 1.12; letter-spacing: -.01em; color: var(--ink); }
   .closing .take b { font-weight: 500; }
+  .closing .take small { display: block; margin-top: 18px; max-width: 46em; font-family: var(--sans); font-size: clamp(15px, 1.2vw, 17px); line-height: 1.55; font-weight: 400; color: var(--ink-2); letter-spacing: 0; }
   @keyframes slide { to { transform: translateX(-50%); } }
 
   /* ── top nav ─────────────────────────────────────────────────────────── */
   .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px clamp(16px, 4vw, 52px); transition: background .4s, box-shadow .4s; }
   .nav.solid { background: rgba(230,234,238,.72); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(13,16,19,.06); }
   .nav .links { display: flex; gap: clamp(10px, 1.8vw, 24px); }
-  .nav .links a { font-size: 12.5px; font-weight: 400; color: #fff; text-decoration: none; letter-spacing: .02em; opacity: .85; transition: color .3s, opacity .3s; }
+  .nav .links a { font-size: 14px; font-weight: 400; color: #fff; text-decoration: none; letter-spacing: .02em; opacity: .85; transition: color .3s, opacity .3s; }
   .nav.solid .links a { color: var(--steel-2); }
   .nav .links a.on, .nav .links a:hover { opacity: 1; color: var(--ink); }
   .nav:not(.solid) .links a.on, .nav:not(.solid) .links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
   .nav .mark { font-family: var(--display); font-weight: 500; font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; color: #fff; text-decoration: none; transition: color .3s; }
   .nav.solid .mark { color: var(--ink); }
-  .nav .meta { justify-self: end; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: #fff; opacity: .85; transition: color .3s; }
+  .nav .meta { justify-self: end; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: #fff; opacity: .85; transition: color .3s; }
   .nav.solid .meta { color: var(--ink-3); }
 
   /* ══ magazine pages: paper colours, torn edges, folios ═════════════════ */
@@ -137,7 +138,7 @@
   .pg-silver { --bg: #e2e7ec; background: linear-gradient(180deg, var(--bg), #d9e0e6); }
   .tear { position: absolute; left: 0; right: 0; top: -26px; height: 28px; z-index: 6; pointer-events: none; filter: drop-shadow(0 -3px 3px rgba(20,28,36,.16)); }
   .tear svg { display: block; width: 100%; height: 100%; }
-  .folio { position: absolute; top: 26px; left: clamp(16px, 5vw, 72px); right: clamp(16px, 5vw, 72px); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); pointer-events: none; }
+  .folio { position: absolute; top: 26px; left: clamp(16px, 5vw, 72px); right: clamp(16px, 5vw, 72px); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); pointer-events: none; }
   .folio b { font-weight: 400; color: var(--ink); }
   .dropcap::first-letter { float: left; font-family: var(--serif); font-size: 4.2em; line-height: .82; padding: 6px 10px 0 0; color: var(--ink); }
 
@@ -146,7 +147,7 @@
     min-height: 100svh; padding: 64px 0 0; justify-content: flex-start; overflow: hidden;
     background: radial-gradient(70% 60% at 50% 70%, rgba(255,255,255,.55), transparent 70%), linear-gradient(180deg, #7f92a4 0%, #a9b8c5 45%, #dbe2e8 100%);
   }
-  .issue { display: flex; justify-content: space-between; padding: 0 clamp(16px, 5vw, 72px); font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.9); }
+  .issue { display: flex; justify-content: space-between; padding: 0 clamp(16px, 5vw, 72px); font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #fff; }
   .wordmark {
     position: relative; z-index: 1; margin: 1vh 0 0; text-align: center;
     font-family: var(--display); font-weight: 300; text-transform: uppercase;
@@ -164,7 +165,7 @@
   .cl.r { text-align: right; justify-items: end; }
   .cl .line { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 19px); line-height: 1.12; letter-spacing: .02em; color: var(--ink); }
   .cl .line em { display: block; font-family: var(--display); font-style: normal; font-weight: 400; text-transform: none; font-size: 1.45em; line-height: 1.1; color: var(--ink); }
-  .cl .line small { text-shadow: 0 0 6px rgba(255,255,255,.95), 0 0 14px rgba(255,255,255,.8); display: block; font-family: var(--sans); text-transform: none; font-size: 12.5px; color: var(--ink-2); margin-top: 3px; letter-spacing: 0; }
+  .cl .line small { text-shadow: 0 0 6px rgba(255,255,255,.95), 0 0 14px rgba(255,255,255,.8); display: block; font-family: var(--sans); text-transform: none; font-size: 13.5px; color: var(--ink-2); margin-top: 3px; letter-spacing: 0; }
   .who h4 { margin: 0 0 8px; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; color: transparent; -webkit-text-stroke: .8px var(--ink); }
   .pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border: 1.5px solid var(--ink); border-radius: 999px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: background .3s, color .3s; background: rgba(255,255,255,.35); }
   .pill:hover { background: var(--ink); color: #fff; }
@@ -175,16 +176,16 @@
   #lookbook { display: block; padding: 0; min-height: 0; height: calc(var(--n, 6) * 70vh + 100vh); }
   .lb-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(250px, 330px) minmax(0, 1fr); gap: 0 2vw; padding: 70px clamp(16px, 5vw, 72px) 0; }
   .lb-text { position: relative; z-index: 3; align-self: center; font-family: var(--serif); }
-  .lb-text .k { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .lb-text .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
   .lb-text h3 { margin: 6px 0 4px; font-family: var(--display); font-weight: 300; text-transform: uppercase; font-size: clamp(30px, 3.4vw, 48px); line-height: 1; letter-spacing: .01em; }
-  .lb-text .dates { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--steel-2); }
-  .lb-text p { font-family: var(--sans); font-size: 13.5px; line-height: 1.65; color: var(--ink-2); margin: 14px 0 16px; }
+  .lb-text .dates { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--steel-2); }
+  .lb-text p { font-family: var(--sans); font-size: 15px; line-height: 1.65; color: var(--ink-2); margin: 14px 0 16px; }
   .pieces { list-style: none; margin: 0 0 16px; padding: 0 0 0 14px; border-left: 1px solid var(--rule); display: grid; gap: 7px; }
-  .pieces li { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); line-height: 1.35; }
-  .pieces li span { display: block; font-style: italic; text-transform: none; letter-spacing: .02em; font-size: 12px; color: var(--ink-2); }
+  .pieces li { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); line-height: 1.35; }
+  .pieces li span { display: block; font-style: italic; text-transform: none; letter-spacing: .02em; font-size: 13.5px; color: var(--ink-2); }
   .lb-fade { transition: opacity .35s ease, transform .35s ease; }
   .lb-fade.out { opacity: 0; transform: translateY(8px); }
-  .lb-nav { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-family: var(--mono); font-size: 11px; color: var(--ink-2); }
+  .lb-nav { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
   .lb-nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--ink-3); font-size: 14px; transition: background .25s, color .25s; }
   .lb-nav button:hover { background: var(--ink); color: #fff; }
   .lb-stage { position: relative; height: 100%; min-width: 0; overflow: hidden; margin-top: -70px; padding-top: 70px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent); mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent); }
@@ -198,25 +199,27 @@
   .lb-slot img.knee { height: 86%; -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent); mask-image: linear-gradient(to bottom, #000 78%, transparent); }
   .lb-slot .shadow { position: absolute; }
   .lb-dots { position: absolute; z-index: 3; left: 0; right: 0; bottom: 4vh; display: flex; justify-content: center; gap: clamp(10px, 2vw, 26px); flex-wrap: wrap; }
-  .lb-dots button { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); padding: 4px 2px; border-bottom: 1px solid transparent; }
+  .lb-dots button { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); padding: 4px 2px; border-bottom: 1px solid transparent; }
   .lb-dots button.on { color: var(--ink); border-color: var(--c, var(--ink)); }
-  .lb-hint { position: absolute; z-index: 3; right: 0; top: 50%; writing-mode: vertical-rl; font-family: var(--mono); font-size: 9.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-3); }
+  .lb-hint { position: absolute; z-index: 3; right: 0; top: 50%; writing-mode: vertical-rl; font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-3); }
 
   /* ══ pull quotes on torn scraps ═══════════════════════════════════════ */
   .beat { min-height: 62svh; align-items: center; text-align: center; }
   .scrapwrap { position: relative; display: inline-block; rotate: var(--rot, -1.6deg); filter: drop-shadow(0 18px 24px rgba(30,40,50,.18)); }
   .scrap { background: #fffdf8; padding: clamp(30px, 4vw, 54px) clamp(30px, 5vw, 70px); max-width: min(760px, 88vw); }
   .scrap p { margin: 0; text-wrap: balance; font-family: var(--display); font-style: normal; font-weight: 400; font-size: clamp(26px, 4vw, 54px); line-height: 1.14; letter-spacing: -.005em; color: var(--ink); }
-  .scrap small { display: block; margin-top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3); }
+  .scrap small { display: block; margin-top: 16px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
   .tape { position: absolute; z-index: 2; width: 110px; height: 28px; background: rgba(226,214,186,.72); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
   .tape.a { top: -12px; left: 8%; transform: rotate(-6deg); }
   .tape.b { top: -10px; right: 9%; transform: rotate(5deg); }
 
   /* ══ shared chart bits ════════════════════════════════════════════════ */
   .viz { width: 100%; height: auto; display: block; overflow: visible; }
-  .viz text { font-family: var(--sans); fill: var(--ink-3); font-size: 10.5px; }
-  .viz .yr { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em; }
+  .viz text { font-family: var(--sans); fill: var(--ink-2); font-size: 13px; }
+  .viz .yr { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
   .viz .grid line { stroke: rgba(13,16,19,.09); }
+  #slotDrill .viz text { font-size: 15px; }
+  #slotDrill .viz .yr { font-size: 14px; }
   .viz .ln path { fill: none; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; transition: opacity .3s, stroke-width .3s; }
   .viz .era rect { fill: rgba(255,255,255,.4); stroke: rgba(13,16,19,.14); transition: fill .25s; }
   .viz .era { cursor: pointer; }
@@ -227,30 +230,32 @@
   .viz .country.drill { cursor: pointer; }
   .viz .country.drill.picked { stroke: var(--ink); stroke-width: 2; }
 
-  .howto { display: flex; align-items: baseline; gap: 10px; margin: 2px 0 14px; font-family: var(--sans); font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--ink-2); }
-  .howto::before { content: "How to"; flex: none; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: #fff; transform: translateY(-1px); }
+  .howto { display: flex; align-items: baseline; gap: 10px; margin: 2px 0 14px; font-family: var(--sans); font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--ink-2); }
+  .howto::before { content: "How to"; flex: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: #fff; transform: translateY(-1px); }
   .card .vkey { margin: 0 0 12px; }
   .vkey { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 18px; }
-  .vkey button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 11px; border: 1px solid rgba(13,16,19,.16); background: rgba(255,255,255,.5); border-radius: 999px; font-size: 12.5px; font-weight: 400; color: var(--ink-2); transition: border-color .25s, color .25s, background .25s; }
+  .vkey button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 11px; border: 1px solid rgba(13,16,19,.16); background: rgba(255,255,255,.5); border-radius: 999px; font-size: 14px; font-weight: 400; color: var(--ink); transition: border-color .25s, color .25s, background .25s; }
   .vkey button i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
   .vkey button:hover { border-color: var(--ink-3); color: var(--ink); }
   .vkey button[aria-pressed="true"] { border-color: var(--ink); color: #fff; background: var(--ink); }
   .vseg { display: inline-flex; border: 1px solid rgba(13,16,19,.18); border-radius: 999px; padding: 2px; background: rgba(255,255,255,.5); }
-  .vseg button { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; color: var(--ink-2); }
+  .vseg button { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; color: var(--ink-2); }
   .vseg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
   .vselect { position: relative; display: inline-block; }
-  .vselect select { -webkit-appearance: none; appearance: none; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); padding: 8px 34px 8px 16px; border: 1px solid rgba(13,16,19,.35); border-radius: 999px; cursor: pointer;
+  .vselect select { -webkit-appearance: none; appearance: none; font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); padding: 8px 34px 8px 16px; border: 1px solid rgba(13,16,19,.35); border-radius: 999px; cursor: pointer;
     background: rgba(255,255,255,.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230d1013' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center; }
   .vselect select:hover { border-color: var(--ink); background-color: #fff; }
-  .vhint { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 8px 0 0; }
-  .vnote { color: var(--ink-3); font-size: 12px; text-align: center; padding: 30px 10px; }
-  .vtip { position: fixed; z-index: 80; pointer-events: none; min-width: 160px; max-width: 260px; padding: 11px 13px; background: var(--glass-2); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid #fff; border-radius: 12px; box-shadow: 0 20px 40px -20px rgba(30,45,60,.5); font-size: 12px; line-height: 1.5; color: var(--ink-2); }
-  .vtip .tt { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .03em; font-size: 14px; color: var(--ink); margin-bottom: 5px; }
+  .vhint { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); line-height: 1.55; margin: 8px 0 0; }
+  .vnote { color: var(--ink-2); font-size: 14px; text-align: center; padding: 30px 10px; }
+  .vtip { position: fixed; z-index: 80; pointer-events: none; min-width: 170px; max-width: 310px; padding: 12px 14px; background: var(--glass-2); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid #fff; border-radius: 12px; box-shadow: 0 20px 40px -20px rgba(30,45,60,.5); font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+  .vtip .tnote { margin-top: 6px; font-size: 12px; color: var(--ink-3); }
+  .vtip b { font-weight: 600; color: var(--ink); }
+  .vtip .tt { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .03em; font-size: 15px; color: var(--ink); margin-bottom: 5px; }
   .vtip .tr { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; }
   .vtip .tr i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
   .vtip .tr b { font-weight: 400; color: var(--ink); font-variant-numeric: tabular-nums; }
   .vtip .tr.top { color: var(--ink); font-weight: 500; }
-  .bsrc { margin-top: 12px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .bsrc { margin-top: 12px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em; line-height: 1.6; text-transform: uppercase; color: var(--ink-2); }
 
   /* ══ thesis ═══════════════════════════════════════════════════════════ */
   .thesisgrid h2 { font-size: clamp(28px, 4.1vw, 58px); }
@@ -276,37 +281,37 @@
   .drillside .tag, .drillside p.vhint { grid-column: 1 / -1; }
   .drillside .big { grid-row: 2 / span 1; }
   .drillside .big { font-family: var(--display); font-weight: 200; font-size: clamp(42px, 5vw, 72px); line-height: 1; letter-spacing: -.02em; margin: 6px 0 4px; }
-  .drillside p { margin: 0; color: var(--ink-2); font-size: 13.5px; }
-  .drillside p.vhint { font-size: 9.5px; color: var(--ink-3); }
+  .drillside p { margin: 0; color: var(--ink-2); font-size: 15px; }
+  .drillside p.vhint { font-size: 12px; color: var(--ink-2); }
 
   /* ══ cycle ════════════════════════════════════════════════════════════ */
   .circlewrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); gap: clamp(22px, 4vw, 60px); align-items: center; }
   .ring { width: 100%; max-width: 520px; margin-inline: auto; display: block; height: auto; overflow: visible; }
   .ring .band { fill: none; stroke: rgba(13,16,19,.12); }
   .ring .tick { stroke: rgba(13,16,19,.22); }
-  .ring .yrlab { fill: var(--ink-3); font-family: var(--mono); font-size: 9.5px; }
+  .ring .yrlab { fill: var(--ink-2); font-family: var(--mono); font-size: 13px; }
   .ring .arc { fill: none; stroke-width: 3; stroke-linecap: round; opacity: .55; transition: opacity .3s, stroke-width .3s; }
   .ring .node { stroke: #fff; stroke-width: 2; }
   .ring g.rev { cursor: pointer; }
   .ring g.rev:hover .arc, .ring g.rev.on .arc { opacity: 1; stroke-width: 5; }
 
   .gaps { display: grid; border-top: 1px solid var(--rule); margin-top: 18px; }
-  .gaphead div, .gaprow { display: grid; grid-template-columns: 1fr 64px 64px 72px; gap: 10px; align-items: center; }
+  .gaphead div, .gaprow { display: grid; grid-template-columns: 1fr 76px 70px 80px; gap: 10px; align-items: center; }
   .gaphead { padding: 10px 4px; border-bottom: 1px solid var(--rule); }
-  .gaphead span { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .gaphead span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
   .gaphead span:not(:first-child) { text-align: right; }
   .gaprow { padding: 11px 4px; border-bottom: 1px solid var(--rule); cursor: pointer; transition: background .25s; border-radius: 6px; }
   .gaprow:hover, .gaprow.on { background: rgba(255,255,255,.7); }
-  .gaprow .gn { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 400; min-width: 0; }
+  .gaprow .gn { display: flex; align-items: center; gap: 10px; font-size: 15.5px; font-weight: 400; min-width: 0; }
   .gaprow .gn i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
-  .gaprow .gv { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-align: right; }
-  .gaprow .gg { font-family: var(--display); font-weight: 400; font-size: 17px; color: var(--ink); text-align: right; }
+  .gaprow .gv { font-family: var(--mono); font-size: 13.5px; color: var(--ink-2); text-align: right; }
+  .gaprow .gg { font-family: var(--display); font-weight: 400; font-size: 19px; color: var(--ink); text-align: right; }
 
   /* ══ seasons ══════════════════════════════════════════════════════════ */
   .clock .petal { fill-opacity: 0; stroke-width: 2; transition: opacity .3s, stroke-width .3s, fill-opacity .3s; }
   .clock .petal.dim { opacity: .12; }
   .clock .petal.hot { stroke-width: 3.2; fill-opacity: .14; }
-  .clock .mlab { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); letter-spacing: .08em; }
+  .clock .mlab { font-family: var(--mono); font-size: 13px; fill: var(--ink-2); letter-spacing: .08em; }
   .clock .mlab.on { fill: var(--ink); font-weight: 600; }
   .clock .spoke { stroke: rgba(13,16,19,.1); }
   .clock .wedge { fill: transparent; cursor: crosshair; }
@@ -336,30 +341,17 @@
   .sp-photo img.knee { -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
   .sp-year { grid-column: 1; grid-row: 1; }
   .sp-lines { grid-column: 3; align-self: center; padding-bottom: 54px; }
-  .sp-k { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); }
+  .sp-k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); }
   .sp-no1 { font-family: var(--serif); font-style: italic; font-size: clamp(40px, 4.6vw, 66px); line-height: 1; margin: 4px 0 2px; }
-  .sp-sub { font-family: var(--mono); font-size: 10px; color: var(--steel-2); margin-bottom: 22px; }
+  .sp-sub { font-family: var(--mono); font-size: 12px; color: var(--ink-2); margin-bottom: 22px; }
   .sp-line { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 13px; letter-spacing: .06em; margin-bottom: 18px; }
   .sp-line em { display: block; font-family: var(--serif); font-style: italic; text-transform: none; font-size: 30px; letter-spacing: 0; color: var(--ink); line-height: 1.15; }
-  .sp-line small { display: block; font-family: var(--sans); text-transform: none; letter-spacing: 0; font-size: 12.5px; color: var(--ink-2); font-weight: 300; }
-  .leddef { position: absolute; top: 18px; right: clamp(18px, 3vw, 40px); z-index: 2; display: grid; gap: 5px; padding: 9px 13px; background: rgba(255,255,255,.72); border-radius: 4px; font-size: 12.5px; color: var(--ink-2); }
-  .spread { padding-top: 96px !important; }
-  .leddef span { display: inline-flex; align-items: center; gap: 8px; }
-  .leddef b { color: var(--ink); font-weight: 600; }
-  .leddef i.led { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); flex: none; } .leddef i.led.concept { background: var(--ink); }
-  .sp-tags { display: grid; gap: 14px; margin-top: 10px; text-transform: none; letter-spacing: 0; }
-  .sp-tag b { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1.1; margin-bottom: 6px; }
-  .sp-tag .rw-chips { margin-top: 0; gap: 8px; }
-  .sp-tag .rw-chip { font-size: 15px; padding: 7px 15px; gap: 8px; }
-  .sp-tag .rw-chip i.led { width: 12px; height: 12px; border-width: 2px; }
-  .sp-tag .rw-chip.m-yes { background: var(--c, var(--ink)); color: var(--on, #fff); }
-  .sp-tag .rw-chip.m-part { background: #fff; box-shadow: inset 0 0 0 2px var(--c); outline: 2px dashed #fff; outline-offset: -2px; }
-  .sp-tag .rw-chip.m-part::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(90deg, var(--c) 50%, transparent 50%); box-shadow: inset 0 0 0 1.5px var(--c); }
+  .sp-line small { display: block; font-family: var(--sans); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-2); font-weight: 400; }
   .sp-risers { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; text-transform: none; letter-spacing: 0; }
   .sp-risers li { display: grid; grid-template-columns: 1fr 52px 70px; align-items: center; gap: 10px; font-family: var(--serif); font-size: 18px; }
-  .sp-risers li span { font-family: var(--mono); font-size: 11px; text-align: right; color: var(--ink-2); }
+  .sp-risers li span { font-family: var(--mono); font-size: 12.5px; text-align: right; color: var(--ink-2); }
   .sp-risers li i { height: 3px; border-radius: 3px; background: var(--c); }
-  .sp-folio { position: absolute; left: clamp(18px, 3vw, 40px); right: clamp(18px, 3vw, 40px); bottom: 14px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+  .sp-folio { position: absolute; left: clamp(18px, 3vw, 40px); right: clamp(18px, 3vw, 40px); bottom: 14px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
   .spread.turn .sp-photo, .spread.turn .sp-lines, .spread.turn .sp-year { opacity: 0; transform: translateX(14px); }
   .sp-photo, .sp-lines, .sp-year { transition: opacity .35s, transform .35s; }
 
@@ -369,7 +361,7 @@
   .h20 .bigyear { font-family: var(--display); font-weight: 200; font-size: 150px; letter-spacing: -.03em; fill: var(--ink); opacity: .9; pointer-events: none; }
   .h20 .bigsub { font-family: var(--mono); font-weight: 600; font-size: 17px; letter-spacing: .12em; text-transform: uppercase; pointer-events: none; }
   .play { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; }
-    .h20key { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 0 10px; font-size: 12.5px; color: var(--ink-2); }
+    .h20key { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 0 10px; font-size: 14px; color: var(--ink-2); }
   .h20key span { display: inline-flex; align-items: center; gap: 7px; }
   .h20key i { width: 22px; height: 10px; border-radius: 3px; background: var(--c); }
   .h20key i.grey { background: #e6e2d9; }
@@ -377,9 +369,15 @@
   .h20key i.none { background: #f8f6f1; box-shadow: inset 0 0 0 1.3px #b3ad9f; }
   .h20key i.part { background: var(--c); opacity: .34; box-shadow: inset 0 0 0 1.5px var(--c); }
   .h20range { width: 100%; margin-top: 10px; accent-color: #0d1013; }
+  #slotH20 + .h20range { display: block; }
+  .shopcard { position: relative; }
+  .h20switch { position: relative; height: 22px; margin-top: 2px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .h20switch b { width: 1.5px; height: 14px; background: var(--ink); }
+  .h20 .tennote .tn1 { font-family: var(--sans); font-size: 17px; font-weight: 500; fill: var(--ink); }
+  .h20 .tennote .tn2 { font-family: var(--sans); font-size: 15px; fill: var(--ink-2); }
   .h20 .bar { transition: fill .4s; }
-  .h20 .nm { font-family: var(--display); font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
-  .h20 .rk, .h20 .ch { font-family: var(--mono); font-size: 10.5px; }
+  .h20 .nm { font-family: var(--display); font-size: 14px; text-transform: uppercase; letter-spacing: .03em; }
+  .h20 .rk, .h20 .ch { font-family: var(--mono); font-size: 12px; }
   .h20 .row.picked .nm { font-weight: 600; }
   .h20 .row.picked .bar { stroke: var(--ink); stroke-width: 2; }
 
@@ -398,13 +396,13 @@
   .spread.duo .rw-fig:last-child img { transform: rotate(1.4deg); }
   .rw-cap { display: grid; gap: 3px; margin-top: 12px; width: 0; min-width: 100%; }
   .rw-cap b { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1.05; }
-  .rw-show { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); line-height: 1.4; }
-  .rw-read { display: flex; align-items: baseline; gap: 7px; font-size: 12px; line-height: 1.35; color: var(--ink-2); }
+  .rw-show { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); line-height: 1.4; }
+  .rw-read { display: flex; align-items: baseline; gap: 7px; font-size: 13.5px; line-height: 1.35; color: var(--ink-2); }
   .rw-read i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c); transform: translateY(-1px); }
   .rw-read i.none { background: transparent; border: 1.5px solid var(--ink-3); }
-  .rw-credit { font-size: 10.5px; color: var(--ink-3); }
+  .rw-credit { font-size: 11.5px; color: var(--ink-3); }
   .rw-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
-  .rw-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; background: #fff; box-shadow: 0 1px 5px rgba(20,30,40,.12); font-size: 11px; line-height: 1.3; color: var(--ink-2); white-space: nowrap; }
+  .rw-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; background: #fff; box-shadow: 0 1px 5px rgba(20,30,40,.12); font-size: 12.5px; line-height: 1.3; color: var(--ink); white-space: nowrap; }
   .rw-chip.up { color: var(--ink); font-weight: 600; }
   .rw-chip i.led { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; } .rw-chip i.led.concept { background: var(--ink); }
   .rw-chip.m-yes, .rw-chip.m-part, .rw-chip.m-no { color: var(--ink); font-weight: 600; }
@@ -418,7 +416,7 @@
   .rw-ptext { display: grid; gap: 10px; align-content: center; padding-right: clamp(0px, 1vw, 12px); }
   .rw-ptext h4 { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1; }
   .rw-ptext .rw-show { font-size: 10.5px; }
-  .rw-k { margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .rw-k { margin-top: 6px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
   .rw-ptext p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
   .rw-ptext .rw-read { margin-top: 6px; font-size: 13px; }
   .rw-close { position: absolute; top: 12px; right: 14px; z-index: 1; width: 34px; height: 34px; border-radius: 50%; font-size: 22px; line-height: 1; background: rgba(13,16,19,.07); color: var(--ink); }
@@ -429,45 +427,129 @@
   .e-halo { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--steel-2); }
   .eras-scroll { width: 100%; }
   #erasSvg { display: block; width: 100%; height: auto; }
-  .eras-reading { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0 calc(100% * 150 / 1296); width: calc(100% * 1130 / 1296); }
-  .eras-reading.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .eras-reading { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0 calc(100% * 172 / 1296); width: calc(100% * 1108 / 1296); }
   .er-col { padding: 10px 18px 0 10px; border-top: 3px solid var(--c, var(--ink)); }
-  .er-col b { display: block; font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--c, var(--ink)); }
-  .er-col p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+  .er-col b { display: block; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--c, var(--ink)); }
+  .er-col p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
   .scrap.long p { font-size: clamp(22px, 3.3vw, 46px); line-height: 1.16; }
-  .eras-legend { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 4px 0 8px; font-size: 12.5px; color: var(--ink-2); }
-  .eras-legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .e-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ink); background: transparent; } .e-dot.concept { background: var(--ink); }
+  .eras-legend { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 4px 0 18px; font-size: 15px; color: var(--ink-2); }
+  .eras-legend > span { display: inline-block; }
+  .eras-legend > span > i { vertical-align: -2px; margin-right: 6px; }
+  .e-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); background: transparent; } .e-dot.concept { background: var(--ink); }
   .e-sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
   .scrub { margin: clamp(22px, 4vh, 36px) 0 0; }
   .scrub .ticks { display: flex; justify-content: space-between; margin-top: 10px; }
-  .scrub .ticks button { font-family: var(--mono); font-size: 11px; color: var(--ink-3); padding: 4px 6px; border-radius: 999px; }
+  .scrub .ticks button { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); padding: 4px 6px; border-radius: 999px; }
   .scrub .ticks button.on { background: var(--ink); color: #fff; }
   .scrub input { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: linear-gradient(90deg, var(--ink) var(--p, 0%), rgba(13,16,19,.15) var(--p, 0%)); outline: none; cursor: pointer; border-radius: 2px; }
   .scrub input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 1.5px solid var(--ink); cursor: grab; box-shadow: 0 4px 10px rgba(0,0,0,.15); }
   .scrub input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 1.5px solid var(--ink); cursor: grab; }
 
   .hot { margin-top: clamp(16px, 2.4vw, 30px); }
-  .hot .ylab { font-family: var(--mono); font-size: 11px; fill: var(--ink-3); cursor: pointer; }
+  .hot .ylab { font-family: var(--mono); font-size: 12px; fill: var(--ink-2); cursor: pointer; }
   .hot .ylab.on { fill: var(--ink); font-weight: 600; }
 
   footer { padding: 26px 0 40px; }
-  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 26px clamp(16px, 5vw, 72px) 0; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 26px clamp(16px, 5vw, 72px) 0; font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+
+  /* ── defined terms (concept-led, clothes-led): hover, tap or focus for the definition ── */
+  .term { border-bottom: 1.5px dotted currentColor; cursor: help; }
+  .term:focus-visible { outline-offset: 2px; }
+  .term-q::after, .rw-chip.term::after { content: "?"; display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 4px; border-radius: 50%; background: rgba(13,16,19,.1); font: 600 10px/1 var(--sans); color: var(--ink); vertical-align: 1px; }
+  .rw-chip.term { border-bottom: 0; }
+  .rw-chip.term:hover { box-shadow: 0 0 0 1.5px var(--ink); }
+
+  /* ── "read one, then all": worked example before the full chart ── */
+  .intro { margin: 2px 0 16px; padding: 14px 16px; background: #fff; border: 1px solid rgba(13,16,19,.14); border-left: 3px solid var(--ink); border-radius: 2px; }
+  .intro-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .intro-tabs button { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(13,16,19,.28); color: var(--ink); background: #fff; transition: background .25s, color .25s; }
+  .intro-tabs button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .intro .k { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 500; color: var(--ink); }
+  .intro p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+  .intro-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+  .intro-notes li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; }
+  .intro-notes b { font-weight: 600; color: var(--ink); }
+  .intro .n { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font: 500 12px/22px var(--mono); text-align: center; margin-top: 1px; }
+  .intro-next { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 14.5px; font-weight: 400; transition: transform .2s; }
+  .intro-next:hover { transform: translateX(3px); }
+  .intro-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14.5px; color: var(--ink-2); }
+  .intro-key span { display: inline-flex; align-items: center; gap: 7px; }
+  .badge circle { fill: var(--ink); stroke: #fff; stroke-width: 2; }
+  .badge text { fill: #fff; font-family: var(--mono); font-size: 12px; font-weight: 600; }
+  .anno { pointer-events: none; transition: opacity .45s; }
+  .anno.off { opacity: 0; }
+  .ring g.rev { transition: opacity .45s; }
+  .ring g.rev.ghost { opacity: .16; }
+  .ring g.rev.ghost.on { opacity: 1; }
+  .ring .endlab { font-family: var(--mono); font-size: 11.5px; fill: var(--ink); letter-spacing: .06em; }
+  #erasSvg .fade { transition: opacity .45s; }
+  #erasSvg.one .fade { opacity: .2; }
+  #erasSvg.one .fade.keep { opacity: 1; }
+
+  /* ── Fig. 5 + Fig. 6 side by side, each with a plain key ── */
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 26px); margin-top: clamp(22px, 4vh, 36px); align-items: stretch; }
+  .pair .cardhead h3.take { font-size: clamp(19px, 1.75vw, 24px); }
+  .pair .ring { max-width: 430px; margin: 4px auto 14px; }
+  .pair .vkey { margin: 0 0 4px; gap: 6px; }
+  .pair .vkey button { padding: 5px 11px 5px 9px; font-size: 13px; }
+  .ckey { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; margin: 4px 0 14px; padding: 12px 14px; background: #fff; border: 1px solid rgba(13,16,19,.12); border-radius: 2px; font-size: 14px; line-height: 1.35; color: var(--ink); }
+  .ckey span { display: flex; align-items: center; gap: 8px; }
+  .ckey svg { flex: none; overflow: visible; }
+
+  /* ── Fig. 8: runway photos as examples of concept-led vs clothes-led ── */
+  .eras-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 14px; align-items: stretch; margin: 2px 0 16px; }
+  .eras-top .intro { margin: 0; }
+  .eras-top.solo { grid-template-columns: minmax(0, 1fr); }
+  .eras-reading.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .e-dot { width: 15px; height: 15px; } .e-halo { width: 17px; height: 17px; }
+  .kinds { margin: 0 0 clamp(26px, 4vw, 44px); }
+  .kinds-lead { margin: 0 0 18px; max-width: 28em; font-family: var(--display); font-weight: 400; font-size: clamp(24px, 2.8vw, 38px); line-height: 1.15; color: var(--ink); text-wrap: balance; }
+  .ledkey.big { gap: 22px; padding: 18px 20px; max-width: 920px; }
+  .ledkey.big .led-h { font-size: 16px; margin-bottom: 12px; }
+  .ledkey.big .led-pics { gap: 12px; }
+  .led-pics figure[tabindex] { cursor: help; }
+  .led-pics figure[tabindex]:hover img, .led-pics figure[tabindex]:focus-visible img { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .ledkey.big figcaption { font-size: 14px; color: var(--ink); }
+  .ledkey.big figcaption small { display: block; font-size: 12.5px; color: var(--ink-2); }
+  .ledkey { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid rgba(13,16,19,.14); border-radius: 2px; }
+  .led-h { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; font-size: 14px; color: var(--ink-2); }
+  .led-h .term { font-weight: 600; color: var(--ink); }
+  .led-pics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .led-pics figure { margin: 0; }
+  .led-pics img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; object-position: top; border-radius: 2px; }
+  .led-pics figcaption { margin-top: 5px; font-size: 12.5px; line-height: 1.3; color: var(--ink-2); }
+  .vtip .tpic { float: right; width: 58px; height: 86px; margin: 2px 0 4px 10px; object-fit: cover; object-position: top; border-radius: 2px; }
+  @media (max-width: 900px) { .eras-top, .eras-reading.two { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ── "All" chip + the one-aesthetic panel under a filtered chart ── */
+  .vkey button.all { padding-left: 14px; font-weight: 500; }
+  .fdetail { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; min-height: 92px; margin: 0 0 12px; padding: 12px 16px; background: #fff; border: 1px solid rgba(13,16,19,.12); border-left: 4px solid var(--c, rgba(13,16,19,.25)); border-radius: 2px; }
+  .fd-all { font-size: 14.5px; color: var(--ink-2); }
+  .fdetail { position: relative; overflow: hidden; }
+  .fd-ex { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 7px; border-radius: 999px; background: var(--ink); color: #fff; }
+  .fdetail.demo::after { content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--c, var(--ink)); transform-origin: left; animation: demobar var(--ms, 4s) linear forwards; }
+  @keyframes demobar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .fd-name { display: flex; flex-basis: 100%; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; color: var(--ink); }
+  .fd-cell { min-width: 96px; }
+  .fd-name i { width: 11px; height: 11px; border-radius: 50%; background: var(--c); }
+  .fd-cell { display: grid; gap: 1px; }
+  .fd-cell small { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+  .fd-cell b { font-size: 17px; font-weight: 500; color: var(--ink); }
 
   /* ── narrow ────────────────────────────────────────────────────────── */
   @media (max-width: 900px) {
     #slotLines { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     #slotLines svg { min-width: 760px; }
     .eras-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .eras-reading, .eras-reading.two { grid-template-columns: 1fr; margin-left: 0; width: 100%; gap: 14px; }
+    .eras-reading { grid-template-columns: 1fr; margin-left: 0; width: 100%; gap: 14px; }
     #erasSvg { min-width: 820px; }
     .nav { grid-template-columns: auto 1fr; }
     .nav .links { display: none; }
     .nav .mark { justify-self: start; }
-    .evidence, .circlewrap, .sumgrid, .thesisgrid, .plat, .drill { grid-template-columns: minmax(0, 1fr); }
+    .evidence, .circlewrap, .pair, .sumgrid, .thesisgrid, .plat, .drill { grid-template-columns: minmax(0, 1fr); }
     .hero-body { grid-template-columns: minmax(0, 1fr); }
     .runway { justify-content: center; flex-wrap: nowrap; }
-    .gaphead div, .gaprow { grid-template-columns: 1fr 48px 48px 54px; gap: 7px; }
+    .gaphead div, .gaprow { grid-template-columns: 1fr 58px 54px 60px; gap: 7px; }
     .drow { grid-template-columns: 92px 1fr 44px; gap: 10px; }
     .spread { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-bottom: 40px; }
     .sp-year, .sp-photo, .sp-lines { grid-column: 1; grid-row: auto; }
@@ -480,8 +562,6 @@
     .rw-panel { grid-template-columns: minmax(0, 1fr); }
     .rw-pimg img { height: min(46vh, 420px); margin: 0 auto; }
     .sp-lines { padding-bottom: 10px; }
-    .leddef { position: static; margin-bottom: 14px; justify-self: start; }
-    .spread { padding-top: 18px !important; }
     .sp-folio span:last-child, .swkey { display: none; }
   }
   @media (max-width: 900px) {
@@ -509,6 +589,7 @@
     .lb-nav { margin-top: 10px; }
   }
   @media (max-width: 560px) {
+    .ckey { grid-template-columns: minmax(0, 1fr); }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -525,8 +606,7 @@
     <a href="#lookbook">lookbook</a>
     <a href="#thesis">the fall</a>
     <a href="#evidence">evidence</a>
-    <a href="#cycle">cycle</a>
-    <a href="#seasons">seasons</a>
+    <a href="#cycle">cycle &amp; seasons</a>
     <a href="#summary">brands</a>
   </div>
   <a class="mark" href="#cover">Enter the Aesthetic</a>
@@ -559,7 +639,7 @@
     <div class="lb-text">
       <div class="lb-fade" id="lbText"></div>
       <div class="lb-nav"><button id="lbPrev" aria-label="Previous look">←</button><span id="lbCount">01 / 06</span><button id="lbNext" aria-label="Next look">→</button></div>
-      <div class="howto" style="margin-top:14px">Scroll, or use the arrows and names, to change looks.</div>
+      <div class="howto" style="margin-top:14px">Scroll or use the arrows to turn the page.</div>
     </div>
     <div class="lb-stage" id="lbStage">
       <div class="lb-ghost" id="lbGhost" aria-hidden="true"></div>
@@ -582,10 +662,10 @@
       </div>
       <div class="card">
         <div class="cardhead">
-          <h3 class="take"><span id="thesisTitle">Streetwear used to be almost every search. Now a third go to other aesthetics.</span><small>Share of searches for the eight aesthetics · Google, worldwide</small></h3>
+          <h3 class="take"><span id="thesisTitle">Streetwear used to be almost every search. Now a third go to other aesthetics.</span><small>Streetwear's share of searches for the eight aesthetics · Google, worldwide</small></h3>
           <a class="go" href="#evidence" aria-label="Next: evidence">↗</a>
         </div>
-        <div class="howto">Hover a block to read its share.</div>
+        <div class="howto">Hover a block for its share.</div>
         <div style="display:flex;align-items:flex-end;gap:18px;margin:4px 0 14px">
           <div class="bigstat" id="bigStat">—</div>
           <div class="sub" id="bigStatSub" style="padding-bottom:10px"></div>
@@ -605,11 +685,11 @@
   <div class="wrap reveal">
     <div class="tag">Feature 02 · The evidence</div>
     <h2>Eight aesthetics, <em>unevenly spread</em></h2>
-    <p class="lede">When each aesthetic rose, where it caught on, and one country up close.</p>
+    <p class="lede">Each aesthetic rose at its own time and in its own places: when, where, then one country up close.</p>
     <div class="evidence">
       <div class="card">
-        <div class="cardhead"><h3 class="take"><span id="whenTitle">Seven of the eight aesthetics took off in 2020 or later, each on its own schedule</span><small>When · worldwide search, each line scaled to its peak</small></h3></div>
-        <div class="howto">Hover to read a month. Tap a name to isolate it. Tap an era to redraw the map.</div>
+        <div class="cardhead"><h3 class="take"><span id="whenTitle">Seven of the eight aesthetics took off in 2020 or later, each on its own schedule</span><small>When · worldwide search, each line scaled to its own peak</small></h3></div>
+        <div class="howto">Hover for any month. Tap a name to isolate it, or an era to redraw the map.</div>
         <div class="vkey" id="vkey" role="group" aria-label="Isolate one aesthetic in this chart"></div>
         <figure id="slotLines" style="margin:0" aria-label="Line chart of worldwide Google search interest for eight aesthetics, 2004 to 2025"></figure>
       </div>
@@ -621,17 +701,17 @@
             <button id="mMost" aria-pressed="false">Most searched</button>
           </div>
         </div>
-        <div class="howto">Hover a country for its numbers; click it to zoom in below.</div>
+        <div class="howto">Hover a country for its numbers. Click one to zoom in.</div>
         <figure id="slotMap" style="margin:0" aria-label="World map coloring each country by its leading aesthetic"></figure>
         <p class="vhint" id="mapHint"></p>
       </div>
       <div class="card drill" id="drillCard">
         <div>
           <div class="cardhead">
-            <h3 class="take"><span id="drillTitle">India: Dark Academia peaked at 29% in 2021–2022</span><small>Zoom in · share of the eight by era · streetwear is the rest</small></h3>
+            <h3 class="take"><span id="drillTitle">India: Dark Academia peaked at 29% in 2021–2022</span><small>Zoom in · share of the eight, era by era · streetwear is the rest</small></h3>
             <label class="vselect"><span class="sr">Country</span><select id="drillSelect" aria-label="Or pick a country from the list"></select></label>
           </div>
-          <div class="howto">Pick a country on the map or here. Shaded band = the timeline's era.</div>
+          <div class="howto">Pick a country here or on the map. Shaded = the timeline's era.</div>
           <figure id="slotDrill" style="margin:0" aria-label="Line chart of each aesthetic's share of searches in the selected country, by era"></figure>
         </div>
         <div class="drillside" id="drillSide"></div>
@@ -642,43 +722,37 @@
 
 <section class="beat pg-news"><div class="scrapwrap reveal" style="--rot:1.2deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>And none of them last the same way.</p></div></div></section>
 
-<!-- ── 4 · cycle ─────────────────────────────────────────────────────── -->
+<!-- ── 4 · cycle + seasons, side by side ─────────────────────────────── -->
 <section id="cycle" class="pg-silver" data-tear data-folio="The cycle">
   <div class="wrap reveal">
     <div class="tag">Feature 03 · The cycle</div>
     <h2>How long does a trend <em>stay on top?</em></h2>
-    <div class="card circlewrap" style="margin-top:clamp(22px,4vh,40px)">
-      <svg class="ring" id="ring" viewBox="0 0 440 440" role="img" aria-label="Circular timeline, one arc per aesthetic from breakout to fade"></svg>
-      <div>
-        <div class="cardhead"><h3 class="take"><span id="ringTitle">A typical aesthetic stays on top for about 20 months</span><small>Months each aesthetic stayed above half its peak</small></h3></div>
-        <p class="lede" style="margin-top:0">Each arc runs from breakout to fade. Some last years; others, a season.</p>
-        <p class="vhint" style="margin:12px 0 0">Faded dot = breakout · big dot = peak · longer arc = longer on top</p>
-        <div class="howto">Hover an arc or a row to highlight it.</div>
-        <div class="gaps" id="gaps">
-          <div class="gaphead"><div><span>Aesthetic</span><span>Broke out</span><span>Peaked</span><span>Months on top</span></div></div>
+    <p class="lede">And inside every year, each one has a month of its own.</p>
+    <div class="pair">
+      <div class="card">
+        <div class="cardhead"><h3 class="take"><span id="ringTitle">Yearly: a typical aesthetic stays on top for about 20 months</span><small>2016 to 2025</small></h3></div>
+        <div class="ckey" aria-label="How to read the ring">
+          <span><svg width="22" height="14" aria-hidden="true"><circle cx="11" cy="7" r="4" fill="#0d1013" fill-opacity=".4"/></svg>Small dot: where it broke out</span>
+          <span><svg width="22" height="14" aria-hidden="true"><circle cx="11" cy="7" r="6" fill="#0d1013"/></svg>Big dot: where it peaked</span>
+          <span><svg width="22" height="14" aria-hidden="true"><path d="M2 12 Q11 0 20 12" fill="none" stroke="#0d1013" stroke-width="2.5" stroke-linecap="round"/></svg>Arc length: time on top</span>
+          <span><svg width="22" height="14" aria-hidden="true"><path d="M3 7h13m-4-4 4 4-4 4" fill="none" stroke="#0d1013" stroke-width="1.8"/></svg>Clockwise from 2016 to 2025</span>
         </div>
+        <div class="vkey" id="rkey" role="group" aria-label="Show all aesthetics or one"></div>
+        <svg class="ring" id="ring" viewBox="0 0 440 440" role="img" aria-label="Circular timeline, one arc per aesthetic from breakout to fade"></svg>
+        <div class="fdetail" id="ringDetail" aria-live="polite"></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p>And inside every year, each one has a month of its own.</p></div></div></section>
-
-<!-- ── 5 · seasons (new) ─────────────────────────────────────────────── -->
-<section id="seasons" class="pg-news" data-tear data-folio="The seasons">
-  <div class="wrap reveal">
-    <div class="tag">Feature 04 · The seasons</div>
-    <h2>Every aesthetic <em>has a month</em></h2>
-    <div class="vkey" id="skey" role="group" aria-label="Aesthetics"></div>
-    <div class="card circlewrap">
-      <svg class="ring clock" id="clock" viewBox="0 0 460 460" role="img" aria-label="Seasonal clock: average search interest by calendar month for each aesthetic"></svg>
-      <div>
-        <div class="cardhead"><h3 class="take"><span id="seasonTitle">Each aesthetic has its own peak month</span><small>Average year, 2021–2025, each scaled to its best month</small></h3></div>
-        <p class="lede" style="margin-top:0" id="seasonLede">Each loop is one aesthetic's average year, 2021–2025, scaled so its best month touches the outer ring. Hover a month to read every aesthetic at once.</p>
-        <div class="howto">Hover a month or a row. Tap a name to isolate its loop.</div>
-        <div class="gaps" id="seasonTable">
-          <div class="gaphead"><div><span>Aesthetic</span><span>Peak</span><span>Low</span><span>Swing</span></div></div>
+      <div class="card" id="seasons">
+        <div class="cardhead"><h3 class="take"><span id="seasonTitle">Monthly: each aesthetic has its own peak month</span><small>The average year, 2021–2025</small></h3></div>
+        <div class="ckey" aria-label="How to read the clock">
+          <span><svg width="22" height="14" aria-hidden="true"><circle cx="11" cy="7" r="5.5" fill="#0d1013" stroke="#fff" stroke-width="1.5"/></svg>Dot: its best month</span>
+          <span><svg width="22" height="14" aria-hidden="true"><path d="M3 12 L11 3 L19 12" fill="none" stroke="#0d1013" stroke-width="2"/></svg>Further out: more searched</span>
+          <span><svg width="22" height="14" aria-hidden="true"><circle cx="11" cy="7" r="5.5" fill="none" stroke="#0d1013" stroke-width="2"/></svg>Round loop: steady all year</span>
+          <span><svg width="22" height="14" aria-hidden="true"><path d="M5 11a6 6 0 1 1 6 1" fill="none" stroke="#0d1013" stroke-width="1.8"/><path d="M9 9l2 3-3 1" fill="none" stroke="#0d1013" stroke-width="1.6"/></svg>Loop closes: the year repeats</span>
         </div>
+        <div class="vkey" id="skey" role="group" aria-label="Show all aesthetics or one"></div>
+        <svg class="ring clock" id="clock" viewBox="0 0 460 460" role="img" aria-label="Seasonal clock: average search interest by calendar month for each aesthetic"></svg>
+        <div class="fdetail" id="seasonDetail" aria-live="polite"></div>
+        <div class="howto">Hover a month to compare all eight.</div>
       </div>
     </div>
   </div>
@@ -686,26 +760,21 @@
 
 <section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:-1.3deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap long"><p>The shops initially didn’t match the general aesthetic patterns.</p></div></div></section>
 
-<!-- ── 7 · the shops: year in review, hot 20 (before 2020), transition, three eras (after 2020) ──────────── -->
+<!-- ── 7 · the shops: year in review, three eras, hot 20 ──────────────────────────────────── -->
 <section id="summary" class="pg-news" data-tear data-folio="The shops">
   <div class="wrap reveal">
-    <div class="tag">Feature 05 · The shops</div>
+    <div class="tag">Feature 04 · The shops</div>
     <h2>What the year <em>was wearing</em></h2>
-    <p class="lede">Each year: the look that gained most, the #1 brand on Lyst (a shopping site's ranking), and whether its runway showed the look.</p>
-    <div class="howto">Pick a year. Click a photo to read about the show.</div>
+    <p class="lede">Did the hottest brand's runway show the year's look? Each page pairs the look with a show from Lyst's #1 brand (Lyst ranks brands by shopper activity).</p>
+    <div class="howto">Drag the slider or tap a year. Click a photo to read about the show.</div>
     <div class="spread" id="spread">
-      <div class="leddef" aria-label="Key">
-        <span><i class="led concept"></i><b>Concept-led</b> the staging is the idea</span>
-        <span><i class="led"></i><b>Clothes-led</b> the clothes are the idea</span>
-      </div>
       <div class="sp-year" id="spYear">2017</div>
       <div class="sp-photo" id="spPhoto"></div>
       <div class="sp-lines">
         <div class="sp-k">Lyst's hottest brand</div>
         <div class="sp-no1" id="spNo1">—</div>
         <div class="sp-sub" id="spNo1Sub"></div>
-        <div class="sp-line">The look<em id="spLook"></em><small id="spLookSub"></small></div>
-        <div class="sp-line">On the runway<div class="sp-tags" id="spTags"></div></div>
+        <div class="sp-line">The year's look<em id="spLook"></em><small id="spLookSub"></small></div>
       </div>
       <div class="sp-folio"><span>Year in review</span><span id="spPage"></span></div>
     </div>
@@ -716,36 +785,54 @@
 
     <div class="card shopcard">
       <div class="cardhead">
-        <h3 class="take"><span id="h20Title">Before 2020, the top brands often matched the year's look</span><small id="h20Sub">The hot 20 · Lyst's top brands, quarter by quarter, 2017 to 2019</small></h3>
+        <h3 class="take"><span id="h20Title">Most top-20 brands did not match the year's look, except in 2019 and 2023</span><small>The hot 20 · Lyst's top 20 (a top 10 until 2018), quarter by quarter, coloured when the brand's runway matched the year's look</small></h3>
         <div class="lb-ctl"><button class="play" id="h20Play" aria-label="Play through the quarters">▶</button><span id="h20Q">2017 Q2</span></div>
       </div>
-      <div class="howto">Press play or drag. Click a brand to follow it.</div>
+      <div class="howto">Press play or drag the slider. Click one of our 13 brands to follow it.</div>
       <div class="h20key" id="h20Key"></div>
-      <figure id="slotH20" style="margin:0" aria-label="Animated ranking of Lyst's top brands by quarter, 2017 to 2019"></figure>
+      <figure id="slotH20" style="margin:0" aria-label="Animated ranking of Lyst's top 20 brands by quarter"></figure>
       <input type="range" id="h20Range" class="h20range" aria-label="Quarter">
-      <p class="bsrc">Lyst Index (top 10 until Q4 2018) · runway match is our reading of reviews</p>
+      <p class="bsrc">Lyst Index · top 10 recorded until Q4 2018, top 20 after · no index found for Q4 2017 · new method from Q1 2026</p>
+      <p class="bsrc" style="margin-top:6px">Runway match is our reading of reviews: show by show for six brands, one or two shows per designer era for 34 more. Dashed outline = no runway.</p>
     </div>
+
   </div>
 </section>
 
-<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:1.1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap long"><p id="erasLink">Until 2019, the streetwear houses on top wore what people searched. Then searches moved on. Runways didn't.</p></div></div></section>
+<section class="beat pg-silver"><div class="scrapwrap reveal" style="--rot:1.1deg"><span class="tape a"></span><span class="tape b"></span><div class="scrap"><p id="erasLink">But look deeper, and a pattern appears.</p></div></div></section>
 
 <section id="summaryB" class="pg-news" data-tear data-folio="The shops" data-nav="#summary">
   <div class="wrap reveal">
+    <div class="kinds">
+      <p class="kinds-lead">We noticed the big luxury shows came in two kinds.</p>
+      <div class="ledkey big" id="ledKey" aria-label="What concept-led and clothes-led shows look like">
+        <div class="led-side" data-led="concept">
+          <div class="led-h"><i class="e-dot concept"></i><span><span class="term" data-def="concept" tabindex="0">Concept-led</span>: the staging is the idea</span></div>
+          <div class="led-pics"></div>
+        </div>
+        <div class="led-side" data-led="clothes">
+          <div class="led-h"><i class="e-dot"></i><span><span class="term" data-def="clothes" tabindex="0">Clothes-led</span>: the clothes are the idea</span></div>
+          <div class="led-pics"></div>
+        </div>
+      </div>
+      <div class="howto" style="margin-top:12px">Hover a photo for the story behind the show.</div>
+    </div>
     <div class="card erascard" id="erasCard">
-      <div class="cardhead"><h3 class="take"><span id="erasTitle">After 2020, few of the top brands' shows matched the year's look</span><small>Shows by Lyst's #1 brands, 2020–2025</small></h3></div>
+      <div class="cardhead"><h3 class="take"><span id="erasTitle">Since 2020, only 2 of 15 shows matched the year's look</span><small>Shows by Lyst's #1 brands, 2020–2025</small></h3></div>
       <div class="howto">Hover a dot for the show.</div>
       <div class="eras-legend">
-        <span><i class="e-dot concept"></i>concept-led show</span><span><i class="e-dot"></i>clothes-led show</span>
-        <span><i class="e-halo"></i>ringed = matched the look (dashed: partly)</span>
+        <span><i class="e-dot concept"></i><span class="term" data-def="concept" tabindex="0">concept-led show</span></span>
+        <span><i class="e-dot"></i><span class="term" data-def="clothes" tabindex="0">clothes-led show</span></span>
+        <span><i class="e-halo"></i><span class="term" data-def="match" tabindex="0">ringed = matched the look</span>&nbsp;(dashed: partly)</span>
       </div>
-      <div class="eras-scroll"><svg id="erasSvg" viewBox="0 0 1296 190" role="img" aria-label="Timeline of the year's look and every runway show studied, 2020 to 2025, with shows that matched the look ringed"></svg></div>
+      <div class="eras-scroll"><svg id="erasSvg" viewBox="0 0 1296 232" role="img" aria-label="Timeline of the year's look and every runway show by Lyst's number-one brands, 2020 to 2025, with shows that matched the year's look ringed"></svg></div>
       <div class="eras-reading two" id="erasReading" aria-label="What each era shows">
-        <div class="er-col"><b>Concept era · 2020–22</b><p id="er1"></p></div>
-        <div class="er-col"><b>Clothes-led era · 2023–25</b><p id="er2"></p></div>
+        <div class="er-col"><b>Concept era · 2020–22</b><p id="er0"></p></div>
+        <div class="er-col"><b>Clothes-led era · 2023–25</b><p id="er1"></p></div>
       </div>
-      <p class="vhint" style="margin:12px 0 0">Labels and eras are our reading of reviews.</p>
+      <p class="vhint" style="margin:14px 0 0">Labels and eras are our reading of reviews.</p>
     </div>
+
   </div>
 </section>
 
